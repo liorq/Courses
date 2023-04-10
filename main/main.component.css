@@ -1,0 +1,12 @@
+app-navbar
+{
+  display: inline-block;
+  width: 250px;
+}
+:host{
+  display:flex;
+  justify-content: space-between;
+}
+
+
+
