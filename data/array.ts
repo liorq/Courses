@@ -21,6 +21,7 @@ export const menuApps = [
     ],
     label: "All Courses",
     notification: null,
+    routerLink:'all-students'
   },
   {
     viewBox: "0 0 511.441 511.441",
@@ -35,6 +36,8 @@ export const menuApps = [
     ],
     label: "All Students",
     notification: 3,
+    routerLink:'all-courses'
+
   },
 ];
 export const menuCourses = [
@@ -54,6 +57,7 @@ export const menuCourses = [
     ],
     label: "Photography",
     notification: null,
+
   },
 
 
@@ -124,15 +128,18 @@ export const menuCourses = [
 ];
 
 
-export const   CoursesDisplayedColumns: string[] = ["name", "startDate", "endDate", "days", "hours","delete"]
+export const   CoursesDisplayedColumns: string[] = ["name", "startDate", "endDate", "days", "hours","delete","add"]
 
 
 
-export const     CoursesColumns = [ {matColumnDef: 'name', title: 'name'}, {matColumnDef: 'startDate', title: 'startDate'},  {matColumnDef: 'endDate', title: 'endDate', },  {matColumnDef: 'days', title: 'days', },  {matColumnDef: "hours", title:"hours", },{matColumnDef: 'delete', title: 'delete'}];
+export const     CoursesColumns = [ {matColumnDef: 'name', title: 'name'}, {matColumnDef: 'startDate', title: 'startDate'},  {matColumnDef: 'endDate', title: 'endDate', },  {matColumnDef: 'days', title: 'days', },  {matColumnDef: "hours", title:"hours", },{matColumnDef: 'delete', title: 'delete'},{matColumnDef: 'add', title: 'add'}];
+
+
+export const  StudentDisplayedColumns: string[] = ["birthDate", "firstName", "phone", "studentId","delete","add"];
+export const  StudentColumns = [  {matColumnDef: 'studentId', title: 'studentId'},  {matColumnDef: 'firstName', title: 'Name', },  {matColumnDef: 'phone', title: 'phone', },  {matColumnDef: 'birthDate', title: 'birthDate', },{matColumnDef: 'delete', title: 'delete'},{matColumnDef: 'add', title: 'add'}];
 
 
 
+export const  ModalStudentColumns: string[] = ["birthDate", "firstName", "phone", "studentId"];
 
-export const  StudentDisplayedColumns: string[] = ["birthDate", "firstName", "phone", "studentId","delete"];
-export const  StudentColumns = [  {matColumnDef: 'studentId', title: 'studentId'},  {matColumnDef: 'firstName', title: 'Name', },  {matColumnDef: 'phone', title: 'phone', },  {matColumnDef: 'birthDate', title: 'birthDate', },{matColumnDef: 'delete', title: 'delete'}];
-
+export const  ModalCoursesColumns: string[] = ["name", "startDate", "endDate", "days", "hours"];

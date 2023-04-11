@@ -1,7 +1,9 @@
 <app-generic-table
-[table]="table"
-  [columns]="CoursesColumns"
-  [displayedColumns]="CoursesDisplayedColumns"
+
+  [tableObj]=" {
+    columns:CoursesColumns,ModalColumns:ModalColumns,
+    displayedColumns:CoursesDisplayedColumns,
+    table:table}"
 ></app-generic-table>
 
 

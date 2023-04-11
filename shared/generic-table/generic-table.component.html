@@ -1,29 +1,29 @@
-<table mat-table [dataSource]="dataSource" matSort  class="mat-elevation-z8 border">
+<div class="table-container">
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 border ">
+    <ng-container *ngFor="let column of tableObj.displayedColumns" [matColumnDef]="column">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{column}}</th>
+      <td mat-cell *matCellDef="let element" [innerHTML]="sanitizer.bypassSecurityTrustHtml(element[column])" (click)="OpenModal(column,element)">></td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="tableObj.displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: tableObj.displayedColumns;"></tr>
+  </table>
+</div>
 
-  <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header >
-      {{column}}
-    </th>
-    <td mat-cell *matCellDef="let element"  [innerHTML]="sanitizer.bypassSecurityTrustHtml(element[column])"  (click)="OpenModal(column,element)">
-      >  </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-</table>
-
-
-
-<!-- modal -->
 <div id="ex1" class="modal">
   <svg (click)="CloseModal()" [attr.xmlns]="deleteModal.xmlns" [attr.viewBox]="deleteModal.viewBox" width="15" height="15">
     <path [attr.d]="deleteModal.d"/>
   </svg>
-  <p>{{deleteModal.message}}</p>
+  <p class="para">{{modalMessage}}</p>
+
+  <div *ngIf="!isDeleteModalOpen" class="container-inputs">
+    <div *ngFor="let item of tableObj.ModalColumns">
+      <div>{{item}}</div>
+      <input [(ngModel)]="formData[item]">
+    </div>
+  </div>
+
   <div class="btn-container">
-    <a class="close Yes" rel="modal:close" (click)="CloseModal(); deletePropertyHandler()">Yes</a>
+    <a class="close Yes" rel="modal:close" (click)="ChangePropertyHandler()">Yes</a>
     <a class="close No" rel="modal:close" (click)="CloseModal()">No</a>
   </div>
 </div>
-

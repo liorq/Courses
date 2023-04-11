@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CoursesService } from 'src/app/core/services/courses.service';
-import { CoursesColumns, CoursesDisplayedColumns } from 'src/app/data/array';
+import { CoursesColumns, CoursesDisplayedColumns, ModalCoursesColumns } from 'src/app/data/array';
 import { CoursesData } from 'src/app/data/objects';
 
 @Component({
@@ -13,9 +13,11 @@ export class CoursesListComponent implements OnInit{
   table!:any[];
   CoursesDisplayedColumns=CoursesDisplayedColumns
   CoursesColumns =CoursesColumns
+  ModalColumns=ModalCoursesColumns;
+
   ngOnInit(): void {
-    this.courseSvc._tablesData.subscribe((updateDData) =>{
-    this.table=updateDData.CoursesData;
+    this.courseSvc._tablesData.subscribe((updatedData) =>{
+    this.table=updatedData.CoursesData;
     })
   }
 

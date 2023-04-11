@@ -1,11 +1,25 @@
 table {
   width: 100%;
+  max-height: 64vh;
+
+
 }
 
 th.mat-sort-header-sorted {
   color: black;
 
 }
+.table-container {
+  max-height: 380px !important;
+  overflow-y: scroll !important;
+  border-radius: 10px;
+  /* border: 1px solid black; */
+  box-shadow: -1px 0px 23px 0px rgba(0,0,0,0.43);
+  -webkit-box-shadow: -1px 0px 23px 0px rgba(0,0,0,0.43);
+  -moz-box-shadow: -1px 0px 23px 0px rgba(0,0,0,0.43);
+}
+
+
 .mat-elevation-z8{
 font-size: 13px;
 
@@ -17,13 +31,58 @@ font-size: 13px;
   -webkit-box-shadow: -1px 0px 23px 0px rgba(0,0,0,0.43);
   -moz-box-shadow: -1px 0px 23px 0px rgba(0,0,0,0.43);
 }
+.modal {
+  display: none;
+  vertical-align: middle;
+  position: relative;
+  z-index: 2;
+  max-width: 370px;
+  box-sizing: border-box;
+  width: 90%;
+  background: #fff;
+  padding: 15px 30px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -o-border-radius: 8px;
+  -ms-border-radius: 8px;
+  border-radius: 8px;
+  -webkit-box-shadow: 0 0 10px #000;
+  -moz-box-shadow: 0 0 10px #000;
+  -o-box-shadow: 0 0 10px #000;
+  -ms-box-shadow: 0 0 10px #000;
+  box-shadow: 0 0 10px #000;
+  text-align: left
+}
+.para{
+  text-align: center;
+}
+div{
+  text-align: center;
+
+}
 :host{
   position: relative;
   top:30px;
 }
-
-
-
+.container-inputs{
+position: relative;
+}
+input{
+  display: inline-block;
+  width: 260px;
+  height: 23px;
+  border-radius: 10px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: .8em;
+  border: 1.5px solid #cccccc;
+  transition: all .2s ease;
+}
+#ex1{
+flex-direction: column;
+align-items: center;
+justify-content: center;
+}
 
 
 
@@ -42,7 +101,7 @@ font-size: 13px;
 }
 #ex1{
   position: absolute;
-  top: 23vh;
+   top: 0;
 }
 svg{
   position: absolute;
@@ -56,6 +115,7 @@ svg{
   width: 75px;
 
 }
+
 .No{
   color: green;
 }

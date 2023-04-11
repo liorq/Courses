@@ -1,8 +1,9 @@
 <div class="side-wrapper">
   <div class="side-title">{{title}}</div>
 
+
   <div class="side-menu">
-    <a href="#" *ngFor="let menuItem of menuItems">
+    <a  *ngFor="let menuItem of menuItems" routerLink="{{menuItem.routerLink}}">
       <svg [attr.viewBox]="menuItem.viewBox" [attr.fill]="menuItem.fill">
         <ng-container *ngFor="let path of menuItem.paths">
           <path [attr.d]="path.d" [attr.data-original]="path.dataOriginal" [attr.fill]="path.fill" />

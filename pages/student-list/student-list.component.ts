@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CoursesService } from 'src/app/core/services/courses.service';
-import { StudentColumns, StudentDisplayedColumns } from 'src/app/data/array';
+import { ModalStudentColumns, StudentColumns, StudentDisplayedColumns } from 'src/app/data/array';
 import { UsersData } from 'src/app/data/objects';
 
 @Component({
@@ -14,10 +14,10 @@ constructor(private courseSvc:CoursesService){}
 table!:any[];
 StudentDisplayedColumns = StudentDisplayedColumns
 StudentColumns = StudentColumns
-
+ModalColumns=ModalStudentColumns;
   ngOnInit(): void {
-    this.courseSvc._tablesData.subscribe((updateDData) =>{
-    this.table=updateDData.StudentColumns;
+    this.courseSvc._tablesData.subscribe((updatedData) =>{
+    this.table=updatedData.UsersData;
     })
   }
 

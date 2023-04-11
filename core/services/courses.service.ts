@@ -23,8 +23,11 @@ export class CoursesService {
   let data= this.tablesData.getValue();
   data.CoursesData=data.CoursesData.filter((o:any)=>o.name!==obj.name)
   data.UsersData=data.UsersData.filter((o:any)=>o.name!==obj.name)
-
-  console.log(data);
   this.tablesData.next(data)
+  }
+  addRow(field:string,element:any){
+    let data= this.tablesData.getValue();
+    data[field].push(element)
+    this.tablesData.next(data)
   }
 }

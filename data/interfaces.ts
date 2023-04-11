@@ -17,5 +17,6 @@ export interface User {
   studentId: string;
   password: string;
   phone: string;
-  delete:any;
+  delete:string;
+  add:string
 }
