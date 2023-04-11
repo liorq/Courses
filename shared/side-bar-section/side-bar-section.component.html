@@ -1,0 +1,15 @@
+<div class="side-wrapper">
+  <div class="side-title">{{title}}</div>
+
+  <div class="side-menu">
+    <a href="#" *ngFor="let menuItem of menuItems">
+      <svg [attr.viewBox]="menuItem.viewBox" [attr.fill]="menuItem.fill">
+        <ng-container *ngFor="let path of menuItem.paths">
+          <path [attr.d]="path.d" [attr.data-original]="path.dataOriginal" [attr.fill]="path.fill" />
+        </ng-container>
+      </svg>
+      {{ menuItem.label }}
+      <span class="notification-number updates">{{ menuItem.notification }}</span>
+    </a>
+  </div>
+</div>

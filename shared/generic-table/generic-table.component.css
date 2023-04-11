@@ -1,0 +1,64 @@
+table {
+  width: 100%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+
+}
+.mat-elevation-z8{
+font-size: 13px;
+
+}
+.border{
+  border-radius: 10px;
+  /* border: 1px solid black; */
+  box-shadow: -1px 0px 23px 0px rgba(0,0,0,0.43);
+  -webkit-box-shadow: -1px 0px 23px 0px rgba(0,0,0,0.43);
+  -moz-box-shadow: -1px 0px 23px 0px rgba(0,0,0,0.43);
+}
+:host{
+  position: relative;
+  top:30px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.close{
+  color: black;
+  cursor: pointer;
+
+}
+#ex1{
+  position: absolute;
+  top: 23vh;
+}
+svg{
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+}
+.btn-container{
+  display: flex;
+  justify-content: space-between;
+  width: 75px;
+
+}
+.No{
+  color: green;
+}
+.Yes{
+  color: red;
+}

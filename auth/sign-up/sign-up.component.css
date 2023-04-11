@@ -1,0 +1,23 @@
+#box{
+  height: auto;
+}
+.btn-16{
+
+}
+.invalid-message{
+  font-size: 14px;
+  color: red;
+}
+
+.flex{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap:9px;
+}
+.align{
+  position: relative;
+  right: -137px;
+top: 3px;
+}

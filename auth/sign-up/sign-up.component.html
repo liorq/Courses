@@ -1,0 +1,114 @@
+<div class="wrapper">
+  <div id="box">
+    <div class="flex">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" height="15" width="15"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
+      <h3> Sign up</h3>
+</div>
+    <form [formGroup]="subscribeForm" (ngSubmit)="signUpHandler()">
+      <div class="headline">Subscribe</div>
+
+      <input
+        type="text"
+        class="input-text"
+        [ngClass]="
+          firstName?.touched && firstName?.invalid ? 'input-text__inavlid' : ''
+        "
+        placeholder="First name"
+        formControlName="firstName"
+      />
+      <div *ngIf="firstName?.touched && firstName?.invalid" class="invalid-message">
+        {{
+          this.userInfoService.getInvalidMessage(
+            firstName?.errors,
+            "firstName",
+            "minlength",
+            this.errorMessages.firstName
+          )
+        }}
+      </div>
+      <input
+        type="text"
+        class="input-text"
+        [ngClass]="
+          lastName?.touched && lastName?.invalid ? 'input-text__inavlid' : ''
+        "
+        placeholder="Last name"
+        formControlName="lastName"
+      />
+      <div class="invalid-message" *ngIf="lastName?.touched && lastName?.invalid">
+        {{
+          this.userInfoService.getInvalidMessage(
+            lastName?.errors,
+            "lastName",
+            "minlength",
+            this.errorMessages.lastName
+          )
+        }}
+      </div>
+      <input
+        type="number"
+        class="input-text"
+        [ngClass]="age?.touched && age?.invalid ? 'input-text__inavlid' : ''"
+        placeholder="Age"
+        formControlName="age"
+      />
+      <div class="invalid-message" *ngIf="age?.touched && age?.invalid">
+        {{
+          this.userInfoService.getInvalidMessage(
+            age?.errors,
+            "age",
+            "min",
+            this.errorMessages.age
+          )
+        }}
+      </div>
+      <input
+        type="text"
+        class="input-text"
+        [ngClass]="email?.touched && email?.invalid ? 'input-text__inavlid' : ''"
+        placeholder="Email"
+        formControlName="email"
+      />
+      <div class="invalid-message" *ngIf="email?.touched && email?.invalid">
+        {{
+          this.userInfoService.getInvalidMessage(
+            email?.errors,
+            "email",
+            "email",
+            this.errorMessages.email
+          )
+        }}
+      </div>
+      <input
+        type="password"
+        class="input-text"
+        [ngClass]="
+          password?.touched && password?.invalid ? 'input-text__inavlid' : ''
+        "
+        placeholder="Password"
+        formControlName="password"
+      />
+      <div class="invalid-message" *ngIf="password?.touched && password?.invalid">
+        {{
+          this.userInfoService.getInvalidMessage(
+            password?.errors,
+            "password",
+            "passwordInvalid",
+            this.errorMessages.password
+          )
+        }}
+      </div>
+
+      <div class="nav-container">
+
+      </div>
+
+
+    </form>
+     <a ></a>
+
+     <button class="custom-btn btn-16 align" [disabled]="subscribeForm.invalid"><span>Submit</span></button>
+
+
+  </div>
+</div>

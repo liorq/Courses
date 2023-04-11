@@ -2,3 +2,10 @@ body, html{
   padding: 0;
   box-sizing: border-box;
 }
+app-footer{
+  height: 66px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}

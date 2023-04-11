@@ -146,7 +146,9 @@ body.light-mode .video-bg:before {
 
 .header {
   background: #1b1b1d3d;
-
+  box-shadow: -1px 0px 23px 9px rgba(0,0,0,0.43);
+  -webkit-box-shadow: -1px 0px 23px 9px rgba(0,0,0,0.43);
+  -moz-box-shadow: -1px 0px 23px 9px rgba(0,0,0,0.43);
  display: flex;
  align-items: center;
  flex-shrink: 0;
@@ -211,6 +213,9 @@ body.light-mode .video-bg:before {
 }
 
 .search-bar {
+  box-shadow: -1px 3px 206px -18px rgba(0,0,0,0.59) inset;
+  -webkit-box-shadow: -1px 3px 206px -18px rgba(0,0,0,0.59) inset;
+  -moz-box-shadow: -1px 3px 206px -18px rgba(0,0,0,0.59) inset;
  height: 40px;
  display: flex;
  width: 100%;
@@ -322,7 +327,7 @@ body.light-mode .video-bg:before {
  width: 250px;
  overflow: auto;
  flex-shrink: 0;
- @media screen and (max-width: 945px) {
+ @media screen and (max-width: 700px) {
   display: none;
  }
 }
