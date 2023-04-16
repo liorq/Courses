@@ -9,21 +9,4 @@
   </table>
 </div>
 
-<div id="ex1" class="modal">
-  <svg (click)="CloseModal()" [attr.xmlns]="deleteModal.xmlns" [attr.viewBox]="deleteModal.viewBox" width="15" height="15">
-    <path [attr.d]="deleteModal.d"/>
-  </svg>
-  <p class="para">{{modalMessage}}</p>
 
-  <div *ngIf="!isDeleteModalOpen" class="container-inputs">
-    <div *ngFor="let item of tableObj.ModalColumns">
-      <div>{{item}}</div>
-      <input [(ngModel)]="formData[item]">
-    </div>
-  </div>
-
-  <div class="btn-container">
-    <a class="close Yes" rel="modal:close" (click)="ChangePropertyHandler()">Yes</a>
-    <a class="close No" rel="modal:close" (click)="CloseModal()">No</a>
-  </div>
-</div>

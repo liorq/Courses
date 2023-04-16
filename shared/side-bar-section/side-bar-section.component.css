@@ -1,0 +1,16 @@
+
+#swal-input1,#swal2-input2,#swal2-input3{
+
+  display: inline-block;
+  width: 260px;
+  height: 43px;
+  border-radius: 10px;
+  margin: 5px auto;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: .8em;
+  border: 1.5px solid #cccccc;
+  transition: all .2s ease;
+}
+
+

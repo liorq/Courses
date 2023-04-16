@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 import * as CryptoJS from 'crypto-js';
+import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class UserInfoService {
+ isUserLogged:BehaviorSubject<boolean>=new BehaviorSubject<boolean>(false)
+  _isUserLogged=this.isUserLogged.asObservable();
 
   constructor() { }
   getInvalidMessage(errors:any,property:string,error:keyof typeof errors,errorMessage:string){
@@ -16,6 +19,9 @@ export class UserInfoService {
     }
     return
   }
+  updateIsUserLoggedSubj(newStatus:boolean){
+  this.isUserLogged.next(newStatus)
+  }
   passwordValidator(control: AbstractControl): ValidationErrors | null {
     const passwordRegex =
       /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -24,5 +30,9 @@ export class UserInfoService {
   }
   getEncryptedPassword(password:string){
     return CryptoJS.SHA256(password).toString();
+  }
+  isUserLoggedIn(){
+    const token = localStorage.getItem('token');
+    return !(token!=null&&token!=""&&token!=undefined);
   }
 }

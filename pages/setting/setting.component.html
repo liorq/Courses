@@ -1,1 +1,4 @@
-<p>setting works!</p>
+<app-side-bar-section *ngFor="let item of menuArray"
+[title]="item.title"
+[menuItems]="item.menuItems"
+></app-side-bar-section>

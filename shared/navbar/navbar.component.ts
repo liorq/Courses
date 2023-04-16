@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CoursesService } from 'src/app/core/services/courses.service';
-import { menuApps, menuCourses } from 'src/app/data/array';
+import { menuApps, menuCourses } from 'src/app/data/arrays';
 
 @Component({
   selector: 'app-navbar',
@@ -15,7 +15,8 @@ ngOnInit(): void {
   this.isNavBarVisible = status;
   })
 }
-  menuApps = menuApps
-  menuCourses = menuCourses
+
+menuArray:any[]=[{title:'Catalog',menuItems:menuApps},{title:'Courses',menuItems:menuCourses}]
+
 
 }

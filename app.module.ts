@@ -20,6 +20,10 @@ import { SideBarSectionComponent } from './shared/side-bar-section/side-bar-sect
 import { StudentListComponent } from './pages/student-list/student-list.component';
 import { CoursesListComponent } from './pages/courses-list/courses-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ClassAttendeesListComponent } from './pages/class-attendees-list/class-attendees-list.component';
+import { MyCoursesComponent } from './pages/my-courses/my-courses.component';
+import { BuyCoursesComponent } from './pages/buy-courses/buy-courses.component';
+
 
 @NgModule({
   declarations: [
@@ -36,6 +40,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SideBarSectionComponent,
     StudentListComponent,
     CoursesListComponent,
+    ClassAttendeesListComponent,
+    MyCoursesComponent,
+    BuyCoursesComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +51,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatTableModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    FormsModule, ReactiveFormsModule
+    FormsModule, ReactiveFormsModule,HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

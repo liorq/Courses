@@ -94,6 +94,22 @@ justify-content: center;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .close{
   color: black;
   cursor: pointer;
@@ -121,4 +137,45 @@ svg{
 }
 .Yes{
   color: red;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.table-container {
+  overflow-x: auto; /* enable horizontal scrolling if needed */
+}
+
+@media screen and (max-width: 600px) {
+  .mat-table {
+    width: 100%;
+  }
+
+  .mat-header-cell,
+  .mat-cell {
+    display: block;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .mat-header-cell {
+    font-weight: bold;
+  }
+
+  .mat-cell:before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
 }

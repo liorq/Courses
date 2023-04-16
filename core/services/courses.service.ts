@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { CoursesData, UsersData } from 'src/app/data/objects';
+import { CoursesData, UsersData, attendees, myCourses } from 'src/app/data/objects';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CoursesService {
-  private tablesData:BehaviorSubject<any>=new BehaviorSubject({CoursesData:CoursesData,UsersData:UsersData})
+  private tablesData:BehaviorSubject<any>=new BehaviorSubject({CoursesData:CoursesData,UsersData:[],attendees:attendees,myCourses:myCourses})
   _tablesData=this.tablesData.asObservable()
 
   private isNavBarVisible = new BehaviorSubject<boolean>(true);
@@ -15,8 +15,12 @@ export class CoursesService {
    toggleNavBar(Status:boolean): void {
     this.isNavBarVisible.next(Status);
   }
-
-
+  updateTablesDataSubject(newValue:any){
+    this.tablesData.next(newValue)
+  }
+ getTablesDataSubjectValue(){
+  return this.tablesData.getValue()
+ }
 
   constructor() { }
   removeRow(obj:any){
@@ -29,5 +33,12 @@ export class CoursesService {
     let data= this.tablesData.getValue();
     data[field].push(element)
     this.tablesData.next(data)
+  }
+  changeRow(field:string,element:any,propertyToUpdate:string,newValue:string){
+    ////is user field property to change like password
+    const obj=element[propertyToUpdate]=newValue
+    this.removeRow(element)
+    this.addRow(field,obj)
+
   }
 }

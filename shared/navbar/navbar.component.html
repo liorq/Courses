@@ -1,10 +1,6 @@
 <div *ngIf="isNavBarVisible" class="left-side">
-  <app-side-bar-section
-    [title]="'Apps'"
-    [menuItems]="menuApps"
-  ></app-side-bar-section>
-  <app-side-bar-section
-    [title]="'Courses'"
-    [menuItems]="menuCourses"
+  <app-side-bar-section *ngFor="let item of menuArray"
+    [title]="item.title"
+    [menuItems]="item.menuItems"
   ></app-side-bar-section>
 </div>

@@ -397,7 +397,12 @@ body.light-mode .video-bg:before {
  flex-direction: column;
  flex-grow: 1;
 }
-
+.menu-link{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
 .menu-link-main {
  text-decoration: none;
  color: var(--theme-color);
