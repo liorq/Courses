@@ -33,6 +33,6 @@ export class UserInfoService {
   }
   isUserLoggedIn(){
     const token = localStorage.getItem('token');
-    return !(token!=null&&token!=""&&token!=undefined);
+    return (token!=null&&token!=""&&token!=undefined);
   }
 }

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { CoursesData, UsersData, attendees, myCourses } from 'src/app/data/objects';
+import { CoursesData, UsersData, addIcon, attendees, buyIcon, deleteIcon, myCourses, reportIcon } from 'src/app/data/objects';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CoursesService {
-  private tablesData:BehaviorSubject<any>=new BehaviorSubject({CoursesData:CoursesData,UsersData:[],attendees:attendees,myCourses:myCourses})
+  private tablesData:BehaviorSubject<any>=new BehaviorSubject({CoursesData:[],UsersData:[],attendees:[],myCourses:[]})
   _tablesData=this.tablesData.asObservable()
 
   private isNavBarVisible = new BehaviorSubject<boolean>(true);
@@ -21,8 +21,14 @@ export class CoursesService {
  getTablesDataSubjectValue(){
   return this.tablesData.getValue()
  }
-
-  constructor() { }
+  addIconsBtn(array:any[]){
+ for(let item of array)  {
+  item.add=addIcon
+  item.delete=deleteIcon
+  item.report=reportIcon
+  item.buy=buyIcon
+  }
+  }
   removeRow(obj:any){
   let data= this.tablesData.getValue();
   data.CoursesData=data.CoursesData.filter((o:any)=>o.name!==obj.name)
@@ -35,7 +41,6 @@ export class CoursesService {
     this.tablesData.next(data)
   }
   changeRow(field:string,element:any,propertyToUpdate:string,newValue:string){
-    ////is user field property to change like password
     const obj=element[propertyToUpdate]=newValue
     this.removeRow(element)
     this.addRow(field,obj)

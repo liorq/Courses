@@ -3,6 +3,7 @@ import { CoursesService } from 'src/app/core/services/courses.service';
 import { ModalStudentColumns, StudentColumns, StudentDisplayedColumns, StudentFormsInputs } from 'src/app/data/arrays';
 import { MyDataService } from 'src/app/core/services/db.service';
 import { UserInfoService } from 'src/app/core/services/auth.service';
+import { addIcon, deleteIcon } from 'src/app/data/objects';
 
 @Component({
   selector: 'app-student-list',
@@ -35,6 +36,7 @@ FormsInputs=StudentFormsInputs;
 async getAllStudents(){
 const allStudents=await this.dbSvc.getAllUsers()
 if(Array.isArray(allStudents)){
+  this.courseSvc.addIconsBtn(allStudents)
   this.table=allStudents;
 }
 }

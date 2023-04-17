@@ -7,7 +7,7 @@ import { CoursesService } from 'src/app/core/services/courses.service';
 import { MyDataService } from 'src/app/core/services/db.service';
 import { getAddUserForm, getDeletedForm, openModalAndGetInput } from 'src/app/data/forms';
 import { Courses, User } from 'src/app/data/interfaces';
-import { addIcon, addModal, deleteIcon, deleteModal } from 'src/app/data/objects';
+import { addIcon, deleteIcon, deleteModal } from 'src/app/data/objects';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -26,21 +26,22 @@ export class GenericTableComponent implements AfterViewInit,OnInit{
   modalMessage!:string ;
   isDeleteModalOpen:boolean = false;
   formData: any = {};
+  isLoadingSignVisible:boolean=true;
+
+
   constructor(private dbSvc:MyDataService, public sanitizer: DomSanitizer,private courseSvc:CoursesService) {}
 
 ngOnInit(): void {
-  // this.dataSource=new MatTableDataSource(this.tableObj.table);
+  // this.courseSvc.addIconsBtn(this.tableObj.table)
 }
   ngAfterViewInit() {
-    console.log(this.tableObj)
 
     setTimeout(() => {
       console.log(this.tableObj)
-
       this.dataSource=new MatTableDataSource(this.tableObj.table);
       this.dataSource.sort = this.sort;
-
-    },2000)
+      this.isLoadingSignVisible=false;
+    },1500)
   }
 
   async OpenModal(column: any, element: any) {
@@ -71,21 +72,19 @@ async buyCourse(element:any){
 async ChangePropertyHandler() {
   if (this.isDeleteModalOpen) {
     if(this.tableObj?.componentName=='StudentComponent')
-    console.log(await this.dbSvc.removeUserHandler(this.deletedRow?.userName))
+    console.log(await this.dbSvc.removeUserHandler(this.deletedRow?.username))
     if(this.tableObj?.componentName=='CoursesComponent'){
 
       console.log(await this.dbSvc.removeCourseHandler(this.deletedRow?.CoursesId))
 
-      console.log("course")
     }
 
     this.courseSvc.removeRow(this.deletedRow);
     this.dataSource.data = this.dataSource.data.filter(row => row !== this.deletedRow);
   } else {
-    this.formData = { ...this.formData, delete: deleteIcon, add: addIcon };
-    ////,add:addIcon,delete:deleteIcon
-    const user:User={...this.formData,role:'student'}
-    const course:Courses={...this.formData,StudentId:'admin',CoursesId:Math.random()*10+"",add:addIcon,delete:deleteIcon}
+    this.formData = { ...this.formData,add:addIcon,delete:deleteIcon};
+    const user:User={...this.formData,role:'student',add:addIcon,delete:deleteIcon}
+    const course:Courses={...this.formData,StudentId:'admin',CoursesId:Math.random()*10+""}
     let response;
     console.log(this.tableObj?.componentName)
      if(this.tableObj?.componentName=='StudentComponent')

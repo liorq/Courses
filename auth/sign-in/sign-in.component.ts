@@ -39,6 +39,5 @@ this.router.navigate(['/my-courses']);
  }
  else
  console.log("user not found")
-
 }
 }

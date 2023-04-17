@@ -23,6 +23,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClassAttendeesListComponent } from './pages/class-attendees-list/class-attendees-list.component';
 import { MyCoursesComponent } from './pages/my-courses/my-courses.component';
 import { BuyCoursesComponent } from './pages/buy-courses/buy-courses.component';
+import { LoadingIconComponent } from './shared/loading-icon/loading-icon.component';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { BuyCoursesComponent } from './pages/buy-courses/buy-courses.component';
     ClassAttendeesListComponent,
     MyCoursesComponent,
     BuyCoursesComponent,
+    LoadingIconComponent,
   ],
   imports: [
     BrowserModule,

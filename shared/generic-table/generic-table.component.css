@@ -179,3 +179,39 @@ svg{
     text-transform: uppercase;
   }
 }
+.mat-mdc-table tbody, .mat-mdc-table tfoot, .mat-mdc-table thead, .mat-mdc-cell, .mat-mdc-footer-cell, .mat-mdc-header-row, .mat-mdc-row, .mat-mdc-footer-row, .mat-mdc-table .mat-mdc-header-cell
+{
+  max-width: 107px;
+}
+
+
+app-loading-icon{
+  position: relative;
+  left: 100px;
+  top: 100px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -22,7 +22,7 @@ export class SignUpComponent implements OnInit {
   errorMessages=errorMessages;
    birthDate!: AbstractControl<any, any> | null;
    address!: AbstractControl<any, any> | null;
-  firstName!: AbstractControl<any, any> | null;
+   name!: AbstractControl<any, any> | null;
   phone!: AbstractControl<any, any> | null;
   age!: AbstractControl<any, any> | null;
   email!: AbstractControl<any, any> | null;
@@ -35,7 +35,7 @@ ngOnInit(){
 
 initForm() {
   this.subscribeForm = new FormGroup({
-    firstName: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    name: new FormControl('', [Validators.required, Validators.minLength(4)]),
     phone: new FormControl('', [Validators.required]),
     age: new FormControl(0, [Validators.required, Validators.min(12)]),
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -43,13 +43,13 @@ initForm() {
     birthDate: new FormControl('', [Validators.required]),
     address: new FormControl('', [Validators.required]),
   });
-  ({address:this.address, birthDate:this.birthDate,firstName: this.firstName, phone: this.phone, age: this.age, email: this.email, password: this.password} = this.subscribeForm.controls);
+  ({address:this.address, birthDate:this.birthDate,name: this.name, phone: this.phone, age: this.age, email: this.email, password: this.password} = this.subscribeForm.controls);
 
 }
 async signUpHandler(){
   ////
 
-  const user:User={studentId:Math.random()*10+"",address:this.address?.value,birthDate:this.birthDate?.value,role:'employee',isStudent:this.userType=='professor'?false:true,name: this.firstName?.value, phone: this.phone?.value, age: this.age?.value, userName: this.email?.value, password: this.password?.value}
+  const user:User={studentId:Math.random()*10+"",address:this.address?.value,birthDate:this.birthDate?.value,role:'employee',isStudent:this.userType=='professor'?false:true,name: this.name?.value, phone: this.phone?.value, age: this.age?.value, userName: this.email?.value, password: this.password?.value}
 
   const response=await this.dbSvc.signUp(user)
   const isResponseOk = response && response.status && response.status <= 200;

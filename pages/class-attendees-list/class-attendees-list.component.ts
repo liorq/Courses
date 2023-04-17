@@ -11,7 +11,7 @@ import { ClassAttendees, ClassAttendeesColumns, ClassAttendeesDisplayedColumns, 
 export class ClassAttendeesListComponent {
   constructor(private dbSvc:MyDataService,private courseSvc: CoursesService){}
 
-  table!:any[];
+  table:any[]=[];
   CoursesDisplayedColumns=ClassAttendeesDisplayedColumns
   CoursesColumns =ClassAttendees
   ModalColumns=ClassAttendeesColumns;
@@ -25,6 +25,6 @@ export class ClassAttendeesListComponent {
     await this.getAllUsersAttendees()
   }
   async getAllUsersAttendees(){
-  console.log( await this.dbSvc.getAllUsersAttendees())
+    this.table=await this.dbSvc.getAllUsersAttendees()
   }
 }

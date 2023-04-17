@@ -11,16 +11,16 @@
         type="text"
         class="input-text"
         [ngClass]="
-          firstName?.touched && firstName?.invalid ? 'input-text__inavlid' : ''
+        name?.touched && name?.invalid ? 'input-text__inavlid' : ''
         "
-        placeholder="Name"
-        formControlName="firstName"
+        placeholder="name"
+        formControlName="name"
       />
-      <div *ngIf="firstName?.touched && firstName?.invalid" class="invalid-message">
+      <div *ngIf="name?.touched && name?.invalid" class="invalid-message">
         {{
           this.userInfoService.getInvalidMessage(
-            firstName?.errors,
-            "firstName",
+            name?.errors,
+            "name",
             "minlength",
             this.errorMessages.firstName
           )

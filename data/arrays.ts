@@ -220,7 +220,7 @@ export const   CoursesDisplayedColumns: string[] = ["name", "startDate", "endDat
 export const     CoursesColumns = [ {matColumnDef: 'name', title: 'name'}, {matColumnDef: 'startDate', title: 'startDate'},  {matColumnDef: 'endDate', title: 'endDate', },  {matColumnDef: 'days', title: 'days', },  {matColumnDef: "hours", title:"hours", },{matColumnDef: 'delete', title: 'delete'},{matColumnDef: 'add', title: 'add'}];
 
 ///userName
-export const   StudentFormsInputs: string[] = ["userName","password","address","birthDate", "name", "phone", "studentId"];
+export const   StudentFormsInputs: string[] = ["username","password","address","birthDate", "name", "phone", "studentId"];
 export const   CoursesFormsInputs: string[] = ["name", "startDate", "endDate", "days", "hours"]
 
 
@@ -239,12 +239,12 @@ export const  ModalCoursesColumns: string[] = ["name", "startDate", "endDate", "
 
 
 
-export const   ClassAttendeesDisplayedColumns: string[] = ["name", "DateOfArrival", "CoursesId", "studentId"]
-export const   ClassAttendeesColumns: string[] = ["name", "DateOfArrival", "CoursesId", "studentId"]
+export const   ClassAttendeesDisplayedColumns: string[] = ["name", "dateOfArrival", "coursesId", "studentId"]
+export const   ClassAttendeesColumns: string[] = ["name", "dateOfArrival", "coursesId", "studentId"]
 
 
 
-export const     ClassAttendees = [ {matColumnDef: 'name', title: 'name'}, {matColumnDef: 'DateOfArrival', title: 'DateOfArrival'},  {matColumnDef: 'CoursesId', title: 'CoursesId', },  {matColumnDef: 'studentId', title: 'studentId', }];
+export const     ClassAttendees = [ {matColumnDef: 'name', title: 'name'}, {matColumnDef: 'dateOfArrival', title: 'dateOfArrival'},  {matColumnDef: 'coursesId', title: 'coursesId', },  {matColumnDef: 'studentId', title: 'studentId', }];
 
 
 

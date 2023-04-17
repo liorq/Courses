@@ -17,8 +17,7 @@ export class MyDataService {
   constructor(private http: HttpClient) { }
 
 async signUp(user:User) {
- user.add=addIcon;
- user.delete=deleteIcon;
+
 
   try {
     const response:any = await this.http.post(`${this.apiUrl}/signUp` ,user).toPromise();
@@ -48,6 +47,7 @@ async signUp(user:User) {
     }
   }
   async removeUserHandler(userName: string): Promise<any> {
+    console.log(userName)
     const requestBody = {
       "username": userName
     };
@@ -62,7 +62,7 @@ async signUp(user:User) {
     }
   }
 
- async getAllUsersAttendees() {
+ async getAllUsersAttendees():Promise<any> {
 
   const headers = this.headerInit()
 
@@ -126,7 +126,7 @@ async getAllCourseHandler(): Promise<any>{
 
 }
 
-async getAllUserCourses() {
+async getAllUserCourses(): Promise<any> {
 
   const headers = this.headerInit()
 

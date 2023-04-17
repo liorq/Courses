@@ -18,24 +18,15 @@ export class CoursesListComponent implements OnInit{
   FormsInputs=CoursesFormsInputs;
 
   async getAllCourses(){
-    const response=await this.dbSvc.getAllCourseHandler()
-    if(Array.isArray(response)){
-        console.log(response)
-       const subValue=this.courseSvc.getTablesDataSubjectValue().CoursesData=response
-        this.courseSvc.updateTablesDataSubject(subValue)
-
-         this.table=response;
+    const AllCourses=await this.dbSvc.getAllCourseHandler()
+    if(Array.isArray(AllCourses)){
+      this.courseSvc.addIconsBtn(AllCourses)
+      const subValue=this.courseSvc.getTablesDataSubjectValue().CoursesData=AllCourses
+      this.courseSvc.updateTablesDataSubject(subValue)
+      this.table=AllCourses;
     }
 
   }
-  async getAllUserCourses(){
-    const response=await this.dbSvc.getAllUserCourses()
-    if(Array.isArray(response)){
-        console.log(response)
-    }
-
-  }
-
   async ngOnInit() {
     this.courseSvc.toggleNavBar(true)
     this.courseSvc._tablesData.subscribe((updatedData) =>{
