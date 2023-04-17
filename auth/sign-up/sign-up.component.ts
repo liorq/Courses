@@ -52,7 +52,6 @@ async signUpHandler(){
   const response=await this.dbSvc.signUp(user)
   const isResponseOk = response && response.status && response.status <= 200;
 
-  
   if(isResponseOk){
     this.autoSvc.updateIsUserLoggedSubj(true)
     await this.dbSvc.signInHandler(this.email?.value,this.password?.value)

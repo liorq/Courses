@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { CoursesService } from "src/app/core/services/courses.service";
 import { MyDataService } from "src/app/core/services/db.service";
-import {  ClassAttendees,  ClassAttendeesColumns,  ClassAttendeesDisplayedColumns} from "src/app/data/arrays";
+import { classAttendeesTableObj } from "src/app/data/table.objects";
 
 @Component({
   selector: "app-class-attendees-list",
@@ -9,28 +9,26 @@ import {  ClassAttendees,  ClassAttendeesColumns,  ClassAttendeesDisplayedColumn
   styleUrls: ["./class-attendees-list.component.css"],
 })
 export class ClassAttendeesListComponent {
+
+  tableObj=classAttendeesTableObj
+
   constructor(
     private dbSvc: MyDataService,
     private courseSvc: CoursesService
   ) {}
 
-  table: any[] = [];
-  CoursesDisplayedColumns = ClassAttendeesDisplayedColumns;
-  CoursesColumns = ClassAttendees;
-  ModalColumns = ClassAttendeesColumns;
-
   async ngOnInit() {
     this.courseSvc.toggleNavBar(true);
     this.courseSvc._tablesData.subscribe((updatedData) => {
-      this.table = updatedData.attendees;
+      this.tableObj.table = updatedData.attendees;
     });
-    if (this.table?.length == 0) await this.getAllUsersAttendees();
+    if (this.tableObj.table?.length == 0) await this.getAllUsersAttendees();
   }
-  
+
   async getAllUsersAttendees() {
     await this.courseSvc.setArrayHandler(
       this.dbSvc.getAllUsersAttendees(),
-      this.table
+      this.tableObj.table
     );
   }
 }

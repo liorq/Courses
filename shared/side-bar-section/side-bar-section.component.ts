@@ -23,17 +23,6 @@ export class SideBarSectionComponent {
  @Input() menuItems!: any[];
  @Input() title!: string;
 
- OpenModal( element: any) {
-
-  if(element.label=='delete'){
-
-    const { message } = element.label === 'delete' ? deleteModal : addModal;
-    Object.assign(this, { modalMessage: message, deletedRow: element, isDeleteModalOpen: element.label === 'delete' });
-    const modal = document.getElementById("ex1");
-    modal && (modal.style.display = "flex");
-  }
-}
-
  async ChangePropertiesHandler(menuItem:any){
 
   if (['Change Name', 'Change Email', 'Change Password'].includes(menuItem.label)) {

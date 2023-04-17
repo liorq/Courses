@@ -1,7 +1,7 @@
 <div class="side-wrapper">
   <div class="side-title">{{title}}</div>
   <div class="side-menu">
-    <a  *ngFor="let menuItem of menuItems" (click)="OpenModal(menuItem)" [routerLink]="menuItem.isDisabled ? null : menuItem.routerLink"
+    <a  *ngFor="let menuItem of menuItems" [routerLink]="menuItem.isDisabled ? null : menuItem.routerLink"
     (click)="ChangePropertiesHandler(menuItem)"
     >
       <svg [attr.viewBox]="menuItem.viewBox" [attr.fill]="menuItem.fill">

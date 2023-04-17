@@ -9,15 +9,14 @@ import { addIcon, deleteIcon } from 'src/app/data/objects';
 })
 export class MyDataService {
 
-  private apiUrl = 'http://localhost:1012';
+   private apiUrl = 'http://localhost:1012';
+   private token:BehaviorSubject<string>=new BehaviorSubject('');
    userName!:string;
-  token:BehaviorSubject<string>=new BehaviorSubject('');
   _token = this.token.asObservable();
 
   constructor(private http: HttpClient) { }
 
 async signUp(user:User) {
-
 
   try {
     const response:any = await this.http.post(`${this.apiUrl}/signUp` ,user).toPromise();
@@ -26,7 +25,6 @@ async signUp(user:User) {
     return error;
   }
 }
-
 
   async signInHandler(userName: string, password: string): Promise<any> {
 
@@ -163,22 +161,19 @@ getAllUsers():Promise<any>|any{
 
 
 async ChangeUserPropertyHandler(propertyToChange: string,newProperty:string,password:string): Promise<any> {
-if(propertyToChange=='changePassword')
-return await this.ChangePasswordHandler(newProperty,password);
-else if(propertyToChange=='changeEmail')
-return await this.ChangeUserNameHandler(newProperty,password)
-else if(propertyToChange=='changeName')
-return await this.ChangeNameHandler(newProperty,password)
+switch(propertyToChange){
+  case 'changePassword':
+    return await this.ChangePasswordHandler(newProperty,password);
+ case 'changeEmail':
+  return await this.ChangeUserNameHandler(newProperty,password);
+ case 'changeName':
+  return await this.ChangeNameHandler(newProperty,password);
 }
-
-
+}
 
 async ChangePasswordHandler(newProperty:string,password:string): Promise<any> {
   const headers = this.headerInit()
- const data= {
-    "newProperty": newProperty,
-    "password":password
-}
+  const data= this.getJsonObject(newProperty,password)
 
   try {
     const response = await this.http
@@ -192,11 +187,8 @@ async ChangePasswordHandler(newProperty:string,password:string): Promise<any> {
 
 async ChangeNameHandler(newProperty:string,password:string): Promise<any> {
   const headers = this.headerInit()
- const data= {
-    "newProperty": newProperty,
-    "password":password
+  const data= this.getJsonObject(newProperty,password)
 
-}
 
   try {
     const response = await this.http
@@ -207,19 +199,18 @@ async ChangeNameHandler(newProperty:string,password:string): Promise<any> {
     return error;
   }
 }
+
 async ChangeUserNameHandler(newProperty:string,password:string): Promise<any> {
   console.log("newProperty",newProperty)
   const headers = this.headerInit()
- const data= {
-    "newProperty": newProperty,
-    "password":password
+ const data= this.getJsonObject(newProperty,password)
 
-}
   try {
     const response = await this.http
       .put<any>(`${this.apiUrl}/users/${newProperty}/changeUserName`, data, { headers })
       .toPromise();
       const token=localStorage.getItem('token');
+      
     if(response&&token){
       const decodedToken = JSON.parse(atob(token.split('.')[1]));
       const userName = decodedToken.name;
@@ -229,5 +220,11 @@ async ChangeUserNameHandler(newProperty:string,password:string): Promise<any> {
   } catch (error: any) {
     return error;
   }
+}
+getJsonObject(newProperty:string,password:string){
+ return {
+    "newProperty": newProperty,
+    "password":password
+}
 }
 }

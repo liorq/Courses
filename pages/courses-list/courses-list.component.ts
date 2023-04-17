@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CoursesService } from 'src/app/core/services/courses.service';
 import { MyDataService } from 'src/app/core/services/db.service';
-import { CoursesColumns, CoursesDisplayedColumns, CoursesFormsInputs, ModalCoursesColumns } from 'src/app/data/arrays';
+import { coursesListTableObj } from 'src/app/data/table.objects';
 
 @Component({
   selector: 'app-courses-list',
@@ -9,23 +9,20 @@ import { CoursesColumns, CoursesDisplayedColumns, CoursesFormsInputs, ModalCours
   styleUrls: ['./courses-list.component.css']
 })
 export class CoursesListComponent implements OnInit{
+  tableObj=coursesListTableObj
   constructor(private courseSvc: CoursesService,private dbSvc: MyDataService){}
-  table!:any[];
-  CoursesDisplayedColumns=CoursesDisplayedColumns
-  CoursesColumns =CoursesColumns
-  ModalColumns=ModalCoursesColumns;
-  FormsInputs=CoursesFormsInputs;
+
   async ngOnInit() {
     this.courseSvc.toggleNavBar(true)
     this.courseSvc._tablesData.subscribe((updatedData) =>{
-    this.table=updatedData.CoursesData
-
+    this.tableObj.table=updatedData.CoursesData
     })
-    if(this.table?.length==0)
+    
+    if(this.tableObj.table?.length==0)
     await this.getAllCourses();
   }
 
   async getAllCourses(){
-    await  this.courseSvc.setArrayHandler(this.dbSvc.getAllCourseHandler(),this.table)
+    await  this.courseSvc.setArrayHandler(this.dbSvc.getAllCourseHandler(),this.tableObj.table)
   }
 }

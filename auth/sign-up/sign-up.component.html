@@ -1,157 +1,66 @@
 <div class="wrapper">
   <div id="box">
     <div class="flex">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" height="15" width="15"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" height="15" width="15">
+        <path
+          d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
+      </svg>
       <h3> Sign up</h3>
-</div>
-    <form [formGroup]="subscribeForm" >
+    </div>
+    <form [formGroup]="subscribeForm">
       <div class="headline">Subscribe</div>
 
-      <input
-        type="text"
-        class="input-text"
-        [ngClass]="
-        name?.touched && name?.invalid ? 'input-text__inavlid' : ''
-        "
-        placeholder="name"
-        formControlName="name"
-      />
+      <input type="text" class="input-text" [ngClass]=" name?.touched && name?.invalid ? 'input-text__inavlid' : ''   "
+        placeholder="name" formControlName="name" />
       <div *ngIf="name?.touched && name?.invalid" class="invalid-message">
-        {{
-          this.userInfoService.getInvalidMessage(
-            name?.errors,
-            "name",
-            "minlength",
-            this.errorMessages.firstName
-          )
+        {{this.userInfoService.getInvalidMessage(name?.errors,"name","minlength", this.errorMessages.firstName )
         }}
       </div>
-      <input
-        type="text"
-        class="input-text"
-        [ngClass]="
-        phone?.touched && phone?.invalid ? 'input-text__inavlid' : ''
-        "
-        placeholder="phone"
-        formControlName="phone"
-      />
+      <input type="tel" class="input-text" [ngClass]="phone?.touched && phone?.invalid ? 'input-text__inavlid' : '' "
+        placeholder="phone" formControlName="phone" />
       <div class="invalid-message" *ngIf="phone?.touched && phone?.invalid">
-        {{
-          this.userInfoService.getInvalidMessage(
-            phone?.errors,
-            "phone",
-            "minlength",
-            this.errorMessages.lastName
-          )
+        {{ this.userInfoService.getInvalidMessage(phone?.errors,"phone","minlength",this.errorMessages.lastName
+        )
         }}
       </div>
-      <input
-        type="number"
-        class="input-text"
-        [ngClass]="age?.touched && age?.invalid ? 'input-text__inavlid' : ''"
-        placeholder="Age"
-        formControlName="age"
-      />
+      <input type="number" class="input-text" [ngClass]="age?.touched && age?.invalid ? 'input-text__inavlid' : ''"
+        placeholder="Age" formControlName="age" />
       <div class="invalid-message" *ngIf="age?.touched && age?.invalid">
-        {{
-          this.userInfoService.getInvalidMessage(
-            age?.errors,
-            "age",
-            "min",
-            this.errorMessages.age
-          )
+        {{this.userInfoService.getInvalidMessage(age?.errors,"age","min",this.errorMessages.age)
         }}
       </div>
-      <input
-        type="text"
-        class="input-text"
-        [ngClass]="age?.touched && age?.invalid ? 'input-text__inavlid' : ''"
-        placeholder="birthDate"
-        formControlName="birthDate"
-      />
+      <input type="date" class="input-text" [ngClass]="age?.touched && age?.invalid ? 'input-text__inavlid' : ''"
+        placeholder="birthDate" formControlName="birthDate" />
       <div class="invalid-message" *ngIf="birthDate?.touched && birthDate?.invalid">
-        {{
-          this.userInfoService.getInvalidMessage(
-            birthDate?.errors,
-            "birthDate",
-            "min",
-            this.errorMessages.age
-          )
-        }}
-      </div>
+        {{ this.userInfoService.getInvalidMessage(birthDate?.errors,"birthDate","min", this.errorMessages.age
+        ) }} </div>
 
-      <input
-        type="text"
-        class="input-text"
-        [ngClass]="address?.touched && address?.invalid ? 'input-text__inavlid' : ''"
-        placeholder="Address"
-        formControlName="address"
-      />
+      <input type="text" class="input-text"
+        [ngClass]="address?.touched && address?.invalid ? 'input-text__inavlid' : ''" placeholder="Address"
+        formControlName="address" />
       <div class="invalid-message" *ngIf="address?.touched && address?.invalid">
         {{
-          this.userInfoService.getInvalidMessage(
-            birthDate?.errors,
-            "address",
-            "min",
-            this.errorMessages.age
-          )
-        }}
-      </div>
-      <input
-        type="text"
-        class="input-text"
-        [ngClass]="email?.touched && email?.invalid ? 'input-text__inavlid' : ''"
-        placeholder="Email"
-        formControlName="email"
-      />
+        this.userInfoService.getInvalidMessage( birthDate?.errors,"address","min",this.errorMessages.age
+        )}} </div>
+      <input type="text" class="input-text" [ngClass]="email?.touched && email?.invalid ? 'input-text__inavlid' : ''"
+        placeholder="Email" formControlName="email" />
       <div class="invalid-message" *ngIf="email?.touched && email?.invalid">
-        {{
-          this.userInfoService.getInvalidMessage(
-            email?.errors,
-            "email",
-            "email",
-            this.errorMessages.email
-          )
+        {{ this.userInfoService.getInvalidMessage( email?.errors, "email", "email",this.errorMessages.email
+        )
         }}
       </div>
-      <input
-        type="password"
-        class="input-text"
-        [ngClass]="
-          password?.touched && password?.invalid ? 'input-text__inavlid' : ''
-        "
-        placeholder="Password"
-        formControlName="password"
-      />
-      <div class="invalid-message" *ngIf="password?.touched && password?.invalid">
-        {{
-          this.userInfoService.getInvalidMessage(
-            password?.errors,
-            "password",
-            "passwordInvalid",
-            this.errorMessages.password
-          )
-        }}
-      </div>
-
-      <div class="nav-container">
-
-      </div>
-
-      <label>
-        <input (click)="userType='professor'" name="user-type" type="radio" value="professor" [checked]="true">
-        Professor
-      </label>
-      <label>
-        <input (click)="userType='Student'"   name="user-type" type="radio" value="student">
-        Student
-      </label>
-
+      <input type="password" class="input-text" [ngClass]=" password?.touched && password?.invalid ? 'input-text__inavlid' : ''
+        " placeholder="Password" formControlName="password" /> <div class="invalid-message" *ngIf="password?.touched && password?.invalid">
+        {{ this.userInfoService.getInvalidMessage(password?.errors,"password", "passwordInvalid",  this.errorMessages.password
+        )}} </div>
+      <div class="nav-container"> </div>
+      <label><input (click)="userType='professor'" name="user-type" type="radio" value="professor" [checked]="true">
+        Professor </label>
+      <label><input (click)="userType='Student'" name="user-type" type="radio" value="student">
+        Student </label>
     </form>
-     <a ></a>
-
-     <button (click)="signUpHandler();" class="custom-btn btn-16 align" [disabled]="!subscribeForm.valid"><span>Submit</span></button>
-
-
+    <a></a>
+    <button (click)="signUpHandler();" class="custom-btn btn-16 align"
+      [disabled]="!subscribeForm.valid"><span>Submit</span></button>
   </div>
 </div>

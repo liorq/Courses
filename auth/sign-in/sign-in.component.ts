@@ -3,7 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { Router } from '@angular/router';
 import { CoursesService } from 'src/app/core/services/courses.service';
 import { MyDataService } from 'src/app/core/services/db.service';
-import { messages } from 'src/app/data/forms';
+import { messages } from 'src/app/data/objects';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -30,14 +30,10 @@ ngOnInit(): void {
 
 }
 
-onSubmit() {
-  console.log(this.signInForm.value);
-}
 async signInHandler(){
 const form= await this.dbSvc.signInHandler(this.userName?.value, this.password?.value)
- if(form?.access_token){
-this.router.navigate(['/my-courses']);
- }
+ if(form?.access_token)
+ this.router.navigate(['/my-courses']);
  else
  Swal.fire(messages.UserNotFound)
 }

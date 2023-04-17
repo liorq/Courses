@@ -1,4 +1,4 @@
-import Swal, { SweetAlertResult } from 'sweetalert2';
+import Swal from 'sweetalert2';
 
 
 
@@ -20,6 +20,8 @@ export function getEditUserForm(property: string) {
   };
 }
 export function getAddUserForm(array:any[]) {
+  ///typeOfInput = array
+  ///placeholders =array
   return {
     confirmButtonColor: '#000000',
     width: '386px',
@@ -34,7 +36,7 @@ export function getAddUserForm(array:any[]) {
       <div style="font-size: 15px !important; color: black;"> ${array[5]} </div>
       <input id="swal-input7" style="display: inline-block; width: 260px; height: 43px; border-radius: 10px; margin: 5px auto; padding: 15px; box-sizing: border-box; font-size: 0.8em; outline: none; border: 1.5px solid #cccccc; transition: all 0.2s ease;" type="text">
       <div style="font-size: 15px !important; color: black;"> ${array[6]} </div>
-      <input id="swal-input8" style="display: inline-block; width: 260px; height: 43px; border-radius: 10px; margin: 5px auto; padding: 15px; box-sizing: border-box; font-size: 0.8em; outline: none; border: 1.5px solid #cccccc; transition: all 0.2s ease;" type="password">
+      <input id="swal-input8" style="display: inline-block; width: 260px; height: 43px; border-radius: 10px; margin: 5px auto; padding: 15px; box-sizing: border-box; font-size: 0.8em; outline: none; border: 1.5px solid #cccccc; transition: all 0.2s ease;" type="text">
     ` : ''}
   `,
     focusConfirm: false,
@@ -47,50 +49,9 @@ export function getAddUserForm(array:any[]) {
     }
   }
 }
-export const messages={
-  Deleted:{
 
-    text: 'Item Successfully Removed.',
-    confirmButtonColor: '#000000',
-    width: '350px',
-    imageAlt: 'Custom image',
-  },
-  UserNotFound:{
 
-    text: 'User or password incorrect.',
-    confirmButtonColor: '#000000',
-    width: '350px',
-    imageAlt: 'Custom image',
-  }
-}
-export async function getDeletedForm(){
- return {
-
-  text: 'Item Successfully Removed.',
-  confirmButtonColor: '#000000',
-  width: '350px',
-  imageAlt: 'Custom image',
-}
-}
-export async function getUserNotFoundObj(){
-  return {
-
-   text: '"User or password incorrect".',
-   confirmButtonColor: '#000000',
-   width: '350px',
-   imageAlt: 'Custom image',
- }
- }
 export async function openModalAndGetInput(value: any) {
   return await Swal.fire(value);
 }
 
-// export async function verifyPassword(userPassword:string){
-//   const password: any =await openModalAndGetInput(swalObj.verifyPassword);
-
-// if (password?.value != userPassword) {
-//   Swal.fire(`Incurrent password: try again`);
-//   return;
-// }
-// return password;
-// }

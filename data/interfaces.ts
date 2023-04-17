@@ -34,16 +34,7 @@ export interface Courses {
   StudentId: string;
   add?:string;
   delete?:string;
-  // public string? Name { get; set; }
 
-  // public string? startDate { get; set; }
-  // public string? endDate { get; set; }
-  // public string? days { get; set; }
-  // public string? CoursesId { get; set; }
-
-  // public string? StudentId { get; set; }
-
-  // public int? Id { get; set; }
 }
 export interface ClassAttendees{
   name: string;
