@@ -1,9 +1,6 @@
 <div  class="center-lo">
   <div class="loging">
-  <div id="load1"></div>
-  <div id="load2"></div>
-  <div id="load3"></div>
-  <div id="load4"></div>
-  <div id="load5"></div>
+  <div *ngFor="let item of ['load1', 'load2', 'load3', 'load4', 'load5']" id="{{item}}"></div>
 </div>
 </div>
+

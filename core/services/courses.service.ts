@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { CoursesData, UsersData, addIcon, attendees, buyIcon, deleteIcon, myCourses, reportIcon } from 'src/app/data/objects';
+import {  addIcon, buyIcon, deleteIcon, reportIcon } from 'src/app/data/objects';
 
 @Injectable({
   providedIn: 'root'
@@ -45,5 +45,13 @@ export class CoursesService {
     this.removeRow(element)
     this.addRow(field,obj)
 
+  }
+
+  async setArrayHandler(promise: Promise<any>, array: any[]){
+    const result=await await promise
+    if(Array.isArray(result)){
+      array.length=0
+      array.push(...result);
+    }
   }
 }

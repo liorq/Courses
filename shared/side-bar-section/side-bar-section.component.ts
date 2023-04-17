@@ -54,8 +54,7 @@ console.log(res)
   return
  }
   }
-   ///modal 2 inputs then display
-  // this.OpenModal(menuItem.label,menuItem)
+
 
 
 

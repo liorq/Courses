@@ -89,7 +89,7 @@ async signUp(user:User) {
 }
 async buyCourseHandler(courses:Courses) {
   const headers = this.headerInit()
-
+  console.log(courses)
   try {
     const response = await this.http.post(`${this.apiUrl}/courses/${courses.name}/buy`,courses, { headers }).toPromise();
     return response;
@@ -98,6 +98,8 @@ async buyCourseHandler(courses:Courses) {
     return error;
   }
 }
+
+
 async removeCourseHandler(courseId: string): Promise<any> {
   console.log(courseId)
   const headers = this.headerInit()
@@ -147,7 +149,7 @@ headerInit (){
   });
 
 }
-getAllUsers(){
+getAllUsers():Promise<any>|any{
   const headers = this.headerInit();
 
   try{
@@ -155,7 +157,7 @@ getAllUsers(){
   return response
   }
   catch(error){
-  return false;
+  return error;
   }
 }
 
