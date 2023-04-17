@@ -2,7 +2,6 @@ import { Component } from "@angular/core";
 import { CoursesService } from "src/app/core/services/courses.service";
 import {  ModalStudentColumns,  StudentColumns,  StudentDisplayedColumns, StudentFormsInputs} from "src/app/data/arrays";
 import { MyDataService } from "src/app/core/services/db.service";
-import { UserInfoService } from "src/app/core/services/auth.service";
 
 @Component({
   selector: "app-student-list",
@@ -25,7 +24,6 @@ export class StudentListComponent {
     this.courseSvc._tablesData.subscribe((updatedData) => {
       this.table = updatedData.UsersData;
     });
-
     if (this.table?.length == 0) {
       await this.getAllStudents();
     }

@@ -15,8 +15,6 @@ ngOnInit(): void {
   this.isNavBarVisible = status;
   })
 }
-
 menuArray:any[]=[{title:'Catalog',menuItems:menuApps},{title:'Courses',menuItems:menuCourses}]
-
 
 }

@@ -47,22 +47,20 @@ initForm() {
 
 }
 async signUpHandler(){
-  ////
 
-  const user:User={studentId:Math.random()*10+"",address:this.address?.value,birthDate:this.birthDate?.value,role:'employee',isStudent:this.userType=='professor'?false:true,name: this.name?.value, phone: this.phone?.value, age: this.age?.value, userName: this.email?.value, password: this.password?.value}
-
+  const user:User=this.getUserObj()
   const response=await this.dbSvc.signUp(user)
   const isResponseOk = response && response.status && response.status <= 200;
+
+  
   if(isResponseOk){
     this.autoSvc.updateIsUserLoggedSubj(true)
     await this.dbSvc.signInHandler(this.email?.value,this.password?.value)
     this.router.navigate(['/my-courses']);
   }
-
 }
-onClick(){
-  console.log(this.subscribeForm)
-
+getUserObj():User{
+ return {studentId:Math.random()*10+"",address:this.address?.value,birthDate:this.birthDate?.value,role:'employee',isStudent:this.userType=='professor'?false:true,name: this.name?.value, phone: this.phone?.value, age: this.age?.value, userName: this.email?.value, password: this.password?.value}
 
 }
 }

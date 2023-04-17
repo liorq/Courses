@@ -28,7 +28,4 @@ export class CoursesListComponent implements OnInit{
   async getAllCourses(){
     await  this.courseSvc.setArrayHandler(this.dbSvc.getAllCourseHandler(),this.table)
   }
-
-
-
 }

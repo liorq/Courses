@@ -3,6 +3,8 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { Router } from '@angular/router';
 import { CoursesService } from 'src/app/core/services/courses.service';
 import { MyDataService } from 'src/app/core/services/db.service';
+import { messages } from 'src/app/data/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-sign-in',
@@ -34,10 +36,9 @@ onSubmit() {
 async signInHandler(){
 const form= await this.dbSvc.signInHandler(this.userName?.value, this.password?.value)
  if(form?.access_token){
- console.log("in")
 this.router.navigate(['/my-courses']);
  }
  else
- console.log("user not found")
+ Swal.fire(messages.UserNotFound)
 }
 }

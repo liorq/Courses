@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { menuApps, menuSetting } from 'src/app/data/arrays';
+import { menuSetting } from 'src/app/data/arrays';
 
 @Component({
   selector: 'app-setting',

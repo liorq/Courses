@@ -47,6 +47,22 @@ export function getAddUserForm(array:any[]) {
     }
   }
 }
+export const messages={
+  Deleted:{
+
+    text: 'Item Successfully Removed.',
+    confirmButtonColor: '#000000',
+    width: '350px',
+    imageAlt: 'Custom image',
+  },
+  UserNotFound:{
+
+    text: 'User or password incorrect.',
+    confirmButtonColor: '#000000',
+    width: '350px',
+    imageAlt: 'Custom image',
+  }
+}
 export async function getDeletedForm(){
  return {
 
@@ -56,7 +72,15 @@ export async function getDeletedForm(){
   imageAlt: 'Custom image',
 }
 }
+export async function getUserNotFoundObj(){
+  return {
 
+   text: '"User or password incorrect".',
+   confirmButtonColor: '#000000',
+   width: '350px',
+   imageAlt: 'Custom image',
+ }
+ }
 export async function openModalAndGetInput(value: any) {
   return await Swal.fire(value);
 }

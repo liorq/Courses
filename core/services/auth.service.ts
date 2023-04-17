@@ -19,6 +19,8 @@ export class UserInfoService {
     }
     return
   }
+
+
   updateIsUserLoggedSubj(newStatus:boolean){
   this.isUserLogged.next(newStatus)
   }
@@ -28,6 +30,8 @@ export class UserInfoService {
     const isValidPassword = !passwordRegex.test(control.value);
     return isValidPassword ? { passwordInvalid: true } : null;
   }
+
+  
   getEncryptedPassword(password:string){
     return CryptoJS.SHA256(password).toString();
   }
