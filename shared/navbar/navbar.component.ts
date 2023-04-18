@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CoursesService } from 'src/app/core/services/courses.service';
-import { menuApps, menuCourses } from 'src/app/data/arrays';
+import { menuApps, menuCatalog, menuCourses } from 'src/app/data/arrays';
 
 @Component({
   selector: 'app-navbar',
@@ -10,12 +10,13 @@ import { menuApps, menuCourses } from 'src/app/data/arrays';
 export class NavbarComponent implements OnInit{
   constructor(private coursesSvc: CoursesService){}
   isNavBarVisible:boolean=true;
+  menuCatalog=menuCatalog;
+  
 ngOnInit(): void {
   this.coursesSvc._isNavBarVisible.subscribe((status)=>{
   this.isNavBarVisible = status;
   })
 }
 
-menuArray:any[]=[{title:'Catalog',menuItems:menuApps},{title:'Courses',menuItems:menuCourses}]
 
 }

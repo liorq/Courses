@@ -2,7 +2,8 @@ import { Component, Input } from "@angular/core";
 import { DbService } from "src/app/core/services/db.service";
 import { ModalStudentColumns } from "src/app/data/arrays";
 import { getEditUserForm, openModalAndGetInput } from "src/app/data/forms";
-import { addModal, deleteModal } from "src/app/data/objects";
+import { addModal, deleteModal, messages } from "src/app/data/objects";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-side-bar-section",
@@ -26,14 +27,19 @@ export class SideBarSectionComponent {
  ////להעיף לסרוויס
  async ChangePropertiesHandler(menuItem:any){
 ////handler is make move change it and move to service
+
   if (['Change Name', 'Change Email', 'Change Password'].includes(menuItem.label)) {
-  let subToChange = menuItem.label.split(' ')[1];
+  const subToChange = menuItem.label.split(' ')[1];
   let form:any=await getEditUserForm(subToChange)
   form= await openModalAndGetInput(form)
+
  if(form.isConfirmed){
-   let newString = menuItem.label.split(' ')[0].toLowerCase()+subToChange
-   await this.dbSvc.ChangeUserPropertyHandler(newString, form.value[1],form.value[0])
- }
+  const newString = menuItem.label.split(' ')[0].toLowerCase()+subToChange
+const response=   await this.dbSvc.ChangeUserPropertyHandler(newString, form.value[1],form.value[0])
+Swal.fire(response.error ? messages.changesUnsuccessful : messages.changesSucceed);
+
+  }
   }
 }
+
 }

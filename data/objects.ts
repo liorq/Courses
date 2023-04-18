@@ -75,7 +75,32 @@ export const addIcon = `
     FailedToPurchase:{
       confirmButtonColor: '#000000',
       width: '350px',
-      text: 'Failed to purchase.',
+      text: 'Failed to Attendee reporting.',
 
-    }
+    } ,
+
+    AttendanceReportingFailed:{
+      confirmButtonColor: '#000000',
+      width: '350px',
+      text: 'Attendance reporting failed.',
+
+    },
+    AttendanceReportSucceed:{
+      confirmButtonColor: '#000000',
+      width: '350px',
+      text: 'Attendance reporting Succeed.',
+
+    },
+        /////need to change
+        changesSucceed:{
+          confirmButtonColor: '#000000',
+          width: '350px',
+          text: ' changes have been applied.',
+
+        },
+        changesUnsuccessful: {
+          confirmButtonColor: '#000000',
+          width: '350px',
+          text: 'Changes have not been applied.',
+        },
   }

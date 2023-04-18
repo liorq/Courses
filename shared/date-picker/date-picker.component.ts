@@ -3,7 +3,8 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { CoursesService } from 'src/app/core/services/courses.service';
 import { DbService } from 'src/app/core/services/db.service';
 import { Courses } from 'src/app/data/interfaces';
-import { DatePickerForm } from 'src/app/data/objects';
+import { DatePickerForm, messages } from 'src/app/data/objects';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-date-picker',
@@ -52,8 +53,9 @@ handleCourseSelection(){
 }
 
 async handleReportValidation() {
-  const isValid = this.isReportValid();
-  console.log(isValid ? await this.dbSvc.addAttendeesHandler(this.form) : 'The report is not valid');
+  const dbReportResponse= this.isReportValid() ? await this.dbSvc.addAttendeesHandler(this.form) :'';
+  Swal.fire(dbReportResponse&&dbReportResponse.error==null?messages.AttendanceReportSucceed: messages.AttendanceReportingFailed)
+
 }
 
 isReportValid(){
