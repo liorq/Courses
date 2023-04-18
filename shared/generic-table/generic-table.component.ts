@@ -5,15 +5,13 @@ import {MatTableDataSource} from '@angular/material/table';
 import { DomSanitizer } from '@angular/platform-browser';
 import { CoursesService } from 'src/app/core/services/courses.service';
 import { MyDataService } from 'src/app/core/services/db.service';
-import { getAddForm, openModalAndGetInput } from 'src/app/data/forms';
-import { deleteModal, messages } from 'src/app/data/objects';
+import { deleteModal } from 'src/app/data/objects';
 
 @Component({
   selector: 'app-generic-table',
   templateUrl: './generic-table.component.html',
   styleUrls: ['./generic-table.component.css'],
 })
-
 export class GenericTableComponent implements AfterViewInit{
  @Input()tableObj !:any;
   @ViewChild(MatSort) sort!: MatSort;
@@ -37,20 +35,7 @@ export class GenericTableComponent implements AfterViewInit{
   }
 
   async OpenModal(column: any, element: any) {
-    this.selectedRow=element;
-
-    switch (column) {
-      case 'buy':
-        await this.courseSvc.buyCourseHandler(element, this);break;
-      case 'add':
-        this.formData = (await openModalAndGetInput(await getAddForm(this.tableObj.FormsInputs,this.tableObj.componentName))).value;
-        this.formData!=undefined&& this.courseSvc.AddPropertyHandler(this); break;
-      case 'delete':
-        this.formData = (await openModalAndGetInput(messages.Deleted)).value;
-        this.isDeleteModalOpen = true;
-        this.courseSvc.AddPropertyHandler(this); break;
-
-    }
+    await this.courseSvc.modalHandler(column, element,this);
   }
 
 }

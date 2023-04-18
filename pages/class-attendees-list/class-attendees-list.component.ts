@@ -10,9 +10,8 @@ import { classAttendeesTableObj } from "src/app/data/table.objects";
   styleUrls: ["./class-attendees-list.component.css"],
 })
 export class ClassAttendeesListComponent {
-
+  
   tableObj=classAttendeesTableObj
-
   constructor(
     private dbSvc: MyDataService,
     private courseSvc: CoursesService,

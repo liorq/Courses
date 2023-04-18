@@ -7,11 +7,11 @@
 
     <div> Attendee reporting form</div>
   </div>
-    <form (ngSubmit)="SelectDayHandler()">
+    <form (ngSubmit)="handleDaySelection()">
       <div>{{'date'}}</div>
-      <input (change)="SelectDayHandler()" [(ngModel)]="form['date']" name="date" type="date">
+      <input (change)="handleDaySelection()" [(ngModel)]="form['date']" name="date" type="date">
       <div>{{'coursesName'}}</div>
-    <select [disabled]="form.disabled" [(ngModel)]="form['coursesName']" name="coursesName" (change)="selectCourse()" id="coursesName">
+    <select [disabled]="form.disabled" [(ngModel)]="form['coursesName']" name="coursesName" (change)="handleCourseSelection()" id="coursesName">
 
       <option  *ngFor="let course of coursesToDisplay" value="{{course.name}}" >{{course.name}}
 
@@ -38,7 +38,7 @@
 
 
 
-      <button class="custom-btn btn-16" (click)="AttendeeReportingHandler()"><span>Report</span></button>
+      <button class="custom-btn btn-16" (click)="handleAttendeeReporting()"><span>Report</span></button>
     </form>
 
   </div>

@@ -35,7 +35,7 @@ export interface Courses {
   StudentId: string;
   add?:string;
   delete?:string;
-
+  coursesId:string;
 }
 export interface ClassAttendees{
   name: string;

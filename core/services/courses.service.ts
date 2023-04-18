@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { openModalAndGetInput, getAddForm } from 'src/app/data/forms';
 import {  addIcon, buyIcon, deleteIcon, messages } from 'src/app/data/objects';
 import { GenericTableComponent } from 'src/app/shared/generic-table/generic-table.component';
 import Swal from 'sweetalert2';
@@ -76,5 +77,25 @@ export class CoursesService {
   component.dataSource.data.push(obj);
   component.formData = {};
  }
+ async modalHandler(column: any, element: any,component:GenericTableComponent){
+  component.selectedRow=element;
+
+    switch (column) {
+      case 'buy':
+        await this.buyCourseHandler(element, component);break;
+      case 'add':
+        component.formData = (await openModalAndGetInput(await getAddForm(component.tableObj.FormsInputs,component.tableObj.componentName))).value;
+        component.formData!=undefined&& this.AddPropertyHandler(component); break;
+      case 'delete':
+        component.formData = (await openModalAndGetInput(messages.Deleted)).value;
+        component.isDeleteModalOpen = true;
+        this.AddPropertyHandler(component); break;
+
+    }
+  }
+
+   getDayOfTheWeek(form: {[key: string]: any}): string {
+    return new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(new Date(form['date']));
+  }
 
 }

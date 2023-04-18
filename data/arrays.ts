@@ -267,3 +267,4 @@ export const datesOfTheYear = [
   { value: '2023-10-22', label: 'October 22, 2023' },
   { value: '2023-10-23', label: 'October 23, 2023' },
 ];
+export const menuArray=[{title:'Setting',menuItems:menuSetting}]

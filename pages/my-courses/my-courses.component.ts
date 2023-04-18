@@ -24,7 +24,6 @@ export class MyCoursesComponent {
       this.tableObj.table = updatedData.myCourses;
     });
     await this.loadTableData();
-
   }
 
   async loadTableData(){
