@@ -238,3 +238,32 @@ export const   BuyCoursesDisplayedColumns: string[] = ["name", "startDate", "end
 export const     BuyCoursesColumns = [ {matColumnDef: 'name', title: 'name'}, {matColumnDef: 'startDate', title: 'startDate'},  {matColumnDef: 'endDate', title: 'endDate', },  {matColumnDef: 'days', title: 'days', },  {matColumnDef: "hours", title:"hours", }];
 
 export const  ModalBuyCoursesColumns: string[] = ["name", "startDate", "endDate", "days", "hours","buy"];
+export const daysOfTheWeek = [
+  {value:'Monday',label: 'Monday'},
+ {value:'Tuesday',label: 'Tuesday'},
+ {value:'Wednesday',label: 'Wednesday'},
+ {value:'Thursday',label: 'Thursday'},
+ {value:'Friday',label: 'Friday'},
+ {value:'Saturday',label: 'Saturday'},
+ {value:'Sunday',label: 'Sunday'},
+
+
+];
+
+export const hoursOfTheDay = [
+ {value:'09:00-12:00',label: '09:00-12:00'},
+ {value:'14:00-16:00',label: '14:00-16:00'},
+ {value:'15:57-17:00',label: '15:57-17:00'},
+ {value:'22:46-23:46',label: '22:46-23:46'},
+ {value:'16:00-20:00',label: '16:00-20:00'},
+
+
+];
+export const datesOfTheYear = [
+  { value: '2023-04-18', label: 'April 18, 2023' },
+  { value: '2023-04-19', label: 'April 19, 2023' },
+  { value: '2023-04-20', label: 'April 20, 2023' },
+  { value: '2023-10-21', label: 'October 21, 2023' },
+  { value: '2023-10-22', label: 'October 22, 2023' },
+  { value: '2023-10-23', label: 'October 23, 2023' },
+];

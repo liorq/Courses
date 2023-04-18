@@ -1,4 +1,5 @@
 import Swal from 'sweetalert2';
+import {  datesOfTheYear, daysOfTheWeek, hoursOfTheDay } from './arrays';
 
 export function getEditUserForm(property: string) {
   return {
@@ -56,37 +57,13 @@ export function getAddUserForm(array:any[]) {
 
 
 const style="display: inline-block; width: 260px; height: 43px; border-radius: 10px; margin: 5px auto; padding:0 15px ; box-sizing: border-box; font-size: 0.8em; outline: none; border: 1.5px solid #cccccc; transition: all 0.2s ease;";
-export const days = [
-  {value:'Monday',label: 'Monday'},
- {value:'Tuesday',label: 'Tuesday'},
- {value:'Wednesday',label: 'Wednesday'},
- {value:'Thursday',label: 'Thursday'},
- {value:'Friday',label: 'Friday'},
- {value:'Saturday',label: 'Saturday'},
- {value:'Sunday',label: 'Sunday'},
 
-
-];
-
-export const hours = [
- {value:'09:00-12:00',label: '09:00-12:00'},
- {value:'14:00-16:00',label: '14:00-16:00'},
- {value:'15:57-17:00',label: '15:57-17:00'},
- {value:'22:46-23:46',label: '22:46-23:46'},
- {value:'16:00-20:00',label: '16:00-20:00'},
-
-
-];
 
 export function getAddCourseForm(array:any[]) {
-  const dates = [
-    { value: '2023-04-18', label: 'April 18, 2023' },
-    { value: '2023-04-19', label: 'April 19, 2023' },
-    { value: '2023-04-20', label: 'April 20, 2023' },
-    { value: '2023-10-21', label: 'October 21, 2023' },
-    { value: '2023-10-22', label: 'October 22, 2023' },
-    { value: '2023-10-23', label: 'October 23, 2023' },
-  ];
+ const days = daysOfTheWeek
+
+ const  hours= hoursOfTheDay
+const dates= datesOfTheYear
 
   const optionTemplate = (options: any[]) => options.map((option: { value: any; label: any; }) => `<option value="${option.value}">${option.label}</option>`).join('');
 
