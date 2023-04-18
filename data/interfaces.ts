@@ -20,6 +20,7 @@ export interface User {
   add?:string| AbstractControl<any, any>;
   role?:string;
   age?:string;
+  email?:string;
 }
 
 

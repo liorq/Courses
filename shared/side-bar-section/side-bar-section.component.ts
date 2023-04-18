@@ -31,6 +31,7 @@ export class SideBarSectionComponent {
   form= await openModalAndGetInput(form)
  if(form.isConfirmed){
    let newString = menuItem.label.split(' ')[0].toLowerCase()+subToChange
+   console.log(newString, form.value[1],form.value[0])
    await this.dbSvc.ChangeUserPropertyHandler(newString, form.value[1],form.value[0])
  }
   }

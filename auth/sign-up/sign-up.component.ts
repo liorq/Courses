@@ -6,6 +6,7 @@ import { CoursesService } from 'src/app/core/services/courses.service';
 import { MyDataService } from 'src/app/core/services/db.service';
 import { User } from 'src/app/data/interfaces';
 import { Router } from '@angular/router';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-sign-up',
@@ -13,10 +14,9 @@ import { Router } from '@angular/router';
   styleUrls: ['../sign-in/sign-in.component.css','./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
+
+  constructor(private authSvc:UserInfoService,private router:Router,public userInfoService: UserInfoService,private coursesSvc: CoursesService,private dbSvc:MyDataService) {}
   userType: string='professor';
-
-
-  constructor(private autoSvc:UserInfoService,private router:Router,public userInfoService: UserInfoService,private coursesSvc: CoursesService,private dbSvc:MyDataService) {}
   isNavBarVisible:boolean=true;
   subscribeForm!: FormGroup;
   errorMessages=errorMessages;
@@ -32,7 +32,6 @@ ngOnInit(){
   this.coursesSvc.toggleNavBar(false)
 }
 
-
 initForm() {
   this.subscribeForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(4)]),
@@ -47,22 +46,18 @@ initForm() {
 
 }
 async signUpHandler(){
-
-  const user:User=this.getUserObj()
-  const response=await this.dbSvc.signUp(user)
+  const response=await this.dbSvc.signUp(this.getUserObj())
   const isResponseOk = response && response.status && response.status <= 200;
 
   if(isResponseOk){
-    this.autoSvc.updateIsUserLoggedSubj(true)
+    this.authSvc.updateIsUserLoggedSubj(true)
     await this.dbSvc.signInHandler(this.email?.value,this.password?.value)
     this.router.navigate(['/my-courses']);
-    const encryptAuthLevel=this.autoSvc.encryptHandler(this.userType)
-    localStorage.setItem('authLevel',encryptAuthLevel);
-
+    this.authSvc.encryptAuthLevelHandler(this.userType)
   }
 }
-getUserObj():User{
- return {studentId:Math.random()*10+"",address:this.address?.value,birthDate:this.birthDate?.value,role:'employee',isStudent:this.userType=='professor'?false:true,name: this.name?.value, phone: this.phone?.value, age: this.age?.value, userName: this.email?.value, password: this.password?.value}
 
+getUserObj():User{
+ return {email:this.email?.value,studentId:uuidv4(),address:this.address?.value,birthDate:this.birthDate?.value,role:'employee',isStudent:this.userType=='professor'?false:true,name: this.name?.value, phone: this.phone?.value, age: this.age?.value, userName: this.email?.value, password: this.password?.value}
 }
 }

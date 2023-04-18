@@ -22,7 +22,8 @@ export class CoursesListComponent implements OnInit{
   }
 
   async loadTableData(){
-    if (this.authSvc.isUserLoggedIn()&& this.tableObj.table?.length == 0) {
+    const isLoadDataNeeded = this.authSvc.isUserLoggedIn() && this.tableObj.table?.length == 0;
+    if (isLoadDataNeeded) {
       const [CoursesData, UsersData, attendees, myCourses] = await this.dbSvc.getAllTablesData()
       this.courseSvc.initTablesDataSubject(CoursesData,UsersData,attendees, myCourses);
     }

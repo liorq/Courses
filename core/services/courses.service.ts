@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import {  addIcon, buyIcon, deleteIcon, messages } from 'src/app/data/objects';
 import { GenericTableComponent } from 'src/app/shared/generic-table/generic-table.component';
 import Swal from 'sweetalert2';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,6 @@ export class CoursesService {
     this.isNavBarVisible.next(Status);
   }
 
-
   updateTablesDataSubject(newValue:any){
     this.tablesData.next(newValue)
   }
@@ -26,10 +26,6 @@ export class CoursesService {
     this.tablesData.next({CoursesData:CoursesData,UsersData:UsersData,attendees:attendees,myCourses:myCourses})
   }
 
-
- getTablesDataSubjectValue(){
-  return this.tablesData.getValue()
- }
 
   addIconsBtn(array:any[]){
  for(let item of array)  {
@@ -48,11 +44,9 @@ export class CoursesService {
     this.tablesData.next(data);
   }
 
-
   async buyCourseHandler(element:any,component:GenericTableComponent){
 
     const response:any=await component.dbSvc.buyCourseHandler({...element,StudentId:'admin'})
-    ///add rows to the subject
     if (response && response?.status !== 400) {
       const data = this.tablesData.getValue();
       data.myCourses.push(response);
@@ -60,34 +54,27 @@ export class CoursesService {
     }
 
     Swal.fire(response?.status !== 400?messages.boughtSuccessfully:messages.FailedToPurchase);
-
   }
-
 
   async AddPropertyHandler(component: GenericTableComponent ) {
     const isStudent = component.tableObj?.componentName === 'StudentComponent';
-
-    if (component.isDeleteModalOpen) {
-      const id = isStudent ? component.selectedRow?.username : component.selectedRow?.coursesId;
-      await (isStudent ? component.dbSvc.removeUserHandler(id) : component.dbSvc.removeCourseHandler(id));
-      component.courseSvc.removeRow(component.selectedRow);
-      component.dataSource.data = component.dataSource.data.filter(row => row !== component.selectedRow);
-    }
-    else {
-      component.formData= {...component.formData, add: addIcon, delete: deleteIcon };
-      const obj = isStudent ? {...component.formData, role: 'student', studentId: Math.random()*10+''} : {...component.formData, StudentId: 'admin', CoursesId: Math.random() * 10 + ''};
-      const response = isStudent ? await component.dbSvc.signUp(obj) : await component.dbSvc.addCourseHandler(obj);
-      const isResponseOk=response && response.status && response.status <= 200
-      Swal.fire(isResponseOk ? "Created successfully" : "Failed to create");
-      component.dataSource.data.push(obj);
-      component.formData = {};
-    }
+    component.isDeleteModalOpen?await this.deleteHandler(component,isStudent):await  this.addHandler(component,isStudent)
     component.dataSource._updateChangeSubscription();
   }
-
-
-
-
-
+ async deleteHandler(component:GenericTableComponent,isStudent:boolean){
+  const id = isStudent ? component.selectedRow?.username : component.selectedRow?.coursesId;
+  await (isStudent ? component.dbSvc.removeUserHandler(id) : component.dbSvc.removeCourseHandler(id));
+  component.courseSvc.removeRow(component.selectedRow);
+  component.dataSource.data = component.dataSource.data.filter(row => row !== component.selectedRow);
+ }
+ async addHandler(component:GenericTableComponent,isStudent:boolean){
+  component.formData= {...component.formData, add: addIcon, delete: deleteIcon };
+  const obj = isStudent ? {...component.formData, role: 'student', studentId: uuidv4(),email:component.formData.userName,isStudent:true} : {...component.formData, StudentId: 'admin', CoursesId:uuidv4()};
+  const response = isStudent ? await component.dbSvc.signUp(obj) : await component.dbSvc.addCourseHandler(obj);
+  const isResponseOk=response && response.status && response.status <= 200
+  Swal.fire(isResponseOk ? "Created successfully" : "Failed to create");
+  component.dataSource.data.push(obj);
+  component.formData = {};
+ }
 
 }

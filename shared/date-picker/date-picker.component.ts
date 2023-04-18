@@ -27,7 +27,9 @@ async ngOnInit() {
 await this.loadTableData()
 }
 async loadTableData(){
-  if (this.authSvc.isUserLoggedIn()&& this.table?.length == 0) {
+  const isLoadDataNeeded =this.authSvc.isUserLoggedIn()&& this.table?.length == 0
+
+  if (isLoadDataNeeded) {
     const [CoursesData, UsersData, attendees, myCourses] = await this.dbSvc.getAllTablesData()
     this.courseSvc.initTablesDataSubject(CoursesData,UsersData,attendees, myCourses);
   }
@@ -45,12 +47,11 @@ selectCourse(){
 AttendeeReportingHandler(){
   const isAllFieldFilled=Object.values(this.form).filter((field:any)=>field!=="").length==8;
   if(isAllFieldFilled){
-    if(this.form.Absentee=='yes')
-    this.isValidAbsence()
+    this.isValidReport()
   }
 }
 
-async isValidAbsence() {
+async isValidReport() {
   ///selectChoice
   ///isValidAbsence חיסור
   ///   isValidAttendee=false; הגעה בזמן
@@ -68,24 +69,22 @@ async isValidAbsence() {
     isValidAbsence=true
     console.log('The current time is more than 10 minutes before the start of the lesson');
     ///חיסור רק
-  } else if (diffInMinutes >= 0 && diffInMinutes <= 10) {
+  } if (diffInMinutes >= 0 && diffInMinutes <= 10) {
     isValidAbsence=true;
     isValidAttendee=true;
         ///חיסור או איחור
-
     console.log('The current time is within 10 minutes before the start of the lesson');
   } else {
     isValidAbsence=true
             ///חיסור
     console.log('The current time is after the start of the lesson');
   }
-  console.log(isValidAbsence,isValidAttendee);
-  console.log(this.form.Absentee);
+  const isFormAbsentee =this.form.Absentee=='yes'&&isValidAbsence||this.form.Absentee=='no'&&isValidAttendee
 
-  if(this.form.Absentee=='yes'&&isValidAbsence||this.form.Absentee=='no'&&isValidAttendee)
+  if(isFormAbsentee)
   console.log(await this.dbSvc.addAttendeesHandler(this.form));
 else
-console.log("not valid")
+console.log('The report is not valid');
 }
 SelectDayHandler(){
   this.form.courseDay= this.getDayOfTheWeek().toLowerCase()

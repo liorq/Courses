@@ -12,10 +12,7 @@ export class AuthLevelGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      let encryptedAuthLevel = localStorage.getItem('authLevel');
-      // Decrypt the encrypted string
-       encryptedAuthLevel = this.authSvc.decryptedHandler(encryptedAuthLevel||"");
-
+      let encryptedAuthLevel = this.authSvc.decryptedHandler(localStorage.getItem('authLevel')||"");
       console.log('Decrypted string:', encryptedAuthLevel);
 
       if (encryptedAuthLevel === "professor") {
@@ -29,9 +26,7 @@ export class AuthLevelGuard implements CanActivate {
   canLoad(
     route: Route,
     segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      let encryptedAuthLevel = localStorage.getItem('authLevel');
-      // Decrypt the encrypted string
-       encryptedAuthLevel = this.authSvc.decryptedHandler(encryptedAuthLevel||"");
+      let encryptedAuthLevel = this.authSvc.decryptedHandler(localStorage.getItem('authLevel')||"");
     if (encryptedAuthLevel === "professor") {
       return true;
     }

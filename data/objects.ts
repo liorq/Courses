@@ -81,4 +81,3 @@ export const addIcon = `
 
     }
   }
-  // Swal.fire(response?.status !== 400?"bought successfully":"Failed to purchase");

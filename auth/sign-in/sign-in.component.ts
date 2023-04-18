@@ -1,10 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import {
-  AbstractControl,
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from "@angular/forms";
+import {  AbstractControl,  FormBuilder,  FormGroup,  Validators,} from "@angular/forms";
 import { Router } from "@angular/router";
 import { CoursesService } from "src/app/core/services/courses.service";
 import { MyDataService } from "src/app/core/services/db.service";

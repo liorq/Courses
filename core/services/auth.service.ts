@@ -38,16 +38,17 @@ export class UserInfoService {
     return (token!=null&&token!=""&&token!=undefined);
   }
 
-
   decryptedHandler(val:string){
     const secretKey = 'mysecretkey';
     return CryptoJS.AES.decrypt(val, secretKey).toString(CryptoJS.enc.Utf8);
-
 
   }
   encryptHandler(val:string){
     const secretKey = 'mysecretkey';
     return CryptoJS.AES.encrypt(val, secretKey).toString();
-
   }
+  encryptAuthLevelHandler(userType:string){
+    localStorage.setItem('authLevel',this.encryptHandler(userType));
+  }
+
 }
