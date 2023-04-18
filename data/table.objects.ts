@@ -5,6 +5,7 @@ export const coursesListTableObj={
   displayedColumns:CoursesDisplayedColumns,
   table:[],FormsInputs:CoursesFormsInputs,componentName:'CoursesComponent'
 }
+
 export const studentListTableObj={
   columns:StudentColumns,ModalColumns:ModalStudentColumns,
   displayedColumns:StudentDisplayedColumns,

@@ -24,7 +24,9 @@ import { ClassAttendeesListComponent } from './pages/class-attendees-list/class-
 import { MyCoursesComponent } from './pages/my-courses/my-courses.component';
 import { BuyCoursesComponent } from './pages/buy-courses/buy-courses.component';
 import { LoadingIconComponent } from './shared/loading-icon/loading-icon.component';
-
+import { DatePickerComponent } from './shared/date-picker/date-picker.component';
+import { MatSelectModule } from '@angular/material/select';
+import { SelectBoxComponent } from './shared/select-box/select-box.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { LoadingIconComponent } from './shared/loading-icon/loading-icon.compone
     MyCoursesComponent,
     BuyCoursesComponent,
     LoadingIconComponent,
+    DatePickerComponent,
+    SelectBoxComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,7 +57,7 @@ import { LoadingIconComponent } from './shared/loading-icon/loading-icon.compone
     MatTableModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    FormsModule, ReactiveFormsModule,HttpClientModule
+    FormsModule, ReactiveFormsModule,HttpClientModule,MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -16,13 +16,16 @@
         {{this.userInfoService.getInvalidMessage(name?.errors,"name","minlength", this.errorMessages.firstName )
         }}
       </div>
+
       <input type="tel" class="input-text" [ngClass]="phone?.touched && phone?.invalid ? 'input-text__inavlid' : '' "
         placeholder="phone" formControlName="phone" />
       <div class="invalid-message" *ngIf="phone?.touched && phone?.invalid">
-        {{ this.userInfoService.getInvalidMessage(phone?.errors,"phone","minlength",this.errorMessages.lastName
+        {{ this.userInfoService.getInvalidMessage(phone?.errors,"phone","pattern",this.errorMessages.phone
         )
         }}
       </div>
+
+
       <input type="number" class="input-text" [ngClass]="age?.touched && age?.invalid ? 'input-text__inavlid' : ''"
         placeholder="Age" formControlName="age" />
       <div class="invalid-message" *ngIf="age?.touched && age?.invalid">

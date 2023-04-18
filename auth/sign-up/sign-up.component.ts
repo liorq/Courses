@@ -36,8 +36,8 @@ ngOnInit(){
 initForm() {
   this.subscribeForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    phone: new FormControl('', [Validators.required]),
-    age: new FormControl(0, [Validators.required, Validators.min(12)]),
+    phone: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
+    age: new FormControl(0, [Validators.required, Validators.min(12), Validators.max(100)]),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, this.userInfoService.passwordValidator, Validators.minLength(8)]),
     birthDate: new FormControl('', [Validators.required]),
@@ -56,6 +56,9 @@ async signUpHandler(){
     this.autoSvc.updateIsUserLoggedSubj(true)
     await this.dbSvc.signInHandler(this.email?.value,this.password?.value)
     this.router.navigate(['/my-courses']);
+    const encryptAuthLevel=this.autoSvc.encryptHandler(this.userType)
+    localStorage.setItem('authLevel',encryptAuthLevel);
+
   }
 }
 getUserObj():User{

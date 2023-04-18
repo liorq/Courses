@@ -10,21 +10,22 @@ import { SettingComponent } from './pages/setting/setting.component';
 import { ClassAttendeesListComponent } from './pages/class-attendees-list/class-attendees-list.component';
 import { MyCoursesComponent } from './pages/my-courses/my-courses.component';
 import { BuyCoursesComponent } from './pages/buy-courses/buy-courses.component';
-// canActivate: [AuthGuard]
+import { DatePickerComponent } from './shared/date-picker/date-picker.component';
+import { AuthSignInGuard } from './core/guards/auth-sign-in.guard';
+import { AuthLevelGuard } from './core/guards/auth-level.guard';
 
 const routes: Routes = [
-  { path: 'sign-up', component: SignUpComponent },
-   { path: 'all-courses', component: CoursesListComponent, },
-   { path: 'all-students', component: StudentListComponent, },
-   { path: 'all-attendees', component: ClassAttendeesListComponent, },
+  { path: 'sign-up', component: SignUpComponent,canActivate: [AuthSignInGuard] },
+   { path: 'all-courses', component: CoursesListComponent, canActivate: [AuthGuard,AuthLevelGuard]},
+   { path: 'all-students', component: StudentListComponent, canActivate: [AuthGuard,AuthLevelGuard]},
+   { path: 'all-attendees', component: ClassAttendeesListComponent, canActivate: [AuthGuard,AuthLevelGuard]},
+   { path: 'report-attendees', component: DatePickerComponent,canActivate: [AuthGuard]},
    { path: 'my-courses', component: MyCoursesComponent, canActivate: [AuthGuard] },
    { path: 'buy-courses', component: BuyCoursesComponent, canActivate: [AuthGuard] },
-
-   { path: 'setting', component: SettingComponent,  },
-
-  { path: 'sign-in', component: SignInComponent },
-   { path: '', component: SignInComponent, pathMatch: 'full' },
-     { path: '**', component: PageNotFoundComponent },
+   { path: 'setting', component: SettingComponent,  canActivate: [AuthGuard]},
+   { path: 'sign-in', component: SignInComponent ,canActivate: [AuthSignInGuard]},
+   { path: '', component: SignInComponent, pathMatch: 'full',canActivate: [AuthSignInGuard] },
+   { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({

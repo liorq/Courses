@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserInfoService } from 'src/app/core/services/auth.service';
 import { CoursesService } from 'src/app/core/services/courses.service';
 import { MyDataService } from 'src/app/core/services/db.service';
 import { coursesListTableObj } from 'src/app/data/table.objects';
@@ -10,19 +11,20 @@ import { coursesListTableObj } from 'src/app/data/table.objects';
 })
 export class CoursesListComponent implements OnInit{
   tableObj=coursesListTableObj
-  constructor(private courseSvc: CoursesService,private dbSvc: MyDataService){}
+  constructor(private courseSvc: CoursesService,private dbSvc: MyDataService,private authSvc:UserInfoService){}
 
   async ngOnInit() {
     this.courseSvc.toggleNavBar(true)
     this.courseSvc._tablesData.subscribe((updatedData) =>{
     this.tableObj.table=updatedData.CoursesData
     })
-    
-    if(this.tableObj.table?.length==0)
-    await this.getAllCourses();
+    await this.loadTableData();
   }
 
-  async getAllCourses(){
-    await  this.courseSvc.setArrayHandler(this.dbSvc.getAllCourseHandler(),this.tableObj.table)
+  async loadTableData(){
+    if (this.authSvc.isUserLoggedIn()&& this.tableObj.table?.length == 0) {
+      const [CoursesData, UsersData, attendees, myCourses] = await this.dbSvc.getAllTablesData()
+      this.courseSvc.initTablesDataSubject(CoursesData,UsersData,attendees, myCourses);
+    }
   }
 }

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Courses, User } from 'src/app/data/interfaces';
 import { addIcon, deleteIcon } from 'src/app/data/objects';
+import { UserInfoService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,38 +11,54 @@ import { addIcon, deleteIcon } from 'src/app/data/objects';
 export class MyDataService {
 
    private apiUrl = 'http://localhost:1012';
-   private token:BehaviorSubject<string>=new BehaviorSubject('');
+   private token:BehaviorSubject<string>=new BehaviorSubject("");
    userName!:string;
   _token = this.token.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private authSvc:UserInfoService) { }
 
 async signUp(user:User) {
-
+  console.log(user)
   try {
     const response:any = await this.http.post(`${this.apiUrl}/signUp` ,user).toPromise();
+
     return response
   } catch (error:any) {
+    console.log(error)
     return error;
   }
 }
 
   async signInHandler(userName: string, password: string): Promise<any> {
-
     const data = {
       username: userName,
       password: password,
     };
         this.userName = userName;
+        console.log(await this.getUserType(userName,password))
 
     try {
       const response = await this.http.post<any>(`${this.apiUrl}/login`, data).toPromise();
-
       this.token.next(response?.access_token);
       localStorage.setItem('token', response?.access_token);
       return response;
     } catch (error: any) {
       return error;
+    }
+  }
+  async getUserType(userName: string,password:string){
+    const data = {
+      username: userName,
+      password: password,
+    };
+
+    try {
+      const response = await this.http.post<any>(`${this.apiUrl}/getUserType`, data).toPromise();
+
+      return response;
+    } catch (error: any) {
+      localStorage.setItem('authLevel',this.authSvc.encryptHandler(error.error.text))
+      return error.error;
     }
   }
   async removeUserHandler(userName: string): Promise<any> {
@@ -75,6 +92,7 @@ async signUp(user:User) {
 
 
  async addCourseHandler(courses:Courses) {
+  console.log(courses)
   const headers = this.headerInit()
   courses.add=addIcon;
   courses.delete=deleteIcon
@@ -82,14 +100,14 @@ async signUp(user:User) {
     const response = await this.http.post(`${this.apiUrl}/courses/${courses.name}`,courses, { headers }).toPromise();
     return response;
   } catch (error) {
+    console.log(error)
     return error;
   }
 }
 async buyCourseHandler(courses:Courses) {
   const headers = this.headerInit()
-  console.log(courses)
   try {
-    const response = await this.http.post(`${this.apiUrl}/courses/${courses.name}/buy`,courses, { headers }).toPromise();
+    const response = await this.http.post(`${this.apiUrl}/courses/${courses.CoursesId}/buy`,courses, { headers }).toPromise();
     return response;
   } catch (error) {
 
@@ -188,14 +206,19 @@ async ChangePasswordHandler(newProperty:string,password:string): Promise<any> {
 async ChangeNameHandler(newProperty:string,password:string): Promise<any> {
   const headers = this.headerInit()
   const data= this.getJsonObject(newProperty,password)
+  console.log(data)
 
 
   try {
     const response = await this.http
       .put<any>(`${this.apiUrl}/users/${newProperty}/changeName`,data, { headers })
       .toPromise();
+      console.log(response)
+
     return response;
   } catch (error: any) {
+    console.log(error)
+
     return error;
   }
 }
@@ -210,7 +233,7 @@ async ChangeUserNameHandler(newProperty:string,password:string): Promise<any> {
       .put<any>(`${this.apiUrl}/users/${newProperty}/changeUserName`, data, { headers })
       .toPromise();
       const token=localStorage.getItem('token');
-      
+
     if(response&&token){
       const decodedToken = JSON.parse(atob(token.split('.')[1]));
       const userName = decodedToken.name;
@@ -227,4 +250,29 @@ getJsonObject(newProperty:string,password:string){
     "password":password
 }
 }
+async getAllTablesData(){
+  return  await Promise.all([
+    this.getAllCourseHandler(),
+    this.getAllUsers(),
+    this.getAllUsersAttendees(),
+    this.getAllUserCourses(),
+  ]);
+}
+
+
+async addAttendeesHandler(course:Courses[]) {
+  const headers = this.headerInit();
+
+
+  try {
+    const response:any = await this.http.post(`${this.apiUrl}/api/Students/users/${this.userName}/course/arrival-time` ,course, { headers }).toPromise();
+    console.log(response)
+
+    return response
+  } catch (error:any) {
+    console.log(error)
+    return error;
+  }
+}
+
 }

@@ -3,6 +3,7 @@ import { CoursesService } from "src/app/core/services/courses.service";
 import {  ModalStudentColumns,  StudentColumns,  StudentDisplayedColumns, StudentFormsInputs} from "src/app/data/arrays";
 import { MyDataService } from "src/app/core/services/db.service";
 import { studentListTableObj } from "src/app/data/table.objects";
+import { UserInfoService } from "src/app/core/services/auth.service";
 
 @Component({
   selector: "app-student-list",
@@ -10,7 +11,7 @@ import { studentListTableObj } from "src/app/data/table.objects";
   styleUrls: ["./student-list.component.css"],
 })
 export class StudentListComponent {
-  constructor(private courseSvc: CoursesService,private dbSvc: MyDataService) {}
+  constructor(private courseSvc: CoursesService,private dbSvc: MyDataService,private authSvc:UserInfoService) {}
 
     tableObj = studentListTableObj
 
@@ -19,12 +20,14 @@ export class StudentListComponent {
     this.courseSvc._tablesData.subscribe((updatedData) => {
       this.tableObj.table = updatedData.UsersData;
     });
-    if (this.tableObj.table?.length == 0) {
-      await this.getAllStudents();
-    }
+      await this.loadTableData();
+
   }
 
-  async getAllStudents() {
-    await this.courseSvc.setArrayHandler(this.dbSvc.getAllUsers(), this.tableObj.table);
+  async loadTableData(){
+    if (this.authSvc.isUserLoggedIn()&& this.tableObj.table?.length == 0) {
+      const [CoursesData, UsersData, attendees, myCourses] = await this.dbSvc.getAllTablesData()
+      this.courseSvc.initTablesDataSubject(CoursesData,UsersData,attendees, myCourses);
+    }
   }
 }

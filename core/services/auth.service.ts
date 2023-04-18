@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
-import * as CryptoJS from 'crypto-js';
 import { BehaviorSubject } from 'rxjs';
-import { User } from 'src/app/data/interfaces';
+import * as CryptoJS from 'crypto-js';
+
 @Injectable({
   providedIn: 'root'
 })
+
 export class UserInfoService {
  isUserLogged:BehaviorSubject<boolean>=new BehaviorSubject<boolean>(false)
   _isUserLogged=this.isUserLogged.asObservable();
@@ -32,27 +33,21 @@ export class UserInfoService {
     return isValidPassword ? { passwordInvalid: true } : null;
   }
 
-
-  // getEncryptedPassword(password:string){
-  //   return CryptoJS.SHA256(password).toString();
-  // }
   isUserLoggedIn(){
     const token = localStorage.getItem('token');
     return (token!=null&&token!=""&&token!=undefined);
   }
 
-///////need
-  validateUserInfo(user: any): boolean {
-    const { name, phone, age, email, password, birthDate, address } = user;
 
-    return (
-      name.trim().length > 0 &&
-      phone.match(/^\d{10}$/) !== null &&
-      age >= 18 &&
-      email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i) !== null &&
-      password.length >= 8 &&
-      address.trim().length > 0 &&
-      birthDate instanceof Date && !isNaN(birthDate.getTime())
-    );
+  decryptedHandler(val:string){
+    const secretKey = 'mysecretkey';
+    return CryptoJS.AES.decrypt(val, secretKey).toString(CryptoJS.enc.Utf8);
+
+
+  }
+  encryptHandler(val:string){
+    const secretKey = 'mysecretkey';
+    return CryptoJS.AES.encrypt(val, secretKey).toString();
+
   }
 }

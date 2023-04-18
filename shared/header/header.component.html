@@ -12,6 +12,8 @@
    </a>
 
    <a class="menu-link" *ngIf="isUserLogged" routerLink="my-courses">My Courses</a>
+   <a class="menu-link" *ngIf="isUserLogged" routerLink="report-attendees">Report attendees</a>
+
    <a class="menu-link" (click)="deleteUserInfo()" *ngIf="isUserLogged" routerLink="sign-in">Logout</a>
 
   </div>

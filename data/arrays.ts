@@ -229,7 +229,7 @@ export const   ClassAttendeesColumns: string[] = ["name", "dateOfArrival", "cour
 
 export const     ClassAttendees = [ {matColumnDef: 'name', title: 'name'}, {matColumnDef: 'dateOfArrival', title: 'dateOfArrival'},  {matColumnDef: 'coursesId', title: 'coursesId', },  {matColumnDef: 'studentId', title: 'studentId', }];
 
-export const   myCoursesDisplayedColumns: string[] = ["name", "startDate", "endDate", "days", "hours","report"]
+export const   myCoursesDisplayedColumns: string[] = ["name", "startDate", "endDate", "days", "hours"]
 
 export const     myCoursesColumns = [ {matColumnDef: 'name', title: 'name'}, {matColumnDef: 'startDate', title: 'startDate'},  {matColumnDef: 'endDate', title: 'endDate', },  {matColumnDef: 'days', title: 'days', },  {matColumnDef: "hours", title:"hours", }];
 
