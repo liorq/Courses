@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { UserInfoService } from 'src/app/core/services/auth.service';
+import { Component, Inject, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { CoursesService } from 'src/app/core/services/courses.service';
-import { MyDataService } from 'src/app/core/services/db.service';
+import { DbService } from 'src/app/core/services/db.service';
 import { Courses } from 'src/app/data/interfaces';
 import { DatePickerForm } from 'src/app/data/objects';
 
 @Component({
   selector: 'app-date-picker',
   templateUrl: './date-picker.component.html',
-  styleUrls: ['./date-picker.component.css']
+  styleUrls: ['./date-picker.component.css'],
+
 })
 export class DatePickerComponent implements OnInit {
 form:any=DatePickerForm
@@ -17,7 +18,8 @@ selectedCourse!:Courses[];
 table: any;
 selectedOptionObj:any;
 
-constructor(private authSvc:UserInfoService,private courseSvc: CoursesService,private dbSvc:MyDataService){}
+constructor(private authSvc:AuthService,private courseSvc: CoursesService, private dbSvc: DbService
+){}
 async ngOnInit() {
  this.courseSvc._tablesData.subscribe((updateData)=>{
   this.table=updateData.myCourses;

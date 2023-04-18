@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { UserInfoService } from "src/app/core/services/auth.service";
+import { AuthService } from "src/app/core/services/auth.service";
 import { CoursesService } from "src/app/core/services/courses.service";
 
 @Component({
@@ -10,7 +10,7 @@ import { CoursesService } from "src/app/core/services/courses.service";
 
 export class HeaderComponent implements OnInit {
   isUserLogged!: boolean;
-  constructor(private authSvc: UserInfoService,private coursesSvc:CoursesService) {}
+  constructor(private authSvc: AuthService,private coursesSvc:CoursesService) {}
   ngOnInit(): void {
     this.authSvc._isUserLogged.subscribe((newStatus) => {
       this.isUserLogged = newStatus;

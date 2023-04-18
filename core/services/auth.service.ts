@@ -7,7 +7,7 @@ import * as CryptoJS from 'crypto-js';
   providedIn: 'root'
 })
 
-export class UserInfoService {
+export class AuthService {
  isUserLogged:BehaviorSubject<boolean>=new BehaviorSubject<boolean>(false)
   _isUserLogged=this.isUserLogged.asObservable();
 

@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
-import { UserInfoService } from "src/app/core/services/auth.service";
+import { AuthService } from "src/app/core/services/auth.service";
 import { CoursesService } from "src/app/core/services/courses.service";
-import { MyDataService } from "src/app/core/services/db.service";
+import { DbService } from "src/app/core/services/db.service";
 import { classAttendeesTableObj } from "src/app/data/table.objects";
 
 @Component({
@@ -10,12 +10,12 @@ import { classAttendeesTableObj } from "src/app/data/table.objects";
   styleUrls: ["./class-attendees-list.component.css"],
 })
 export class ClassAttendeesListComponent {
-  
+
   tableObj=classAttendeesTableObj
   constructor(
-    private dbSvc: MyDataService,
+    private dbSvc: DbService,
     private courseSvc: CoursesService,
-    private authSvc:UserInfoService
+    private authSvc:AuthService
   ) {}
 
   async ngOnInit() {

@@ -4,7 +4,7 @@ import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { DomSanitizer } from '@angular/platform-browser';
 import { CoursesService } from 'src/app/core/services/courses.service';
-import { MyDataService } from 'src/app/core/services/db.service';
+import { DbService } from 'src/app/core/services/db.service';
 import { deleteModal } from 'src/app/data/objects';
 
 @Component({
@@ -22,7 +22,7 @@ export class GenericTableComponent implements AfterViewInit{
   isDeleteModalOpen:boolean = false;
   formData: any = {};
   isLoadingSignVisible:boolean=true;
-  constructor(public dbSvc:MyDataService, public sanitizer: DomSanitizer,public courseSvc:CoursesService) {}
+  constructor(public dbSvc:DbService, public sanitizer: DomSanitizer,public courseSvc:CoursesService) {}
 
   ngAfterViewInit() {
     setTimeout(() => {

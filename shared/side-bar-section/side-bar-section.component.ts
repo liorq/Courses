@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { MyDataService } from "src/app/core/services/db.service";
+import { DbService } from "src/app/core/services/db.service";
 import { ModalStudentColumns } from "src/app/data/arrays";
 import { getEditUserForm, openModalAndGetInput } from "src/app/data/forms";
 import { addModal, deleteModal } from "src/app/data/objects";
@@ -14,7 +14,7 @@ import { addModal, deleteModal } from "src/app/data/objects";
   ],
 })
 export class SideBarSectionComponent {
-  constructor(private dbSvc:MyDataService){}
+  constructor(private dbSvc:DbService){}
   deleteModal=deleteModal
   ModalColumns=ModalStudentColumns
   formData:any
@@ -23,15 +23,15 @@ export class SideBarSectionComponent {
  @Input() menuItems!: any[];
  @Input() title!: string;
 
+ ////להעיף לסרוויס
  async ChangePropertiesHandler(menuItem:any){
-
+////handler is make move change it and move to service
   if (['Change Name', 'Change Email', 'Change Password'].includes(menuItem.label)) {
   let subToChange = menuItem.label.split(' ')[1];
   let form:any=await getEditUserForm(subToChange)
   form= await openModalAndGetInput(form)
  if(form.isConfirmed){
    let newString = menuItem.label.split(' ')[0].toLowerCase()+subToChange
-   console.log(newString, form.value[1],form.value[0])
    await this.dbSvc.ChangeUserPropertyHandler(newString, form.value[1],form.value[0])
  }
   }

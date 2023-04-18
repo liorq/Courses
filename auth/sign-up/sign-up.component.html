@@ -13,14 +13,14 @@
       <input type="text" class="input-text" [ngClass]=" name?.touched && name?.invalid ? 'input-text__inavlid' : ''   "
         placeholder="name" formControlName="name" />
       <div *ngIf="name?.touched && name?.invalid" class="invalid-message">
-        {{this.userInfoService.getInvalidMessage(name?.errors,"name","minlength", this.errorMessages.firstName )
+        {{this.AuthService.getInvalidMessage(name?.errors,"name","minlength", this.errorMessages.firstName )
         }}
       </div>
 
       <input type="tel" class="input-text" [ngClass]="phone?.touched && phone?.invalid ? 'input-text__inavlid' : '' "
         placeholder="phone" formControlName="phone" />
       <div class="invalid-message" *ngIf="phone?.touched && phone?.invalid">
-        {{ this.userInfoService.getInvalidMessage(phone?.errors,"phone","pattern",this.errorMessages.phone
+        {{ this.AuthService.getInvalidMessage(phone?.errors,"phone","pattern",this.errorMessages.phone
         )
         }}
       </div>
@@ -29,13 +29,13 @@
       <input type="number" class="input-text" [ngClass]="age?.touched && age?.invalid ? 'input-text__inavlid' : ''"
         placeholder="Age" formControlName="age" />
       <div class="invalid-message" *ngIf="age?.touched && age?.invalid">
-        {{this.userInfoService.getInvalidMessage(age?.errors,"age","min",this.errorMessages.age)
+        {{this.AuthService.getInvalidMessage(age?.errors,"age","min",this.errorMessages.age)
         }}
       </div>
       <input type="date" class="input-text" [ngClass]="age?.touched && age?.invalid ? 'input-text__inavlid' : ''"
         placeholder="birthDate" formControlName="birthDate" />
       <div class="invalid-message" *ngIf="birthDate?.touched && birthDate?.invalid">
-        {{ this.userInfoService.getInvalidMessage(birthDate?.errors,"birthDate","min", this.errorMessages.age
+        {{ this.AuthService.getInvalidMessage(birthDate?.errors,"birthDate","min", this.errorMessages.age
         ) }} </div>
 
       <input type="text" class="input-text"
@@ -43,18 +43,18 @@
         formControlName="address" />
       <div class="invalid-message" *ngIf="address?.touched && address?.invalid">
         {{
-        this.userInfoService.getInvalidMessage( birthDate?.errors,"address","min",this.errorMessages.age
+        this.AuthService.getInvalidMessage( birthDate?.errors,"address","min",this.errorMessages.age
         )}} </div>
       <input type="text" class="input-text" [ngClass]="email?.touched && email?.invalid ? 'input-text__inavlid' : ''"
         placeholder="Email" formControlName="email" />
       <div class="invalid-message" *ngIf="email?.touched && email?.invalid">
-        {{ this.userInfoService.getInvalidMessage( email?.errors, "email", "email",this.errorMessages.email
+        {{ this.AuthService.getInvalidMessage( email?.errors, "email", "email",this.errorMessages.email
         )
         }}
       </div>
       <input type="password" class="input-text" [ngClass]=" password?.touched && password?.invalid ? 'input-text__inavlid' : ''
         " placeholder="Password" formControlName="password" /> <div class="invalid-message" *ngIf="password?.touched && password?.invalid">
-        {{ this.userInfoService.getInvalidMessage(password?.errors,"password", "passwordInvalid",  this.errorMessages.password
+        {{ this.AuthService.getInvalidMessage(password?.errors,"password", "passwordInvalid",  this.errorMessages.password
         )}} </div>
       <div class="nav-container"> </div>
       <label><input (click)="userType='professor'" name="user-type" type="radio" value="professor" [checked]="true">

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UserInfoService } from 'src/app/core/services/auth.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { CoursesService } from 'src/app/core/services/courses.service';
-import { MyDataService } from 'src/app/core/services/db.service';
+import { DbService } from 'src/app/core/services/db.service';
 import { coursesListTableObj } from 'src/app/data/table.objects';
 
 @Component({
@@ -11,7 +11,7 @@ import { coursesListTableObj } from 'src/app/data/table.objects';
 })
 export class CoursesListComponent implements OnInit{
   tableObj=coursesListTableObj
-  constructor(private courseSvc: CoursesService,private dbSvc: MyDataService,private authSvc:UserInfoService){}
+  constructor(private courseSvc: CoursesService,private dbSvc: DbService,private authSvc:AuthService){}
 
   async ngOnInit() {
     this.courseSvc.toggleNavBar(true)

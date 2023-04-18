@@ -1,8 +1,8 @@
 import { Component } from "@angular/core";
 import { CoursesService } from "../../core/services/courses.service";
-import { MyDataService } from "src/app/core/services/db.service";
+import { DbService } from "src/app/core/services/db.service";
 import { myCoursesTableObj } from "src/app/data/table.objects";
-import { UserInfoService } from "src/app/core/services/auth.service";
+import { AuthService } from "src/app/core/services/auth.service";
 
 @Component({
   selector: "app-my-courses",
@@ -15,7 +15,7 @@ export class MyCoursesComponent {
 
   constructor(
     private courseSvc: CoursesService,
-    private dbSvc: MyDataService,private authSvc:UserInfoService
+    private dbSvc: DbService,private authSvc:AuthService
   ) {}
 
   async ngOnInit() {

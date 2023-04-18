@@ -1,8 +1,8 @@
 import { Component } from "@angular/core";
 import { CoursesService } from "src/app/core/services/courses.service";
-import { MyDataService } from "src/app/core/services/db.service";
+import { DbService } from "src/app/core/services/db.service";
 import { studentListTableObj } from "src/app/data/table.objects";
-import { UserInfoService } from "src/app/core/services/auth.service";
+import { AuthService } from "src/app/core/services/auth.service";
 import { User } from "src/app/data/interfaces";
 
 @Component({
@@ -11,7 +11,7 @@ import { User } from "src/app/data/interfaces";
   styleUrls: ["./student-list.component.css"],
 })
 export class StudentListComponent {
-  constructor(private courseSvc: CoursesService,private dbSvc: MyDataService,private authSvc:UserInfoService) {}
+  constructor(private courseSvc: CoursesService,private dbSvc: DbService,private authSvc:AuthService) {}
 
     tableObj = studentListTableObj
 

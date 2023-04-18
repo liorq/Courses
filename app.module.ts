@@ -26,7 +26,6 @@ import { BuyCoursesComponent } from './pages/buy-courses/buy-courses.component';
 import { LoadingIconComponent } from './shared/loading-icon/loading-icon.component';
 import { DatePickerComponent } from './shared/date-picker/date-picker.component';
 import { MatSelectModule } from '@angular/material/select';
-import { SelectBoxComponent } from './shared/select-box/select-box.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +47,6 @@ import { SelectBoxComponent } from './shared/select-box/select-box.component';
     BuyCoursesComponent,
     LoadingIconComponent,
     DatePickerComponent,
-    SelectBoxComponent,
   ],
   imports: [
     BrowserModule,

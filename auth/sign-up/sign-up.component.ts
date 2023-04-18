@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { errorMessages } from 'src/app/data/objects';
-import { UserInfoService } from '../../core/services/auth.service'
+import { AuthService } from '../../core/services/auth.service'
 import { CoursesService } from 'src/app/core/services/courses.service';
-import { MyDataService } from 'src/app/core/services/db.service';
+import { DbService } from 'src/app/core/services/db.service';
 import { User } from 'src/app/data/interfaces';
 import { Router } from '@angular/router';
 import { v4 as uuidv4 } from 'uuid';
@@ -15,7 +15,7 @@ import { v4 as uuidv4 } from 'uuid';
 })
 export class SignUpComponent implements OnInit {
 
-  constructor(private authSvc:UserInfoService,private router:Router,public userInfoService: UserInfoService,private coursesSvc: CoursesService,private dbSvc:MyDataService) {}
+  constructor(private authSvc:AuthService,private router:Router,public AuthService: AuthService,private coursesSvc: CoursesService,private dbSvc:DbService) {}
   userType: string='professor';
   isNavBarVisible:boolean=true;
   subscribeForm!: FormGroup;
@@ -38,7 +38,7 @@ initForm() {
     phone: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
     age: new FormControl(0, [Validators.required, Validators.min(12), Validators.max(100)]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, this.userInfoService.passwordValidator, Validators.minLength(8)]),
+    password: new FormControl('', [Validators.required, this.AuthService.passwordValidator, Validators.minLength(8)]),
     birthDate: new FormControl('', [Validators.required]),
     address: new FormControl('', [Validators.required]),
   });

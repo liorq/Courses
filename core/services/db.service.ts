@@ -2,20 +2,19 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Courses, User } from 'src/app/data/interfaces';
-import { addIcon, deleteIcon } from 'src/app/data/objects';
-import { UserInfoService } from './auth.service';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MyDataService {
+export class DbService {
 
    private apiUrl = 'http://localhost:1012';
    private token:BehaviorSubject<string>=new BehaviorSubject("");
    userName!:string;
   _token = this.token.asObservable();
 
-  constructor(private http: HttpClient,private authSvc:UserInfoService) { }
+  constructor(private http: HttpClient,private authSvc:AuthService) { }
 
 async signUp(user:User) {
   try {

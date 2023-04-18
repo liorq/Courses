@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import {  AbstractControl,  FormBuilder,  FormGroup,  Validators,} from "@angular/forms";
 import { Router } from "@angular/router";
 import { CoursesService } from "src/app/core/services/courses.service";
-import { MyDataService } from "src/app/core/services/db.service";
+import { DbService } from "src/app/core/services/db.service";
 import { messages } from "src/app/data/objects";
 import Swal from "sweetalert2";
 
@@ -16,7 +16,7 @@ export class SignInComponent implements OnInit {
   userName!: AbstractControl<any, any>;
   constructor(
     private router: Router,
-    private dbSvc: MyDataService,
+    private dbSvc: DbService,
     private coursesSvc: CoursesService,
     private formBuilder: FormBuilder
   ) {}
