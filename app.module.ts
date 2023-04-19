@@ -24,7 +24,7 @@ import { ClassAttendeesListComponent } from './pages/class-attendees-list/class-
 import { MyCoursesComponent } from './pages/my-courses/my-courses.component';
 import { BuyCoursesComponent } from './pages/buy-courses/buy-courses.component';
 import { LoadingIconComponent } from './shared/loading-icon/loading-icon.component';
-import { DatePickerComponent } from './shared/date-picker/date-picker.component';
+import { reportAttendanceComponent } from './shared/report-attendace/report-attendace.component';
 import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
@@ -46,7 +46,7 @@ import { MatSelectModule } from '@angular/material/select';
     MyCoursesComponent,
     BuyCoursesComponent,
     LoadingIconComponent,
-    DatePickerComponent,
+    reportAttendanceComponent,
   ],
   imports: [
     BrowserModule,

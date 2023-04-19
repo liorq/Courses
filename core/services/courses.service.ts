@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { openModalAndGetInput, getAddForm } from 'src/app/data/forms';
+import { Courses } from 'src/app/data/interfaces';
 import {  addIcon, buyIcon, deleteIcon, messages } from 'src/app/data/objects';
+import { reportAttendanceComponent } from 'src/app/shared/report-attendace/report-attendace.component';
 import { GenericTableComponent } from 'src/app/shared/generic-table/generic-table.component';
 import Swal from 'sweetalert2';
 import { v4 as uuidv4 } from 'uuid';
@@ -97,5 +99,55 @@ export class CoursesService {
    getDayOfTheWeek(form: {[key: string]: any}): string {
     return new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(new Date(form['date']));
   }
+
+
+
+
+handleCourseSelection(component:reportAttendanceComponent){
+  component.selectedCourse=component.table.filter((o:any)=>o.name==component.form.coursesName);
+  component.form['hours']=component.selectedCourse[0].hours
+  component.form.CoursesId=component.selectedCourse[0]!.coursesId
+ }
+
+ handleAttendeeReporting(component:reportAttendanceComponent){
+ const isAllFieldFilled=Object.values(component.form).filter((field:any)=>field!=="").length==8;
+ if(isAllFieldFilled){
+   this.handleReportValidation(component)
+ }
+}
+
+async handleReportValidation(component:reportAttendanceComponent) {
+ const dbReportResponse= this.isReportValid(component) ? await component.dbSvc.addAttendeesHandler(component.form) :'';
+ Swal.fire(dbReportResponse&&dbReportResponse.error==null?messages.AttendanceReportSucceed: messages.AttendanceReportingFailed)
+
+}
+
+isReportValid(component:reportAttendanceComponent){
+let  isValidAbsence=false;
+let  isValidAttendee=false;
+ const currentDate = new Date();
+ const startLesson = new Date(component.form['date'] + 'T' + component.form['hours'].split("-")[0]);
+ const diffInMinutes = Math.floor((startLesson.getTime() - currentDate.getTime()) / 60000);
+
+ if (diffInMinutes > 10) {
+   isValidAbsence=true
+   console.log('The current time is more than 10 minutes before the start of the lesson');
+ } if (diffInMinutes >= 0 && diffInMinutes <= 10) {
+   isValidAbsence=true;
+   isValidAttendee=true;
+   console.log('The current time is within 10 minutes before the start of the lesson');
+ } else {
+   isValidAbsence=true
+   console.log('The current time is after the start of the lesson');
+ }
+ const isValidReport = (component.form.Absentee === 'yes' && isValidAbsence) || (component.form.Absentee === 'no' && isValidAttendee);
+ return isValidReport;
+}
+
+handleDaySelection(component:reportAttendanceComponent){
+  component.form.courseDay= this.getDayOfTheWeek(component.form).toLowerCase()
+  component.form.disabled=false;
+  component.coursesToDisplay=component.table.filter((o:Courses)=>o.days==component.form.courseDay)
+}
 
 }

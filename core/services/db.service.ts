@@ -35,13 +35,16 @@ async signUp(user:User) {
 
     try {
       const response = await this.http.post<any>(`${this.apiUrl}/login`, data).toPromise();
-  ///tokenHandler function
-      this.token.next(response?.access_token);
-      localStorage.setItem('token', response?.access_token);
+
+    this.tokenHandler(response?.access_token)
       return response;
     } catch (error: any) {
       return error;
     }
+  }
+  tokenHandler(token:string){
+    this.token.next(token);
+    localStorage.setItem('token', token);
   }
   async getUserType(userName: string,password:string){
     const data = {

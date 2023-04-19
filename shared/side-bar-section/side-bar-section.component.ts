@@ -24,9 +24,7 @@ export class SideBarSectionComponent {
  @Input() menuItems!: any[];
  @Input() title!: string;
 
- ////להעיף לסרוויס
- async ChangePropertiesHandler(menuItem:any){
-////handler is make move change it and move to service
+ async processPropertyChangeRequest(menuItem:any){
 
   if (['Change Name', 'Change Email', 'Change Password'].includes(menuItem.label)) {
   const subToChange = menuItem.label.split(' ')[1];
@@ -34,12 +32,11 @@ export class SideBarSectionComponent {
   form= await openModalAndGetInput(form)
 
  if(form.isConfirmed){
-  const newString = menuItem.label.split(' ')[0].toLowerCase()+subToChange
-const response=   await this.dbSvc.ChangeUserPropertyHandler(newString, form.value[1],form.value[0])
-Swal.fire(response.error ? messages.changesUnsuccessful : messages.changesSucceed);
+   const newString = menuItem.label.split(' ')[0].toLowerCase()+subToChange
+   const response=   await this.dbSvc.ChangeUserPropertyHandler(newString, form.value[1],form.value[0])
+   Swal.fire(response.error ? messages.changesUnsuccessful : messages.changesSucceed);
 
-  }
-  }
-}
-
+        }
+     }
+   }
 }

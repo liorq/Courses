@@ -2,7 +2,7 @@
   <div class="side-title">{{title}}</div>
   <div class="side-menu">
     <a  *ngFor="let menuItem of menuItems" [routerLink]="menuItem.isDisabled ? null : menuItem.routerLink"
-    (click)="ChangePropertiesHandler(menuItem)"
+    (click)="processPropertyChangeRequest(menuItem)"
     >
       <svg [attr.viewBox]="menuItem.viewBox" [attr.fill]="menuItem.fill">
         <ng-container *ngFor="let path of menuItem.paths">

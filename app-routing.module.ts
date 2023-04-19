@@ -10,7 +10,7 @@ import { SettingComponent } from './pages/setting/setting.component';
 import { ClassAttendeesListComponent } from './pages/class-attendees-list/class-attendees-list.component';
 import { MyCoursesComponent } from './pages/my-courses/my-courses.component';
 import { BuyCoursesComponent } from './pages/buy-courses/buy-courses.component';
-import { DatePickerComponent } from './shared/date-picker/date-picker.component';
+import { reportAttendanceComponent } from './shared/report-attendace/report-attendace.component';
 import { AuthSignInGuard } from './core/guards/auth-sign-in.guard';
 import { AuthLevelGuard } from './core/guards/auth-level.guard';
 
@@ -19,7 +19,7 @@ const routes: Routes = [
    { path: 'all-courses', component: CoursesListComponent, canActivate: [AuthGuard,AuthLevelGuard]},
    { path: 'all-students', component: StudentListComponent, canActivate: [AuthGuard,AuthLevelGuard]},
    { path: 'all-attendees', component: ClassAttendeesListComponent, canActivate: [AuthGuard,AuthLevelGuard]},
-   { path: 'report-attendees', component: DatePickerComponent,canActivate: [AuthGuard]},
+   { path: 'report-attendees', component: reportAttendanceComponent,canActivate: [AuthGuard]},
    { path: 'my-courses', component: MyCoursesComponent, canActivate: [AuthGuard] },
    { path: 'buy-courses', component: BuyCoursesComponent, canActivate: [AuthGuard] },
    { path: 'setting', component: SettingComponent,  canActivate: [AuthGuard]},
