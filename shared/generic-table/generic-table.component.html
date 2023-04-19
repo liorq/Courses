@@ -1,4 +1,4 @@
-<div [ngClass]="{'display-none':!isLoadingSignVisible}" class="table-container">
+<div [ngClass]="{'display-none':isLoadingSignVisible}" class="table-container">
   <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 border ">
     <ng-container *ngFor="let column of tableObj.displayedColumns" [matColumnDef]="column">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>{{column}}</th>

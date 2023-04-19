@@ -1,5 +1,6 @@
 import Swal from 'sweetalert2';
 import {  datesOfTheYear, daysOfTheWeek, hoursOfTheDay } from './arrays';
+import { Courses } from './interfaces';
 
 export function getEditUserForm(property: string) {
   return {
@@ -111,6 +112,61 @@ const dates= datesOfTheYear
   }
 }
 
+
+
+
+////תאריך התחלה סוף שעה ושם של הקורס זה מה שיכול לערוך
+////יש את זה כבר לא צריך לייבא את זה! רק לשלוח את זה
+export function editCourseForm(array:string[],element:Courses) {
+  const days = daysOfTheWeek
+  const  hours= hoursOfTheDay
+ const dates= datesOfTheYear
+
+   const optionTemplate = (options: any[]) => options.map((option: { value: any; label: any; }) => `<option value="${option.value}">${option.label}</option>`).join('');
+
+   return {
+     confirmButtonColor: '#000000',
+     width: '386px',
+     html: `
+     <div class="form-title">Add Form</div>
+     <div class="form-subtitle">Please enter the required information</div>
+
+     <div class="form-label">${array[0]}</div>
+     <input style="${style}" value=${element.name} id="name" class="form-input" type="text">
+
+     <div class="form-label">start</div>
+     <select style="${style}" class="form-select" name="dates" id="dates1">
+       ${optionTemplate(dates)}
+     </select>
+
+     <div class="form-label">end</div>
+     <select  style="${style}" class="form-select" name="dates" id="dates2">
+       ${optionTemplate(dates)}
+     </select>
+
+     <div class="form-label">day</div>
+     <select style="${style}" class="form-select" name="days" id="days">
+       ${optionTemplate(days)}
+     </select>
+
+     <div class="form-label">hours</div>
+     <select style="${style}" class="form-select" name="time-range" id="time-range">
+       ${optionTemplate(hours)}
+     </select>
+   `,
+     focusConfirm: false,
+     preConfirm: () => {
+       let obj :any= {};
+       obj[array[0]] = (document.getElementById('name') as HTMLInputElement)?.value || '';
+       obj[array[1]] = (document.getElementById('dates1') as HTMLInputElement)?.value || '';
+       obj[array[2]] = (document.getElementById('dates2') as HTMLInputElement)?.value || '';
+       obj[array[3]] = (document.getElementById('days') as HTMLInputElement)?.value || '';
+       obj[array[4]] = (document.getElementById('time-range') as HTMLInputElement)?.value || '';
+
+       return obj;
+     }
+   }
+ }
 
 
 export async function openModalAndGetInput(value: any) {

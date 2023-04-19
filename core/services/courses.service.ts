@@ -8,6 +8,7 @@ import { GenericTableComponent } from 'src/app/shared/generic-table/generic-tabl
 import Swal from 'sweetalert2';
 import { v4 as uuidv4 } from 'uuid';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -107,9 +108,14 @@ refreshPage(){
         component.formData = (await openModalAndGetInput(messages.Deleted)).value;
         component.isDeleteModalOpen = true;
         this.AddPropertyHandler(component); break;
+        case 'edit':
+
+        console.log(element)
+        break;
 
     }
   }
+
 
    getDayOfTheWeek(form: {[key: string]: any}): string {
     return new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(new Date(form['date']));
