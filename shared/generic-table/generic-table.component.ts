@@ -42,20 +42,8 @@ export class GenericTableComponent implements AfterViewInit{
   isLoadingSignVisible:boolean=true;
   isAddBtnNeeded!:boolean;
 
-  constructor(private _liveAnnouncer: LiveAnnouncer,public dbSvc:DbService, public sanitizer: DomSanitizer,public courseSvc:CoursesService) {}
-  announceSortChange(sortState: Sort) {
-    // This example uses English messages. If your application supports
-    // multiple language, you would internationalize these strings.
-    // Furthermore, you can customize the message to add additional
-    // details about the values being sorted.
-    if (sortState.direction) {
+  constructor(public dbSvc:DbService, public sanitizer: DomSanitizer,public courseSvc:CoursesService) {}
 
-      console.log(this.dataSource._filterData)
-      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
-    } else {
-      this._liveAnnouncer.announce('Sorting cleared');
-    }
-  }
   ngAfterViewInit() {
 
     const { componentName } = this.tableObj;
@@ -72,7 +60,5 @@ export class GenericTableComponent implements AfterViewInit{
   async OpenModal(column: any, element: any) {
     await this.courseSvc.modalHandler(column, element,this);
   }
-  onSortChange(event:any) {
-    this.dataSource.sort = event;
-  }
+
 }
