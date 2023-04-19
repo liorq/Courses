@@ -48,7 +48,6 @@ initForm() {
 async signUpHandler(){
   const response=await this.dbSvc.signUp(this.getUserObj())
   const isResponseOk = response && response.status && response.status <= 200;
-
   if(isResponseOk){
     this.authSvc.updateIsUserLoggedSubj(true)
     await this.dbSvc.signInHandler(this.email?.value,this.password?.value)

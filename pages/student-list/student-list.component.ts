@@ -18,7 +18,7 @@ export class StudentListComponent {
   async ngOnInit() {
     this.courseSvc.toggleNavBar(true);
     this.courseSvc._tablesData.subscribe((updatedData) => {
-      this.tableObj.table = updatedData.UsersData?.filter((u:User)=>u.isStudent!==false);
+      this.tableObj.table = updatedData.UsersData?.filter((u:User)=>u.isStudent!==false&&u.name!="");
     });
       await this.loadTableData();
   }

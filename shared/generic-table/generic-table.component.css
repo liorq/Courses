@@ -56,6 +56,13 @@ font-size: 13px;
 .para{
   text-align: center;
 }
+.disaply-none{
+  display:none;
+
+}
+.btn-16{
+  height: fit-content;
+}
 div{
   text-align: center;
 

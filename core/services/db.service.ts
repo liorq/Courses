@@ -179,7 +179,7 @@ async ChangePasswordHandler(newProperty:string,password:string): Promise<any> {
 
   try {
     const response = await this.http
-      .put<any>(`${this.apiUrl}/users/${newProperty}/changePassword`,data, { headers })
+      .put<any>(`${this.apiUrl}/users/${newProperty||"user"}/changePassword`,data, { headers })
       .toPromise();
     return response;
   } catch (error) {
@@ -193,7 +193,7 @@ async ChangeNameHandler(newProperty:string,password:string): Promise<any> {
 
   try {
     const response = await this.http
-      .put<any>(`${this.apiUrl}/users/${newProperty}/changeName`,data, { headers })
+      .put<any>(`${this.apiUrl}/users/${newProperty||"user"}/changeName`,data, { headers })
       .toPromise();
 
     return response;
@@ -208,7 +208,7 @@ async ChangeUserNameHandler(newProperty:string,password:string): Promise<any> {
 
   try {
     const response = await this.http
-      .put<any>(`${this.apiUrl}/users/${newProperty}/changeUserName`, data, { headers })
+      .put<any>(`${this.apiUrl}/users/${newProperty||"user"}/changeUserName`, data, { headers })
       .toPromise();
     return response;
   } catch (error) {

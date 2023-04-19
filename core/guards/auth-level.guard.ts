@@ -13,7 +13,6 @@ export class AuthLevelGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       let encryptedAuthLevel = this.authSvc.decryptedHandler(localStorage.getItem('authLevel')||"");
-      console.log('Decrypted string:', encryptedAuthLevel);
 
       if (encryptedAuthLevel === "professor") {
         return true;

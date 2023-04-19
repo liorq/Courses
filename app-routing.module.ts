@@ -10,7 +10,7 @@ import { SettingComponent } from './pages/setting/setting.component';
 import { ClassAttendeesListComponent } from './pages/class-attendees-list/class-attendees-list.component';
 import { MyCoursesComponent } from './pages/my-courses/my-courses.component';
 import { BuyCoursesComponent } from './pages/buy-courses/buy-courses.component';
-import { reportAttendanceComponent } from './shared/report-attendace/report-attendace.component';
+import { reportAttendanceComponent } from './pages/report-attendace/report-attendace.component';
 import { AuthSignInGuard } from './core/guards/auth-sign-in.guard';
 import { AuthLevelGuard } from './core/guards/auth-level.guard';
 

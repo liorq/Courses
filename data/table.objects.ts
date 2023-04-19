@@ -5,7 +5,6 @@ export const coursesListTableObj={
   displayedColumns:CoursesDisplayedColumns,
   table:[],FormsInputs:CoursesFormsInputs,componentName:'CoursesComponent'
 }
-
 export const studentListTableObj={
   columns:StudentColumns,ModalColumns:ModalStudentColumns,
   displayedColumns:StudentDisplayedColumns,
@@ -14,8 +13,8 @@ export const studentListTableObj={
 
 export const  myCoursesTableObj= {
   columns:myCoursesColumns,ModalColumns:ModalCoursesColumns,
-  displayedColumns:myCoursesDisplayedColumns,
-  table:[]
+  displayedColumns:myCoursesDisplayedColumns,componentName:'myCoursesComponent'
+ , table:[]
 }
 
 export const buyCoursesTableObj={

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { CoursesService } from 'src/app/core/services/courses.service';
 import { DbService } from 'src/app/core/services/db.service';
+import { Courses } from 'src/app/data/interfaces';
 import { coursesListTableObj } from 'src/app/data/table.objects';
 
 @Component({
@@ -16,7 +17,7 @@ export class CoursesListComponent implements OnInit{
   async ngOnInit() {
     this.courseSvc.toggleNavBar(true)
     this.courseSvc._tablesData.subscribe((updatedData) =>{
-    this.tableObj.table=updatedData.CoursesData
+      this.tableObj.table = updatedData.CoursesData?.filter((u:Courses)=>u.name!="");
     })
     await this.loadTableData();
   }

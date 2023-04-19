@@ -18,7 +18,7 @@ export class SideBarSectionComponent {
   constructor(private dbSvc:DbService){}
   deleteModal=deleteModal
   ModalColumns=ModalStudentColumns
-  formData:any
+  formData:any;
   addModal=addModal
   modalMessage=''
  @Input() menuItems!: any[];

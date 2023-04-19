@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { openModalAndGetInput, getAddForm } from 'src/app/data/forms';
 import { Courses } from 'src/app/data/interfaces';
-import {  addIcon, buyIcon, deleteIcon, messages } from 'src/app/data/objects';
-import { reportAttendanceComponent } from 'src/app/shared/report-attendace/report-attendace.component';
+import {  addIcon, buyIcon, deleteIcon, editIcon, messages } from 'src/app/data/objects';
+import { reportAttendanceComponent } from 'src/app/pages/report-attendace/report-attendace.component';
 import { GenericTableComponent } from 'src/app/shared/generic-table/generic-table.component';
 import Swal from 'sweetalert2';
 import { v4 as uuidv4 } from 'uuid';
@@ -35,6 +35,7 @@ export class CoursesService {
   item.add=addIcon
   item.delete=deleteIcon
   item.buy=buyIcon
+  item.edit=editIcon
   }
   }
 
@@ -55,14 +56,14 @@ refreshPage(){
 
 
   async buyCourseHandler(element:Courses,component:GenericTableComponent){
-
     const response:any=await component.dbSvc.buyCourseHandler({...element,StudentId:'admin'})
-    if (response && response?.status < 400) {
+    if (response.error==null) {
       const data = this.tablesData.getValue();
       data.myCourses.push(response);
       this.updateTablesDataSubject(data);
     }
-    Swal.fire(response?.status < 400?messages.boughtSuccessfully:messages.FailedToPurchase);
+
+    Swal.fire(response.error==null?messages.boughtSuccessfully:messages.FailedToPurchase);
   }
 
   async AddPropertyHandler(component: GenericTableComponent ) {
@@ -85,9 +86,9 @@ refreshPage(){
   component.formData= {...component.formData, add: addIcon, delete: deleteIcon };
   const obj = isStudent ? {...component.formData, role: 'student', studentId: uuidv4(),email:component.formData.userName,isStudent:true} : {...component.formData, StudentId: 'admin', CoursesId:uuidv4()};
   const response = isStudent ? await component.dbSvc.signUp(obj) : await component.dbSvc.addCourseHandler(obj);
-  const isResponseOk=response && response.status && response.status <= 200
-  Swal.fire(isResponseOk ? "Created successfully" : "Failed to create");
-  component.dataSource.data.push(obj);
+  const isResponseOk=response && response.status && response.status <= 200;
+  Swal.fire(isResponseOk ?messages.CreatedSuccessfully :messages.FailedToCreate);
+  isResponseOk&&component.dataSource.data.push(obj);
   component.formData = {};
  }
 
@@ -128,6 +129,9 @@ handleCourseSelection(component:reportAttendanceComponent){
  if(isAllFieldFilled){
    this.handleReportValidation(component)
  }
+ else
+ Swal.fire("Some of the fields have not been filled.")
+
 }
 
 async handleReportValidation(component:reportAttendanceComponent) {

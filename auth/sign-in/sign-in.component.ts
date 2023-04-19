@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import {  AbstractControl,  FormBuilder,  FormGroup,  Validators,} from "@angular/forms";
 import { Router } from "@angular/router";
+import { AuthService } from "src/app/core/services/auth.service";
 import { CoursesService } from "src/app/core/services/courses.service";
 import { DbService } from "src/app/core/services/db.service";
 import { messages } from "src/app/data/objects";
@@ -18,7 +19,8 @@ export class SignInComponent implements OnInit {
     private router: Router,
     private dbSvc: DbService,
     private coursesSvc: CoursesService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private authSvc: AuthService
   ) {}
   signInForm!: FormGroup;
 
@@ -48,6 +50,8 @@ export class SignInComponent implements OnInit {
         myCourses
       );
       this.router.navigate(["/my-courses"]);
-    } else Swal.fire(messages.UserNotFound);
+      this.authSvc.updateIsUserLoggedSubj(true)
+    }
+    else Swal.fire(messages.UserNotFound);
   }
 }

@@ -207,15 +207,15 @@ export const menuCourses = [
 ];
 
 
-export const   CoursesDisplayedColumns: string[] = ["name", "startDate", "endDate", "days", "hours","delete","add"]
+export const   CoursesDisplayedColumns: string[] = ["name", "startDate", "endDate", "days", "hours","delete","edit"]
 
-export const     CoursesColumns = [ {matColumnDef: 'name', title: 'name'}, {matColumnDef: 'startDate', title: 'startDate'},  {matColumnDef: 'endDate', title: 'endDate', },  {matColumnDef: 'days', title: 'days', },  {matColumnDef: "hours", title:"hours", },{matColumnDef: 'delete', title: 'delete'},{matColumnDef: 'add', title: 'add'}];
+export const     CoursesColumns = [ {matColumnDef: 'name', title: 'name'}, {matColumnDef: 'startDate', title: 'startDate'},  {matColumnDef: 'endDate', title: 'endDate', },  {matColumnDef: 'days', title: 'days', },  {matColumnDef: "hours", title:"hours", },{matColumnDef: 'delete', title: 'delete'},{matColumnDef: 'add', title: 'add'},{matColumnDef: 'edit', title: 'edit'}];
 
 export const   StudentFormsInputs: string[] = ["username","password","address","birthDate", "name", "phone", "studentId"];
 
 export const   CoursesFormsInputs: string[] = ["name", "startDate", "endDate", "days", "hours"]
 
-export const  StudentDisplayedColumns: string[] = ["username","password","address","birthDate", "name", "phone", "studentId","delete","add"];
+export const  StudentDisplayedColumns: string[] = ["username","password","address","birthDate", "name", "phone", "studentId","delete","edit"];
 
 export const  StudentColumns = [{matColumnDef: 'username', title: 'userName'},{matColumnDef: 'address', title: 'address'},  {matColumnDef: 'studentId', title: 'studentId'},  {matColumnDef: 'name', title: 'Name', },  {matColumnDef: 'phone', title: 'phone', },  {matColumnDef: 'birthDate', title: 'birthDate', },{matColumnDef: 'delete', title: 'delete'},{matColumnDef: 'add', title: 'add'}];
 

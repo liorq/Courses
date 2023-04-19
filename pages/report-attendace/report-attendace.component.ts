@@ -15,8 +15,7 @@ export class reportAttendanceComponent implements OnInit {
 form:any=DatePickerForm
 coursesToDisplay!:Courses[];
 selectedCourse!:Courses[];
-table: any;
-selectedOptionObj:any;
+table !:Courses[];
 
 constructor(private authSvc:AuthService,private courseSvc: CoursesService, public dbSvc: DbService
 ){}

@@ -2,10 +2,10 @@
   <div id="box">
     <img src="https://image.freepik.com/free-icon/refresh_318-33117.jpg" alt="lock" />
     <h3> Sign in</h3>
-    <form [formGroup]="signInForm" (ngSubmit)="signInHandler()">
+    <form [formGroup]="signInForm" >
       <input type="text" formControlName="userName" placeholder="Username" />
       <input type="password" formControlName="password" placeholder="Password" />
-      <button class="custom-btn btn-16" [disabled]="signInForm.invalid"><span>Go on</span></button>
+      <button class="custom-btn btn-16" (click)="signInHandler()" [disabled]="signInForm.invalid"><span>Go on</span></button>
     </form>
     <div class="signup">
       <p>Not a member? <a routerLink="/signup">Sign up</a></p>

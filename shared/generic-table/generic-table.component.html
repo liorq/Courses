@@ -1,18 +1,20 @@
-<div *ngIf="!isLoadingSignVisible" class="table-container">
-  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 border">
+<div [ngClass]="{'display-none':!isLoadingSignVisible}" class="table-container">
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 border ">
     <ng-container *ngFor="let column of tableObj.displayedColumns" [matColumnDef]="column">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ column }}</th>
-      <td
-        mat-cell
-        *matCellDef="let element"
-        [innerHTML]="sanitizer.bypassSecurityTrustHtml(element[column])"
-        (click)="OpenModal(column, element)"
-      ></td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{column}}</th>
+      <td mat-cell *matCellDef="let element" [innerHTML]="sanitizer.bypassSecurityTrustHtml(element[column])" (click)="OpenModal(column,element)">></td>
     </ng-container>
-
     <tr mat-header-row *matHeaderRowDef="tableObj.displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: tableObj.displayedColumns;"></tr>
   </table>
 </div>
 
-<app-loading-icon   *ngIf="isLoadingSignVisible" ></app-loading-icon>
+<div>
+  <button
+    *ngIf="!isLoadingSignVisible && isAddBtnNeeded"
+    class="custom-btn btn-16" (click)="this.OpenModal('add',{})"  >
+    <span>{{ "Create New Resource" }}</span>
+  </button>
+</div>
+<app-loading-icon *ngIf="isLoadingSignVisible"></app-loading-icon>
+
