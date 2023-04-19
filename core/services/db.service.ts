@@ -20,7 +20,7 @@ async signUp(user:User) {
   try {
     const response:any = await this.http.post(`${this.apiUrl}/signUp` ,user).toPromise();
     return response
-  } catch (error:any) {
+  } catch (error) {
     return error;
   }
 }
@@ -38,14 +38,17 @@ async signUp(user:User) {
 
     this.tokenHandler(response?.access_token)
       return response;
-    } catch (error: any) {
+    } catch (error) {
       return error;
     }
   }
+
+
   tokenHandler(token:string){
     this.token.next(token);
     localStorage.setItem('token', token);
   }
+
   async getUserType(userName: string,password:string){
     const data = {
       username: userName,
@@ -56,7 +59,7 @@ async signUp(user:User) {
       const response = await this.http.post<any>(`${this.apiUrl}/getUserType`, data).toPromise();
 
       return response;
-    } catch (error: any) {
+    } catch (error:any) {
       localStorage.setItem('authLevel',this.authSvc.encryptHandler(error.error.text))
       return error.error;
     }
@@ -71,7 +74,7 @@ async signUp(user:User) {
         .delete<any>(`${this.apiUrl}/removeUser`, { body: requestBody })
         .toPromise();
       return response;
-    } catch (error: any) {
+    } catch (error) {
       return error;
     }
   }
@@ -114,7 +117,7 @@ async removeCourseHandler(courseId: string): Promise<any> {
       .delete<any>(`${this.apiUrl}/courses/${courseId}`, { headers })
       .toPromise();
     return response;
-  } catch (error: any) {
+  } catch (error) {
     return error;
   }
 }
@@ -179,7 +182,7 @@ async ChangePasswordHandler(newProperty:string,password:string): Promise<any> {
       .put<any>(`${this.apiUrl}/users/${newProperty}/changePassword`,data, { headers })
       .toPromise();
     return response;
-  } catch (error: any) {
+  } catch (error) {
     return error;
   }
 }
@@ -194,7 +197,7 @@ async ChangeNameHandler(newProperty:string,password:string): Promise<any> {
       .toPromise();
 
     return response;
-  } catch (error: any) {
+  } catch (error) {
     return error;
   }
 }
@@ -208,7 +211,7 @@ async ChangeUserNameHandler(newProperty:string,password:string): Promise<any> {
       .put<any>(`${this.apiUrl}/users/${newProperty}/changeUserName`, data, { headers })
       .toPromise();
     return response;
-  } catch (error: any) {
+  } catch (error) {
     return error;
   }
 }
@@ -234,7 +237,7 @@ async addAttendeesHandler(course:Courses[]) {
   try {
     const response:any = await this.http.post(`${this.apiUrl}/api/Students/users/${this.userName}/course/arrival-time` ,course, { headers }).toPromise();
     return response
-  } catch (error:any) {
+  } catch (error) {
     return error;
   }
 }

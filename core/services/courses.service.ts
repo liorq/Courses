@@ -38,25 +38,31 @@ export class CoursesService {
   }
   }
 
-   removeRow(obj: any) {
+   removeRow(obj: Courses) {
     const data = this.tablesData.getValue();
     const arrays = ['CoursesData', 'UsersData', 'myCourses', 'attendees'];
     for (let key of arrays) {
       data[key] = data[key].filter((o:any) => o !== obj);
     }
     this.tablesData.next(data);
+    this.refreshPage();
   }
 
-  async buyCourseHandler(element:any,component:GenericTableComponent){
+
+refreshPage(){
+  location.reload();
+}
+
+
+  async buyCourseHandler(element:Courses,component:GenericTableComponent){
 
     const response:any=await component.dbSvc.buyCourseHandler({...element,StudentId:'admin'})
-    if (response && response?.status !== 400) {
+    if (response && response?.status < 400) {
       const data = this.tablesData.getValue();
       data.myCourses.push(response);
       this.updateTablesDataSubject(data);
     }
-
-    Swal.fire(response?.status !== 400?messages.boughtSuccessfully:messages.FailedToPurchase);
+    Swal.fire(response?.status < 400?messages.boughtSuccessfully:messages.FailedToPurchase);
   }
 
   async AddPropertyHandler(component: GenericTableComponent ) {
@@ -64,12 +70,17 @@ export class CoursesService {
     component.isDeleteModalOpen?await this.deleteHandler(component,isStudent):await  this.addHandler(component,isStudent)
     component.dataSource._updateChangeSubscription();
   }
+
+
+
  async deleteHandler(component:GenericTableComponent,isStudent:boolean){
   const id = isStudent ? component.selectedRow?.username : component.selectedRow?.coursesId;
   await (isStudent ? component.dbSvc.removeUserHandler(id) : component.dbSvc.removeCourseHandler(id));
-  component.courseSvc.removeRow(component.selectedRow);
+  this.removeRow(component.selectedRow);
   component.dataSource.data = component.dataSource.data.filter(row => row !== component.selectedRow);
  }
+
+
  async addHandler(component:GenericTableComponent,isStudent:boolean){
   component.formData= {...component.formData, add: addIcon, delete: deleteIcon };
   const obj = isStudent ? {...component.formData, role: 'student', studentId: uuidv4(),email:component.formData.userName,isStudent:true} : {...component.formData, StudentId: 'admin', CoursesId:uuidv4()};
@@ -79,7 +90,10 @@ export class CoursesService {
   component.dataSource.data.push(obj);
   component.formData = {};
  }
- async modalHandler(column: any, element: any,component:GenericTableComponent){
+
+
+
+ async modalHandler(column: string, element: Courses,component:GenericTableComponent){
   component.selectedRow=element;
 
     switch (column) {

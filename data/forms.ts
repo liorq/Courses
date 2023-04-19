@@ -18,12 +18,12 @@ export function getEditUserForm(property: string) {
     ],
   };
 }
-export function getAddForm(array:any[],componentName:string) {
+export function getAddForm(array:string[],componentName:string) {
 
   return componentName =="CoursesComponent"?getAddCourseForm(array):getAddUserForm(array)
 
 }
-export function getAddUserForm(array:any[]) {
+export function getAddUserForm(array:string[]) {
 
   return {
     confirmButtonColor: '#000000',
@@ -59,7 +59,7 @@ export function getAddUserForm(array:any[]) {
 const style="display: inline-block; width: 260px; height: 43px; border-radius: 10px; margin: 5px auto; padding:0 15px ; box-sizing: border-box; font-size: 0.8em; outline: none; border: 1.5px solid #cccccc; transition: all 0.2s ease;";
 
 
-export function getAddCourseForm(array:any[]) {
+export function getAddCourseForm(array:string[]) {
  const days = daysOfTheWeek
 
  const  hours= hoursOfTheDay

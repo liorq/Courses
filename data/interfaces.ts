@@ -1,11 +1,5 @@
 import { AbstractControl } from "@angular/forms";
 
-export interface ClassAttendees{
-     name:string;
-     DateOfArrival:string;
-     CoursesId:string;
-     studentId :string;
-}
 
 export interface User {
   name: string| AbstractControl<any, any>;
@@ -22,7 +16,9 @@ export interface User {
   age?:string;
   email?:string;
 }
-
+export type AnyObject = {
+  [key: string]: any;
+};
 
 
 export interface Courses {
@@ -36,12 +32,7 @@ export interface Courses {
   add?:string;
   delete?:string;
   coursesId:string;
+  buy?:string;
 }
-export interface ClassAttendees{
-  name: string;
-  DateOfArrival: string;
-  CoursesId: string;
-  studentId: string;
 
-}
 

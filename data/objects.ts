@@ -91,7 +91,6 @@ export const addIcon = `
       text: 'Attendance reporting Succeed.',
 
     },
-        /////need to change
         changesSucceed:{
           confirmButtonColor: '#000000',
           width: '350px',
