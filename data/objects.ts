@@ -75,7 +75,7 @@ export const addIcon = `
     FailedToPurchase:{
       confirmButtonColor: '#000000',
       width: '350px',
-      text: 'Failed to Attendee reporting.',
+      text: 'Failed to Purchase .',
 
     } ,
 
