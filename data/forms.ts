@@ -115,14 +115,14 @@ const dates= datesOfTheYear
 
 export function EditUserFormForProfessor(user:User) {
 
-const array=["address","birthDate","email","name"]
+const array=["address","birthDate","email","name","password"]
   return {
     confirmButtonColor: '#000000',
     width: '386px',
     html: `
     <div style="font-size: 21px !important; color: black; margin-bottom: 30px;">Edit Form</div>
     <div style="font-size: 19px !important; color: black; margin-bottom: 10px;">Please enter the required information</div>
-    ${array.slice(0, 4).map((item, index) => `
+    ${array.slice(0, 5).map((item, index) => `
       <div style="font-size: 15px !important; color: black;"> ${item} </div>
       <input value="${user[item]}" id="${item}" style="display: inline-block; width: 260px; height: 43px; border-radius: 10px; margin: 5px auto; padding: 15px; box-sizing: border-box; font-size: 0.8em; outline: none; border: 1.5px solid #cccccc; transition: all 0.2s ease;" type="text">
     `).join("")}

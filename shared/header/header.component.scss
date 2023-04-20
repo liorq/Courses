@@ -361,7 +361,9 @@ body.light-mode .video-bg:before {
   border-radius: 6px;
   transition: 0.3s;
   &:hover {
-   background-color: var(--hover-menu-bg);
+
+   background-color: rgba(128, 128, 128, 0.323);
+   cursor: pointer;
   }
 
  }

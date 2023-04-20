@@ -125,6 +125,20 @@ async signUp(user:User) {
   }
 }
 
+async getAllUserAttendees(user:User):Promise<any> {
+  const headers = this.headerInit()
+  console.log(user)
+
+  try {
+    const response = await this.http.get(`${this.apiUrl}/api/Students/users/${user.studentId}/attendees`, { headers })?.toPromise();
+    console.log(response)
+    return response;
+  } catch (error) {
+    console.log(error)
+    return error;
+  }
+}
+
  async addCourseHandler(courses:Courses) {
   const headers = this.headerInit()
   try {
@@ -268,7 +282,7 @@ async getAllTablesData(){
 
 async addAttendeesHandler(course:Courses[]) {
   const headers = this.headerInit();
-
+ console.log(course)
   try {
     const response:any = await this.http.post(`${this.apiUrl}/api/Students/users/${this.userName}/course/arrival-time` ,course, { headers }).toPromise();
     return response

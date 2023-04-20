@@ -6,6 +6,6 @@ app-footer{
   height: 66px;
   position: fixed;
   left: 0;
-  bottom: 0;
+  bottom: -4px;
   width: 100%;
 }

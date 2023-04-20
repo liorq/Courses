@@ -113,17 +113,21 @@ refreshPage(){
         component.isDeleteModalOpen = true;
         this.ChangePropertyHandler(component); break;
         case 'edit':
+        component.formData = (await openModalAndGetInput(await this.editFormHandler(component,element,isStudent))).value;
 
-
-          component.formData = (await openModalAndGetInput(await this.editFormHandler(component,element,isStudent))).value;
-         console.log(component.formData);
-         this.editPropertyHandler(component,isStudent,element)
-
+        component.formData!=undefined&&  this.editPropertyHandler(component,isStudent,element)
         break;
+        case 'username':
+          Swal.fire('defaults');
+        await  component.dbSvc.getAllUserAttendees(element)
+          break;
 
     }
   }
-
+  ////
+getUserProperty(component:GenericTableComponent){
+ component.dbSvc.getAllUsersAttendees()
+}
 
    getDayOfTheWeek(form: {[key: string]: any}): string {
     return new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(new Date(form['date']));
@@ -134,8 +138,10 @@ async editFormHandler(component:GenericTableComponent,element:any,isStudent:Bool
 }
 async editPropertyHandler(component:GenericTableComponent,isStudent:Boolean,element:any){
 const id=isStudent?element.studentId:element.coursesId;
-const res=  await (!isStudent ? component.dbSvc.editCourseHandler({...component.formData,CoursesId:id}) : component.dbSvc.editUserByProfessorHandler({...component.formData,  studentId:id}));
-
+const res= await (!isStudent ? component.dbSvc.editCourseHandler({...component.formData,CoursesId:id}) : component.dbSvc.editUserByProfessorHandler({...component.formData,  studentId:id}));
+console.log(res);
+if(res.error==null)
+this.refreshPage();
 
 }
 
@@ -186,7 +192,7 @@ let  isValidAttendee=false;
 handleDaySelection(component:reportAttendanceComponent){
   component.form.courseDay= this.getDayOfTheWeek(component.form).toLowerCase()
   component.form.disabled=false;
-  component.coursesToDisplay=component.table.filter((o:Courses)=>o.days==component.form.courseDay)
+  component.coursesToDisplay=component.table.filter((o:Courses)=>o.days.toLowerCase()==component.form.courseDay)
 }
 
 }

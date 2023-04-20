@@ -200,7 +200,10 @@ app-loading-icon{
 }
 
 
-
+/* app-loading-icon{
+  height: fit-content;
+  width: fit-content;
+} */
 
 
 
