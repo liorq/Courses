@@ -35,8 +35,8 @@ ngOnInit(){
 initForm() {
   this.subscribeForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    phone: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
-    age: new FormControl(0, [Validators.required, Validators.min(12), Validators.max(100)]),
+    phone: new FormControl('', [Validators.required]),
+    age: new FormControl(0, [Validators.required, Validators.min(12)]),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, this.AuthService.passwordValidator, Validators.minLength(8)]),
     birthDate: new FormControl('', [Validators.required]),
@@ -47,6 +47,7 @@ initForm() {
 }
 async signUpHandler(){
   const response=await this.dbSvc.signUp(this.getUserObj())
+  console.log(response)
   const isResponseOk = response && response.status && response.status <= 200;
   if(isResponseOk){
     this.authSvc.updateIsUserLoggedSubj(true)
@@ -59,4 +60,5 @@ async signUpHandler(){
 getUserObj():User{
  return {email:this.email?.value,studentId:uuidv4(),address:this.address?.value,birthDate:this.birthDate?.value,role:'employee',isStudent:this.userType=='professor'?false:true,name: this.name?.value, phone: this.phone?.value, age: this.age?.value, userName: this.email?.value, password: this.password?.value}
 }
+
 }

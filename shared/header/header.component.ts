@@ -11,6 +11,7 @@ import { CoursesService } from "src/app/core/services/courses.service";
 export class HeaderComponent implements OnInit {
   isUserLogged!: boolean;
   constructor(private authSvc: AuthService,private coursesSvc:CoursesService) {}
+  
   ngOnInit(): void {
     this.authSvc._isUserLogged.subscribe((newStatus) => {
       this.isUserLogged = newStatus;
@@ -18,6 +19,7 @@ export class HeaderComponent implements OnInit {
     if (this.authSvc.isUserLoggedIn())
     this.isUserLogged = true;
   }
+
   deleteUserInfo() {
     localStorage.setItem("token", "");
     localStorage.setItem("authLevel", "");

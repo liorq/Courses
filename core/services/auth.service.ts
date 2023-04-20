@@ -8,7 +8,7 @@ import * as CryptoJS from 'crypto-js';
 })
 
 export class AuthService {
- isUserLogged:BehaviorSubject<boolean>=new BehaviorSubject<boolean>(false)
+   isUserLogged:BehaviorSubject<boolean>=new BehaviorSubject<boolean>(false)
   _isUserLogged=this.isUserLogged.asObservable();
 
   constructor() { }
@@ -38,15 +38,17 @@ export class AuthService {
     return (token!=null&&token!=""&&token!=undefined);
   }
 
-  decryptedHandler(val:string){
+  decryptedHandler(){
+    const val = localStorage.getItem('authLevel')||"";
     const secretKey = 'mysecretkey';
     return CryptoJS.AES.decrypt(val, secretKey).toString(CryptoJS.enc.Utf8);
-
   }
+
   encryptHandler(val:string){
     const secretKey = 'mysecretkey';
     return CryptoJS.AES.encrypt(val, secretKey).toString();
   }
+  
   encryptAuthLevelHandler(userType:string){
     localStorage.setItem('authLevel',this.encryptHandler(userType));
   }

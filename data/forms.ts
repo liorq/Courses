@@ -1,6 +1,6 @@
 import Swal from 'sweetalert2';
 import {  datesOfTheYear, daysOfTheWeek, hoursOfTheDay } from './arrays';
-import { Courses } from './interfaces';
+import { Courses, User } from './interfaces';
 
 export function getEditUserForm(property: string) {
   return {
@@ -113,60 +113,118 @@ const dates= datesOfTheYear
 }
 
 
+export function EditUserForm2(user:User) {
+
+const array=["address","birthDate","email","name"]
+  return {
+    confirmButtonColor: '#000000',
+    width: '386px',
+    html: `
+    <div style="font-size: 21px !important; color: black; margin-bottom: 30px;">Edit Form</div>
+    <div style="font-size: 19px !important; color: black; margin-bottom: 10px;">Please enter the required information</div>
+    ${array.slice(0, 4).map((item, index) => `
+      <div style="font-size: 15px !important; color: black;"> ${item} </div>
+      <input value="${user[item]}" id="swal-input${index + 2}" style="display: inline-block; width: 260px; height: 43px; border-radius: 10px; margin: 5px auto; padding: 15px; box-sizing: border-box; font-size: 0.8em; outline: none; border: 1.5px solid #cccccc; transition: all 0.2s ease;" type="text">
+    `).join("")}
+  `,
+    focusConfirm: false,
+    preConfirm: () => {
+      let obj :any= {};
+      for(let i=0; i<array.length; i++){
+        obj[array[i]] = (document.getElementById('swal-input' + (i+2)) as HTMLInputElement)?.value || '';
+      }
+      return obj;
+    }
+  }
+}
 
 
 ////תאריך התחלה סוף שעה ושם של הקורס זה מה שיכול לערוך
 ////יש את זה כבר לא צריך לייבא את זה! רק לשלוח את זה
-export function editCourseForm(array:string[],element:Courses) {
-  const days = daysOfTheWeek
-  const  hours= hoursOfTheDay
- const dates= datesOfTheYear
+export function EditCourseForm(array: string[], element: Courses) {
+  const days = daysOfTheWeek;
+  const hours = hoursOfTheDay;
+  const dates = datesOfTheYear;
 
-   const optionTemplate = (options: any[]) => options.map((option: { value: any; label: any; }) => `<option value="${option.value}">${option.label}</option>`).join('');
+  const optionTemplate = (options: any[]) =>
+    options
+      .map(
+        (option: { value: any; label: any; selected?: boolean }) =>
+          `<option value="${option.value}" ${
+            option.selected ? "selected" : ""
+          }>${option.label}</option>`
+      )
+      .join("");
 
-   return {
-     confirmButtonColor: '#000000',
-     width: '386px',
-     html: `
-     <div class="form-title">Add Form</div>
-     <div class="form-subtitle">Please enter the required information</div>
+  const selectElements = [
+    {
+      name: "dates1",
+      label: "start",
+      options: dates,
+      value: element.startDate,
+    },
+    {
+      name: "dates2",
+      label: "end",
+      options: dates,
+      value: element.endDate,
+    },
+    {
+      name: "days",
+      label: "day",
+      options: days,
+      value: element.days,
+    },
+    {
+      name: "time-range",
+      label: "hours",
+      options: hours,
+      value: element.hours,
+    },
+  ];
 
-     <div class="form-label">${array[0]}</div>
-     <input style="${style}" value=${element.name} id="name" class="form-input" type="text">
+  const selectFields = selectElements
+    .map(
+      (select) => `
+      <div class="form-label">${select.label}</div>
+      <select style="${style}" class="form-select" name="${select.name}" id="${select.name}">
+        ${optionTemplate(
+          select.options.map((option) => ({
+            value: option.value,
+            label: option.label,
+            selected: option.value === select.value,
+          }))
+        )}
+      </select>
+    `
+    )
+    .join("");
 
-     <div class="form-label">start</div>
-     <select style="${style}" class="form-select" name="dates" id="dates1">
-       ${optionTemplate(dates)}
-     </select>
+  return {
+    confirmButtonColor: "#000000",
+    width: "386px",
+    html: `
+      <div class="form-title">Add Form</div>
+      <div class="form-subtitle">Please enter the required information</div>
 
-     <div class="form-label">end</div>
-     <select  style="${style}" class="form-select" name="dates" id="dates2">
-       ${optionTemplate(dates)}
-     </select>
+      <div class="form-label">${array[0]}</div>
+      <input style="${style}" value=${element.name} id="name" class="form-input" type="text">
 
-     <div class="form-label">day</div>
-     <select style="${style}" class="form-select" name="days" id="days">
-       ${optionTemplate(days)}
-     </select>
-
-     <div class="form-label">hours</div>
-     <select style="${style}" class="form-select" name="time-range" id="time-range">
-       ${optionTemplate(hours)}
-     </select>
-   `,
-     focusConfirm: false,
-     preConfirm: () => {
-       let obj :any= {};
-       obj[array[0]] = (document.getElementById('name') as HTMLInputElement)?.value || '';
-       obj[array[1]] = (document.getElementById('dates1') as HTMLInputElement)?.value || '';
-       obj[array[2]] = (document.getElementById('dates2') as HTMLInputElement)?.value || '';
-       obj[array[3]] = (document.getElementById('days') as HTMLInputElement)?.value || '';
-       obj[array[4]] = (document.getElementById('time-range') as HTMLInputElement)?.value || '';
-
-       return obj;
-     }
-   }
- }
+      ${selectFields}
+    `,
+    focusConfirm: false,
+    preConfirm: () => {
+      let obj: any = {};
+      obj[array[0]] = (document.getElementById("name") as HTMLInputElement)
+        ?.value || "";
+      selectElements.forEach((select) => {
+        obj[select.name] = (document.getElementById(select.name) as HTMLSelectElement)
+          ?.value || "";
+      });
+      return obj;
+    },
+  };
+}
 
 
 export async function openModalAndGetInput(value: any) {

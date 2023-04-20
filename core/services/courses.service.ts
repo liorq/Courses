@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { openModalAndGetInput, getAddForm } from 'src/app/data/forms';
+import { openModalAndGetInput, getAddForm, EditCourseForm, EditUserForm2 } from 'src/app/data/forms';
 import { Courses } from 'src/app/data/interfaces';
 import {  addIcon, buyIcon, deleteIcon, editIcon, messages } from 'src/app/data/objects';
 import { reportAttendanceComponent } from 'src/app/pages/report-attendace/report-attendace.component';
@@ -15,13 +15,18 @@ import { v4 as uuidv4 } from 'uuid';
 export class CoursesService {
   private tablesData:BehaviorSubject<any>=new BehaviorSubject({CoursesData:[],UsersData:[],attendees:[],myCourses:[]})
   private isNavBarVisible = new BehaviorSubject<boolean>(true);
+  private isStudent=new BehaviorSubject<boolean>(true);
+  _isStudent=this.isStudent.asObservable();
   _tablesData=this.tablesData.asObservable()
   _isNavBarVisible = this.isNavBarVisible.asObservable();
 
    toggleNavBar(Status:boolean): void {
     this.isNavBarVisible.next(Status);
   }
+  updateIsStudentSub(Status:boolean){
+    this.isStudent.next(Status);
 
+  }
   updateTablesDataSubject(newValue:any){
     this.tablesData.next(newValue)
   }
@@ -73,8 +78,6 @@ refreshPage(){
     component.dataSource._updateChangeSubscription();
   }
 
-
-
  async deleteHandler(component:GenericTableComponent,isStudent:boolean){
   const id = isStudent ? component.selectedRow?.username : component.selectedRow?.coursesId;
   await (isStudent ? component.dbSvc.removeUserHandler(id) : component.dbSvc.removeCourseHandler(id));
@@ -84,7 +87,7 @@ refreshPage(){
 
 
  async addHandler(component:GenericTableComponent,isStudent:boolean){
-  component.formData= {...component.formData, add: addIcon, delete: deleteIcon };
+  component.formData= {...component.formData, add: addIcon, delete: deleteIcon,edit:editIcon };
   const obj = isStudent ? {...component.formData, role: 'student', studentId: uuidv4(),email:component.formData.userName,isStudent:true} : {...component.formData, StudentId: 'admin', CoursesId:uuidv4()};
   const response = isStudent ? await component.dbSvc.signUp(obj) : await component.dbSvc.addCourseHandler(obj);
   const isResponseOk=response && response.status && response.status <= 200;
@@ -94,8 +97,8 @@ refreshPage(){
  }
 
 
-
- async modalHandler(column: string, element: Courses,component:GenericTableComponent){
+/////elemnt any
+ async modalHandler(column: string, element: any,component:GenericTableComponent){
   component.selectedRow=element;
 
     switch (column) {
@@ -109,6 +112,10 @@ refreshPage(){
         component.isDeleteModalOpen = true;
         this.AddPropertyHandler(component); break;
         case 'edit':
+          // component.formData = (await openModalAndGetInput(await EditCourseForm(component.tableObj.FormsInputs,element))).value;
+          component.formData = (await openModalAndGetInput(await EditUserForm2(element))).value;
+
+        // component.formData!=undefined&& this.AddPropertyHandler(component); break;
 
         console.log(element)
         break;

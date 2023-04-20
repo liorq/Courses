@@ -14,9 +14,6 @@ import {MatSort, Sort }from '@angular/material/sort'
 })
 export class GenericTableComponent implements AfterViewInit{
 
-
-
-
  @Input()tableObj !:any;
  @ViewChild(MatSort) sort!: MatSort;
  selectedRow!:any;
@@ -34,6 +31,7 @@ export class GenericTableComponent implements AfterViewInit{
 
     const { componentName } = this.tableObj;
     this.isAddBtnNeeded = componentName === "StudentComponent" || componentName === "CoursesComponent";
+
     setTimeout(() => {
        this.isLoadingSignVisible = false;
       const { table } = this.tableObj;

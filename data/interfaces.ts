@@ -2,6 +2,8 @@ import { AbstractControl } from "@angular/forms";
 
 
 export interface User {
+  [key: string]: any;
+
   name: string| AbstractControl<any, any>;
   birthDate: string| AbstractControl<any, any>;
   address: string| AbstractControl<any, any>;
