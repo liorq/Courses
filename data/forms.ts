@@ -113,7 +113,7 @@ const dates= datesOfTheYear
 }
 
 
-export function EditUserForm2(user:User) {
+export function EditUserFormForProfessor(user:User) {
 
 const array=["address","birthDate","email","name"]
   return {
@@ -124,14 +124,14 @@ const array=["address","birthDate","email","name"]
     <div style="font-size: 19px !important; color: black; margin-bottom: 10px;">Please enter the required information</div>
     ${array.slice(0, 4).map((item, index) => `
       <div style="font-size: 15px !important; color: black;"> ${item} </div>
-      <input value="${user[item]}" id="swal-input${index + 2}" style="display: inline-block; width: 260px; height: 43px; border-radius: 10px; margin: 5px auto; padding: 15px; box-sizing: border-box; font-size: 0.8em; outline: none; border: 1.5px solid #cccccc; transition: all 0.2s ease;" type="text">
+      <input value="${user[item]}" id="${item}" style="display: inline-block; width: 260px; height: 43px; border-radius: 10px; margin: 5px auto; padding: 15px; box-sizing: border-box; font-size: 0.8em; outline: none; border: 1.5px solid #cccccc; transition: all 0.2s ease;" type="text">
     `).join("")}
   `,
     focusConfirm: false,
     preConfirm: () => {
       let obj :any= {};
       for(let i=0; i<array.length; i++){
-        obj[array[i]] = (document.getElementById('swal-input' + (i+2)) as HTMLInputElement)?.value || '';
+        obj[array[i]] = (document.getElementById(array[i]) as HTMLInputElement)?.value || '';
       }
       return obj;
     }
@@ -139,8 +139,6 @@ const array=["address","birthDate","email","name"]
 }
 
 
-////תאריך התחלה סוף שעה ושם של הקורס זה מה שיכול לערוך
-////יש את זה כבר לא צריך לייבא את זה! רק לשלוח את זה
 export function EditCourseForm(array: string[], element: Courses) {
   const days = daysOfTheWeek;
   const hours = hoursOfTheDay;
@@ -158,13 +156,13 @@ export function EditCourseForm(array: string[], element: Courses) {
 
   const selectElements = [
     {
-      name: "dates1",
+      name: "startDate",
       label: "start",
       options: dates,
       value: element.startDate,
     },
     {
-      name: "dates2",
+      name: "endDate",
       label: "end",
       options: dates,
       value: element.endDate,
@@ -176,7 +174,7 @@ export function EditCourseForm(array: string[], element: Courses) {
       value: element.days,
     },
     {
-      name: "time-range",
+      name: "hours",
       label: "hours",
       options: hours,
       value: element.hours,

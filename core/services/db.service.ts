@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Courses, User } from 'src/app/data/interfaces';
 import { AuthService } from './auth.service';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,6 +16,40 @@ export class DbService {
   _token = this.token.asObservable();
 
   constructor(private http: HttpClient,private authSvc:AuthService) { }
+
+
+//////
+async editUserByProfessorHandler(user: User){
+    const headers = this.headerInit()
+
+    try {
+      const response = await this.http
+        .put<any>(`${this.apiUrl}/users/${this.userName||"user"}/changeUser`,user, { headers })
+        .toPromise();
+
+      return response;
+    } catch (error) {
+      return error;
+    }
+
+}
+async editCourseHandler(course: Courses){
+  const headers = this.headerInit()
+  console.log(course)
+  try {
+    const response = await this.http
+      .put<any>(`${this.apiUrl}/courses/${course.name}/ChangeCourse`,course, { headers })
+      .toPromise();
+
+    return response;
+  } catch (error) {
+    return error;
+  }
+
+}
+////////////////////////////////////////////////////////////
+
+
 
 async signUp(user:User) {
   try {

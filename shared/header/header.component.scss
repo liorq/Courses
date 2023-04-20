@@ -144,13 +144,17 @@ body.light-mode .video-bg:before {
  font-weight: 500;
 }
 
+#svg{
+  color: #fff;
+}
 .header {
-  background: #1b1b1d3d;
+  background: black;
   box-shadow: -1px 0px 23px 9px rgba(0,0,0,0.43);
   -webkit-box-shadow: -1px 0px 23px 9px rgba(0,0,0,0.43);
   -moz-box-shadow: -1px 0px 23px 9px rgba(0,0,0,0.43);
  display: flex;
  align-items: center;
+ color: white;
  flex-shrink: 0;
  height: 58px;
  width: 100%;
@@ -359,13 +363,17 @@ body.light-mode .video-bg:before {
   &:hover {
    background-color: var(--hover-menu-bg);
   }
+
  }
  svg {
   width: 16px;
   margin-right: 8px;
+
  }
 }
-
+#svg12{
+  color: #fff;
+}
 .updates {
   opacity: 0;
  position: relative;
@@ -388,12 +396,21 @@ body.light-mode .video-bg:before {
   @media screen and (max-width: 1055px) {
    margin: auto;
   }
+  .menu-link{
   a {
    padding: 20px 24px;
+
+
   }
+
  }
+
+}
 }
 
+#svg{
+  fill: #fff;
+}
 .main-container {
  display: flex;
  flex-direction: column;

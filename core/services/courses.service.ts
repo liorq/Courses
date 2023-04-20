@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { openModalAndGetInput, getAddForm, EditCourseForm, EditUserForm2 } from 'src/app/data/forms';
+import { openModalAndGetInput, getAddForm, EditCourseForm, EditUserFormForProfessor } from 'src/app/data/forms';
 import { Courses } from 'src/app/data/interfaces';
 import {  addIcon, buyIcon, deleteIcon, editIcon, messages } from 'src/app/data/objects';
 import { reportAttendanceComponent } from 'src/app/pages/report-attendace/report-attendace.component';
@@ -17,7 +17,7 @@ export class CoursesService {
   private isNavBarVisible = new BehaviorSubject<boolean>(true);
   private isStudent=new BehaviorSubject<boolean>(true);
   _isStudent=this.isStudent.asObservable();
-  _tablesData=this.tablesData.asObservable()
+  _tablesData=this.tablesData.asObservable();
   _isNavBarVisible = this.isNavBarVisible.asObservable();
 
    toggleNavBar(Status:boolean): void {
@@ -72,7 +72,7 @@ refreshPage(){
     Swal.fire(response.error==null?messages.boughtSuccessfully:messages.FailedToPurchase);
   }
 
-  async AddPropertyHandler(component: GenericTableComponent ) {
+  async ChangePropertyHandler(component: GenericTableComponent ) {
     const isStudent = component.tableObj?.componentName === 'StudentComponent';
     component.isDeleteModalOpen?await this.deleteHandler(component,isStudent):await  this.addHandler(component,isStudent)
     component.dataSource._updateChangeSubscription();
@@ -100,24 +100,25 @@ refreshPage(){
 /////elemnt any
  async modalHandler(column: string, element: any,component:GenericTableComponent){
   component.selectedRow=element;
+  const isStudent = component.tableObj?.componentName === 'StudentComponent';
 
     switch (column) {
       case 'buy':
         await this.buyCourseHandler(element, component);break;
       case 'add':
         component.formData = (await openModalAndGetInput(await getAddForm(component.tableObj.FormsInputs,component.tableObj.componentName))).value;
-        component.formData!=undefined&& this.AddPropertyHandler(component); break;
+        component.formData!=undefined&& this.ChangePropertyHandler(component); break;
       case 'delete':
         component.formData = (await openModalAndGetInput(messages.Deleted)).value;
         component.isDeleteModalOpen = true;
-        this.AddPropertyHandler(component); break;
+        this.ChangePropertyHandler(component); break;
         case 'edit':
-          // component.formData = (await openModalAndGetInput(await EditCourseForm(component.tableObj.FormsInputs,element))).value;
-          component.formData = (await openModalAndGetInput(await EditUserForm2(element))).value;
 
-        // component.formData!=undefined&& this.AddPropertyHandler(component); break;
 
-        console.log(element)
+          component.formData = (await openModalAndGetInput(await this.editFormHandler(component,element,isStudent))).value;
+         console.log(component.formData);
+         this.editPropertyHandler(component,isStudent,element)
+
         break;
 
     }
@@ -128,8 +129,15 @@ refreshPage(){
     return new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(new Date(form['date']));
   }
 
+async editFormHandler(component:GenericTableComponent,element:any,isStudent:Boolean){
+  return isStudent?  await EditUserFormForProfessor(element):await EditCourseForm(component.tableObj.FormsInputs,element);
+}
+async editPropertyHandler(component:GenericTableComponent,isStudent:Boolean,element:any){
+const id=isStudent?element.studentId:element.coursesId;
+const res=  await (!isStudent ? component.dbSvc.editCourseHandler({...component.formData,CoursesId:id}) : component.dbSvc.editUserByProfessorHandler({...component.formData,  studentId:id}));
 
 
+}
 
 handleCourseSelection(component:reportAttendanceComponent){
   component.selectedCourse=component.table.filter((o:any)=>o.name==component.form.coursesName);
