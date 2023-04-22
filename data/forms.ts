@@ -232,34 +232,33 @@ export async function openModalAndGetInput(value: any) {
 
 
 
-export function getCourseSignupInfoForm(data: any[], data2: any[]) {
-
-  const style='-webkit-box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.05); box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.05);font-size:14px;'
-  let tableRows = '';
-  let tableRows2 = '';
+export function getCourseSignupInfoForm(attendanceRecords: any[], courses: any[]) {
+  const tableStyle = '-webkit-box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.15); box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.15);font-size:14px;';
+  let attendanceRows = '';
+  let courseRows = '';
 
   // Display message if there are no attendance records
-  if (data.length === 0) {
-    tableRows = `<tr style="${style}"><td colspan="3" style="${style}">No attendance records found.</td></tr>`;
+  if (attendanceRecords.length === 0) {
+    attendanceRows = `<tr style="${tableStyle}"><td colspan="3" style="${tableStyle}">No attendance records found.</td></tr>`;
   } else {
-    tableRows = data.map(item => `
-      <tr style="${style}">
-        <td style="${style}">${item.name}</td>
-        <td style="${style}">${item.dateOfArrival}</td>
-        <td style="${style}">${item.reason}</td>
+    attendanceRows = attendanceRecords.map(record => `
+      <tr style="${tableStyle}">
+        <td style="${tableStyle}">${record.name}</td>
+        <td style="${tableStyle}">${record.dateOfArrival}</td>
+        <td style="${tableStyle}">${record.reason}</td>
       </tr>
     `).join("");
   }
 
   // Display message if there are no courses
-  if (data2.length === 0) {
-    tableRows2 = `<tr style="${style}"><td colspan="3" style="${style}">No courses found.</td></tr>`;
+  if (courses.length === 0) {
+    courseRows = `<tr style="${tableStyle}"><td colspan="3" style="${tableStyle}">No courses found.</td></tr>`;
   } else {
-    tableRows2 = data2.map(item => `
-      <tr style="${style}">
-        <td style="${style}">${item.name}</td>
-        <td style="${style}">${item.startDate}</td>
-        <td style="${style}">${item.endDate}</td>
+    courseRows = courses.map(course => `
+      <tr style="${tableStyle}">
+        <td style="${tableStyle}">${course.name}</td>
+        <td style="${tableStyle}">${course.startDate}</td>
+        <td style="${tableStyle}">${course.endDate}</td>
       </tr>
     `).join("");
   }
@@ -268,23 +267,23 @@ export function getCourseSignupInfoForm(data: any[], data2: any[]) {
     confirmButtonColor: '#000000',
     width: '483px',
     html: `
-    <div  style="font-size:19px;margin-bottom:15px;font-weight:500;">all of the student's attendance</div>
-      <table style="width:100%;${style}">
-        <tr style="${style}">
-          <th style="${style}">Courses name</th>
-          <th style="${style}">Date of arrival</th>
-          <th style="${style}">Reason</th>
+    <div  style="font-size:19px;margin-bottom:15px;font-weight:500;">All Attendance Records</div>
+      <table style="width:100%;${tableStyle}">
+        <tr style="${tableStyle}">
+          <th style="${tableStyle}">Name</th>
+          <th style="${tableStyle}">Date of Arrival</th>
+          <th style="${tableStyle}">Reason</th>
         </tr>
-        ${tableRows}
+        ${attendanceRows}
       </table>
-      <div style="font-size:19px;margin-bottom:15px;font-weight:500;margin-top:15px;">all of the student's courses</div>
-      <table style="width:100%;${style}">
-        <tr style="${style}">
-          <th style="${style}">Courses name</th>
-          <th style="${style}">start Date</th>
-          <th style="${style}">end Date</th>
+      <div style="font-size:19px;margin-bottom:15px;font-weight:500;margin-top:15px;">All Courses</div>
+      <table style="width:100%;${tableStyle}">
+        <tr style="${tableStyle}">
+          <th style="${tableStyle}">Name</th>
+          <th style="${tableStyle}">Start Date</th>
+          <th style="${tableStyle}">End Date</th>
         </tr>
-        ${tableRows2}
+        ${courseRows}
       </table>
       `,
 
@@ -303,10 +302,9 @@ export function getCourseSignupInfoForm(data: any[], data2: any[]) {
 
 export function getCourseInfoForm(data: any[]) {
 
-  const style='-webkit-box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.05); box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.05);font-size:14px;'
+  const style='-webkit-box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.15); box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.15);font-size:14px;'
   let tableRows = '';
 
-  // Display message if there are no attendance records
   if (data.length === 0) {
     tableRows = `<tr style="${style}"><td colspan="3" style="${style}">No attendance records found.</td></tr>`;
   } else {
@@ -319,14 +317,13 @@ export function getCourseInfoForm(data: any[]) {
     `).join("");
   }
 
-  // Display message if there are no courses
 
 
   return {
     confirmButtonColor: '#000000',
     width: '483px',
     html: `
-    <div  style="font-size:19px;margin-bottom:15px;font-weight:500;">all of the student's attendance</div>
+    <div  style="font-size:19px;margin-bottom:15px;font-weight:500;">all of the student's registered</div>
       <table style="width:100%;${style}">
         <tr style="${style}">
           <th style="${style}"> name</th>
