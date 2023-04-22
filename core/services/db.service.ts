@@ -127,15 +127,12 @@ async signUp(user:User) {
 
 async getAllUserAttendees(user:User):Promise<any> {
   const headers = this.headerInit()
-  console.log(user)
 
   try {
     const response = await this.http.get(`${this.apiUrl}/api/Students/users/${user.studentId}/attendees`, { headers })?.toPromise();
-    console.log(response)
     return response;
   } catch (error) {
-    console.log(error)
-    return error;
+    return [];
   }
 }
 
@@ -280,15 +277,46 @@ async getAllTablesData(){
 }
 
 
-async addAttendeesHandler(course:Courses[]) {
+async addAttendeesHandler(course:Courses[],reason:string) {
   const headers = this.headerInit();
  console.log(course)
   try {
-    const response:any = await this.http.post(`${this.apiUrl}/api/Students/users/${this.userName}/course/arrival-time` ,course, { headers }).toPromise();
+    const response:any = await this.http.post(`${this.apiUrl}/api/Students/users/${this.userName}/course/arrival-time/${reason}` ,course, { headers }).toPromise();
     return response
   } catch (error) {
     return error;
   }
 }
+async getAllUserCoursesByPro(user: any): Promise<any> {
+  const headers = this.headerInit();
+  try {
+    const userName = user?.username
 
+    const response = await this.http
+      .get(`${this.apiUrl}/users/${userName}/getUserCoursesByPro`, { headers })
+      .toPromise();
+    return response;
+  } catch (error) {
+    return error;
+  }
+}
+
+
+
+
+async getAllUsersRegisteredForCourse(coursesId:string): Promise<any> {
+  const headers = this.headerInit();
+  try {
+
+    const response = await this.http
+      .get(`${this.apiUrl}/courses/${coursesId}/getAllUsersRegisteredForCourse`, { headers })
+      .toPromise();
+      console.log(  response)
+    return response;
+  } catch (error) {
+    console.log(  error)
+
+    return error;
+  }
+}
 }

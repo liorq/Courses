@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { whatAppSvg } from 'src/app/data/objects';
+import { whatAppSvg } from 'src/app/data/svgIcons';
 
 @Component({
   selector: 'app-footer',

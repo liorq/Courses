@@ -35,6 +35,7 @@ export interface Courses {
   delete?:string;
   coursesId:string;
   buy?:string;
+  reason:string;
 }
 
 

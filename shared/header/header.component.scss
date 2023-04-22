@@ -362,7 +362,7 @@ body.light-mode .video-bg:before {
   transition: 0.3s;
   &:hover {
 
-   background-color: rgba(128, 128, 128, 0.323);
+   background-color: rgba(128, 128, 128, 0.10);
    cursor: pointer;
   }
 
@@ -888,3 +888,16 @@ body.light-mode .video-bg:before {
  background: var(--scrollbar-bg);
  border-radius: 10px;
 }
+.video-bg {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+
+  video {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+  }
+ }

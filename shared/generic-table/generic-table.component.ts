@@ -39,6 +39,7 @@ export class GenericTableComponent implements AfterViewInit{
       this.dataSource = new MatTableDataSource(table);
       this.dataSource.sort = this.sort;
     }, 1500);
+
   }
 
   async OpenModal(column: any, element: any) {

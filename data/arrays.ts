@@ -207,13 +207,13 @@ export const menuCourses = [
 ];
 
 
-export const   CoursesDisplayedColumns: string[] = ["name", "startDate", "endDate", "days", "hours","delete","edit"]
+export const   CoursesDisplayedColumns: string[] = ["name", "startDate", "endDate", "days", "hours","delete","edit","info"]
 
 export const     CoursesColumns = [ {matColumnDef: 'name', title: 'name'}, {matColumnDef: 'startDate', title: 'startDate'},  {matColumnDef: 'endDate', title: 'endDate', },  {matColumnDef: 'days', title: 'days', },  {matColumnDef: "hours", title:"hours", },{matColumnDef: 'delete', title: 'delete'},{matColumnDef: 'add', title: 'add'},{matColumnDef: 'edit', title: 'edit'}];
 
 export const   StudentFormsInputs: string[] = ["username","password","address","birthDate", "name", "phone", "studentId"];
 
-export const   CoursesFormsInputs: string[] = ["name", "startDate", "endDate", "days", "hours"]
+export const   CoursesFormsInputs: string[] = ["name", "startDate", "endDate", "days", "hours","info"]
 
 export const  StudentDisplayedColumns: string[] = ["username","password","address","birthDate", "name", "phone", "studentId","delete","edit"];
 

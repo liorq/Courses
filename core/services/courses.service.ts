@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { openModalAndGetInput, getAddForm, EditCourseForm, EditUserFormForProfessor } from 'src/app/data/forms';
+import { openModalAndGetInput, getAddForm, getEditCourseForm, getEditUserFormForProfessor, getCourseSignupInfoForm, getCourseInfoForm } from 'src/app/data/forms';
 import { Courses } from 'src/app/data/interfaces';
-import {  addIcon, buyIcon, deleteIcon, editIcon, messages } from 'src/app/data/objects';
+import { messages } from 'src/app/data/objects';
 import { reportAttendanceComponent } from 'src/app/pages/report-attendace/report-attendace.component';
 import { GenericTableComponent } from 'src/app/shared/generic-table/generic-table.component';
 import Swal from 'sweetalert2';
 import { v4 as uuidv4 } from 'uuid';
-
+import {  addIcon, buyIcon, deleteIcon, editIcon, infoIcon} from 'src/app/data/svgIcons';
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +42,7 @@ export class CoursesService {
   item.delete=deleteIcon
   item.buy=buyIcon
   item.edit=editIcon
+  item.info=infoIcon
   }
   }
 
@@ -97,11 +98,11 @@ refreshPage(){
  }
 
 
-/////elemnt any
+/////elemnt any pro
  async modalHandler(column: string, element: any,component:GenericTableComponent){
   component.selectedRow=element;
   const isStudent = component.tableObj?.componentName === 'StudentComponent';
-
+ ////clickedColumn = column
     switch (column) {
       case 'buy':
         await this.buyCourseHandler(element, component);break;
@@ -114,28 +115,34 @@ refreshPage(){
         this.ChangePropertyHandler(component); break;
         case 'edit':
         component.formData = (await openModalAndGetInput(await this.editFormHandler(component,element,isStudent))).value;
-
         component.formData!=undefined&&  this.editPropertyHandler(component,isStudent,element)
         break;
         case 'username':
-          Swal.fire('defaults');
-        await  component.dbSvc.getAllUserAttendees(element)
+        const [allUserAttendees, allUserCourses] = await this.getUserProperty(element,component)
+         await  await openModalAndGetInput(await getCourseSignupInfoForm(allUserAttendees,allUserCourses))
           break;
-
+          case 'info':
+          const AllUsersRegistered=  await component.dbSvc.getAllUsersRegisteredForCourse(element.coursesId)
+          console.log(AllUsersRegistered)
+          await openModalAndGetInput(await getCourseInfoForm(AllUsersRegistered))
+          break;
     }
   }
   ////
-getUserProperty(component:GenericTableComponent){
- component.dbSvc.getAllUsersAttendees()
-}
+async getUserProperty(element:any,component:GenericTableComponent){
+  return await Promise.all([
+    component.dbSvc.getAllUserAttendees(element)||[],
+    component.dbSvc.getAllUserCoursesByPro(element)||[],
+  ]);}
 
    getDayOfTheWeek(form: {[key: string]: any}): string {
     return new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(new Date(form['date']));
   }
 
 async editFormHandler(component:GenericTableComponent,element:any,isStudent:Boolean){
-  return isStudent?  await EditUserFormForProfessor(element):await EditCourseForm(component.tableObj.FormsInputs,element);
+  return isStudent?  await getEditUserFormForProfessor(element):await getEditCourseForm(component.tableObj.FormsInputs,element);
 }
+
 async editPropertyHandler(component:GenericTableComponent,isStudent:Boolean,element:any){
 const id=isStudent?element.studentId:element.coursesId;
 const res= await (!isStudent ? component.dbSvc.editCourseHandler({...component.formData,CoursesId:id}) : component.dbSvc.editUserByProfessorHandler({...component.formData,  studentId:id}));
@@ -162,7 +169,7 @@ handleCourseSelection(component:reportAttendanceComponent){
 }
 
 async handleReportValidation(component:reportAttendanceComponent) {
- const dbReportResponse= this.isReportValid(component) ? await component.dbSvc.addAttendeesHandler(component.form) :'';
+ const dbReportResponse= this.isReportValid(component) ? await component.dbSvc.addAttendeesHandler(component.form,component.form.reason) :null;
  Swal.fire(dbReportResponse&&dbReportResponse.error==null?messages.AttendanceReportSucceed: messages.AttendanceReportingFailed)
 
 }
