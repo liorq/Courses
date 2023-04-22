@@ -16,9 +16,17 @@ form:any=DatePickerForm
 coursesToDisplay!:Courses[];
 selectedCourse!:Courses[];
 table !:Courses[];
+disableReason = false; // Initialize the disableReason property
+
 
 constructor(private authSvc:AuthService,private courseSvc: CoursesService, public dbSvc: DbService
-){}
+  ){}
+
+  toggleReasonHandler(event: any) {
+    this.disableReason = event === 'yes' ? false : true;
+    this.form['reason'] = event === 'no' ? 'No reason provided' : '';
+  }
+  
 async ngOnInit() {
  this.courseSvc._tablesData.subscribe((updateData)=>{
   this.table=updateData.myCourses;

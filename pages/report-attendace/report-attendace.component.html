@@ -23,18 +23,16 @@
       <option >{{this.form['hours']}}</option>
 
     </select>
-    <div>{{'reason'}}</div>
 
-    <input [(ngModel)]="form['reason']" name="reason"  type="text">
 
     <div>{{'Absentee'}}</div>
 
-    <select [(ngModel)]="form['Absentee']" name="Absentee" id="selectHours">
+    <select [(ngModel)]="form['Absentee']" name="Absentee" id="selectHours" (ngModelChange)="toggleReasonHandler($event)">
       <option style="height: 80px;" class="selectOption">yes</option>
       <option class="selectOption"> no</option>
-
     </select>
-
+    <div>{{'reason'}}</div>
+    <input [(ngModel)]="form['reason']" name="reason" type="text" [disabled]="disableReason">
 
 
 
