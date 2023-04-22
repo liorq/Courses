@@ -24,6 +24,7 @@ export type AnyObject = {
 
 
 export interface Courses {
+  // [key: string]: any,
   name: string;
   startDate: string;
   endDate: string;

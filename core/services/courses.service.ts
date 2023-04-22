@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { openModalAndGetInput, getAddForm, getEditCourseForm, getEditUserFormForProfessor, getCourseSignupInfoForm, getCourseInfoForm } from 'src/app/data/forms';
-import { Courses } from 'src/app/data/interfaces';
+import { Courses, User } from 'src/app/data/interfaces';
 import { messages } from 'src/app/data/objects';
 import { reportAttendanceComponent } from 'src/app/pages/report-attendace/report-attendace.component';
 import { GenericTableComponent } from 'src/app/shared/generic-table/generic-table.component';
@@ -27,11 +27,11 @@ export class CoursesService {
     this.isStudent.next(Status);
 
   }
-  updateTablesDataSubject(newValue:any){
+  updateTablesDataSubject(newValue:{[key: string]: any}){
     this.tablesData.next(newValue)
   }
 
-  initTablesDataSubject(CoursesData:any,UsersData:any,attendees:any,myCourses:any){
+  initTablesDataSubject(CoursesData:any[],UsersData:any[],attendees:any[],myCourses:any[]){
     this.tablesData.next({CoursesData:CoursesData,UsersData:UsersData,attendees:attendees,myCourses:myCourses})
   }
 
@@ -99,8 +99,9 @@ refreshPage(){
  }
 
 
-/////elemnt any pro
  async modalHandler(column: string, element: any,component:GenericTableComponent){
+
+ ///(myObj instanceof MyInterface)
   component.selectedRow=element;
   const isStudent = component.tableObj?.componentName === 'StudentComponent';
     switch (column) {
@@ -128,7 +129,7 @@ refreshPage(){
     }
   }
   ////
-async getUserProperty(element:any,component:GenericTableComponent){
+async getUserProperty(element:User,component:GenericTableComponent){
   return await Promise.all([
     component.dbSvc.getAllUserAttendees(element)||[],
     component.dbSvc.getAllUserCoursesByPro(element)||[],
@@ -151,13 +152,13 @@ this.refreshPage();
 }
 
 handleCourseSelection(component:reportAttendanceComponent){
-  component.selectedCourse=component.table.filter((o:any)=>o.name==component.form.coursesName);
+  component.selectedCourse=component.table.filter((o:Courses)=>o.name==component.form.coursesName);
   component.form['hours']=component.selectedCourse[0].hours
   component.form.CoursesId=component.selectedCourse[0]!.coursesId
  }
 
  handleAttendeeReporting(component: reportAttendanceComponent) {
-  const isAllFieldFilled = Object.values(component.form).every((field: any) => field !== "");
+  const isAllFieldFilled = Object.values(component.form).every((field) => field !== "");
   isAllFieldFilled ? this.handleReportValidation(component) : Swal.fire(messages.invalidForm);
 }
 
