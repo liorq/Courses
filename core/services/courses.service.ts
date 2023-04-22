@@ -77,6 +77,7 @@ refreshPage(){
     const isStudent = component.tableObj?.componentName === 'StudentComponent';
     component.isDeleteModalOpen?await this.deleteHandler(component,isStudent):await  this.addHandler(component,isStudent)
     component.dataSource._updateChangeSubscription();
+
   }
 
  async deleteHandler(component:GenericTableComponent,isStudent:boolean){
@@ -123,7 +124,6 @@ refreshPage(){
           break;
           case 'info':
           const AllUsersRegistered=  await component.dbSvc.getAllUsersRegisteredForCourse(element.coursesId)
-          console.log(AllUsersRegistered)
           await openModalAndGetInput(await getCourseInfoForm(AllUsersRegistered))
           break;
     }
@@ -145,9 +145,8 @@ async editFormHandler(component:GenericTableComponent,element:any,isStudent:Bool
 
 async editPropertyHandler(component:GenericTableComponent,isStudent:Boolean,element:any){
 const id=isStudent?element.studentId:element.coursesId;
-const res= await (!isStudent ? component.dbSvc.editCourseHandler({...component.formData,CoursesId:id}) : component.dbSvc.editUserByProfessorHandler({...component.formData,  studentId:id}));
-console.log(res);
-if(res.error==null)
+await (!isStudent ? component.dbSvc.editCourseHandler({...component.formData,CoursesId:id}) : component.dbSvc.editUserByProfessorHandler({...component.formData,  studentId:id}));
+
 this.refreshPage();
 
 }
@@ -158,14 +157,9 @@ handleCourseSelection(component:reportAttendanceComponent){
   component.form.CoursesId=component.selectedCourse[0]!.coursesId
  }
 
- handleAttendeeReporting(component:reportAttendanceComponent){
- const isAllFieldFilled=Object.values(component.form).filter((field:any)=>field!=="").length==8;
- if(isAllFieldFilled){
-   this.handleReportValidation(component)
- }
- else
- Swal.fire("Some of the fields have not been filled.")
-
+ handleAttendeeReporting(component: reportAttendanceComponent) {
+  const isAllFieldFilled = Object.values(component.form).every((field: any) => field !== "");
+  isAllFieldFilled ? this.handleReportValidation(component) : Swal.fire(messages.invalidForm);
 }
 
 async handleReportValidation(component:reportAttendanceComponent) {

@@ -108,4 +108,10 @@
           width: '350px',
           text: 'Changes have not been applied.',
         },
+
+        invalidForm:{
+          confirmButtonColor: '#000000',
+        width: '350px',
+          text:"Some of the fields have not been filled."
+        }
   }
