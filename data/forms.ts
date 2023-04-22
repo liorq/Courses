@@ -234,7 +234,7 @@ export async function openModalAndGetInput(value: any) {
 
 export function getCourseSignupInfoForm(data: any[], data2: any[]) {
 
-  const style='-webkit-box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.05); box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.05);'
+  const style='-webkit-box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.05); box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.05);font-size:14px;'
   let tableRows = '';
   let tableRows2 = '';
 
@@ -303,7 +303,7 @@ export function getCourseSignupInfoForm(data: any[], data2: any[]) {
 
 export function getCourseInfoForm(data: any[]) {
 
-  const style='-webkit-box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.05); box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.05);'
+  const style='-webkit-box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.05); box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.05);font-size:14px;'
   let tableRows = '';
 
   // Display message if there are no attendance records

@@ -103,7 +103,6 @@ refreshPage(){
  async modalHandler(column: string, element: any,component:GenericTableComponent){
   component.selectedRow=element;
   const isStudent = component.tableObj?.componentName === 'StudentComponent';
- ////clickedColumn = column
     switch (column) {
       case 'buy':
         await this.buyCourseHandler(element, component);break;
@@ -123,8 +122,8 @@ refreshPage(){
          await  await openModalAndGetInput(await getCourseSignupInfoForm(allUserAttendees,allUserCourses))
           break;
           case 'info':
-          const AllUsersRegistered=  await component.dbSvc.getAllUsersRegisteredForCourse(element.coursesId)
-          await openModalAndGetInput(await getCourseInfoForm(AllUsersRegistered))
+            await openModalAndGetInput(await getCourseInfoForm(await component.dbSvc.getAllUsersRegisteredForCourse(element.coursesId)));
+
           break;
     }
   }
