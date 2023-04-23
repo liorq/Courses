@@ -26,7 +26,7 @@ constructor(private authSvc:AuthService,private courseSvc: CoursesService, publi
     this.disableReason = event === 'yes' ? false : true;
     this.form['reason'] = event === 'no' ? 'No reason provided' : '';
   }
-  
+
 async ngOnInit() {
  this.courseSvc._tablesData.subscribe((updateData)=>{
   this.table=updateData.myCourses;
@@ -49,5 +49,8 @@ handleCourseSelection(){
 }
 handleDaySelection(){
   this.courseSvc.handleDaySelection(this)
+}
+clearForm(){
+  this.courseSvc.refreshPage()
 }
 }

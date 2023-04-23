@@ -21,7 +21,6 @@ export class MyCoursesComponent {
   async ngOnInit() {
     this.courseSvc.toggleNavBar(true);
     this.courseSvc._tablesData.subscribe((updatedData) => {
-      console.log(updatedData);
       this.tableObj.table = updatedData.myCourses;
     });
     await this.loadTableData();

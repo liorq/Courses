@@ -101,7 +101,6 @@ refreshPage(){
 
  async modalHandler(column: string, element: any,component:GenericTableComponent){
 
- ///(myObj instanceof MyInterface)
   component.selectedRow=element;
   const isStudent = component.tableObj?.componentName === 'StudentComponent';
     switch (column) {
@@ -114,18 +113,17 @@ refreshPage(){
         component.formData = (await openModalAndGetInput(messages.Deleted)).value;
         component.isDeleteModalOpen = true;
         this.ChangePropertyHandler(component); break;
-        case 'edit':
+      case 'edit':
         component.formData = (await openModalAndGetInput(await this.editFormHandler(component,element,isStudent))).value;
         component.formData!=undefined&&  this.editPropertyHandler(component,isStudent,element)
         break;
-        case 'username':
+      case 'username':
         const [allUserAttendees, allUserCourses] = await this.getUserProperty(element,component)
-         await  await openModalAndGetInput(await getCourseSignupInfoForm(allUserAttendees,allUserCourses))
-          break;
-          case 'info':
-            await openModalAndGetInput(await getCourseInfoForm(await component.dbSvc.getAllUsersRegisteredForCourse(element.coursesId)));
-
-          break;
+        await  await openModalAndGetInput(await getCourseSignupInfoForm(allUserAttendees,allUserCourses))
+        break;
+      case 'info':
+        await openModalAndGetInput(await getCourseInfoForm(await component.dbSvc.getAllUsersRegisteredForCourse(element.coursesId)));
+        break;
     }
   }
   ////

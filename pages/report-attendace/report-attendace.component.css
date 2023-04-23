@@ -56,9 +56,10 @@ body{
   margin: 0 auto;
 }
 #box{
+  padding: 10px;
   width: 320px;
   border-radius: 15px;
-  height: calc(68% + 50px);
+  height: calc(71% + 50px);
   margin: 0 auto;
   background: #fff;
   border: thin solid #ededed;
@@ -86,7 +87,7 @@ body{
 }
 .container{
   margin-top: 25px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   display: flex;
   font-size: 17px;
   align-items: center;
@@ -319,7 +320,7 @@ background: radial-gradient(circle, rgba(247,150,192,1) 0%, rgba(118,174,241,1) 
   outline: none;
 }
 button {
-  margin: 20px;
+  margin: 16px;
 }
 
 /* 16 */
@@ -328,7 +329,7 @@ button {
   color: #000;
   position: relative;
   right:-64px;
-  top: 40px;
+  top: 20px;
    transform: translate(-50%, -50%);
    box-shadow: -1px 0px 23px 0px rgba(0,0,0,0.50);
   -webkit-box-shadow: -1px 0px 23px 0px rgba(0,0,0,0.50);

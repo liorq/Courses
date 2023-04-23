@@ -35,7 +35,6 @@ async editUserByProfessorHandler(user: User){
 }
 async editCourseHandler(course: Courses){
   const headers = this.headerInit()
-  console.log(course)
   try {
     const response = await this.http
       .put<any>(`${this.apiUrl}/courses/${course.name}/ChangeCourse`,course, { headers })
@@ -279,7 +278,6 @@ async getAllTablesData(){
 
 async addAttendeesHandler(course:Courses[],reason:string) {
   const headers = this.headerInit();
- console.log(course)
   try {
     const response:any = await this.http.post(`${this.apiUrl}/api/Students/users/${this.userName}/course/arrival-time/${reason}` ,course, { headers }).toPromise();
     return response
@@ -311,10 +309,8 @@ async getAllUsersRegisteredForCourse(coursesId:string): Promise<any> {
     const response = await this.http
       .get(`${this.apiUrl}/courses/${coursesId}/getAllUsersRegisteredForCourse`, { headers })
       .toPromise();
-      console.log(  response)
     return response;
   } catch (error) {
-    console.log(  error)
 
     return error;
   }

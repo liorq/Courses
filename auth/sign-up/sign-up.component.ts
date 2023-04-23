@@ -47,7 +47,6 @@ initForm() {
 }
 async signUpHandler(){
   const response=await this.dbSvc.signUp(this.getUserObj())
-  console.log(response)
   const isResponseOk = response && response.status && response.status <= 200;
   if(isResponseOk){
     this.authSvc.updateIsUserLoggedSubj(true)
